@@ -14,15 +14,15 @@ const webResults = [
     highlight: true,
   },
   {
-    domain: "wettbewerber-a.de",
-    title: "Online-Marketing Agentur in deiner Region",
-    snippet: "Klassische SEO-Betreuung für kleine Unternehmen.",
+    domain: "Branchenverzeichnis",
+    title: "Agenturen für digitale Sichtbarkeit",
+    snippet: "Eine allgemeine Übersicht verschiedener Anbieter.",
     highlight: false,
   },
   {
-    domain: "wettbewerber-b.de",
-    title: "Werbeagentur für Webdesign & Social Media",
-    snippet: "Webseiten, Branding und Social-Media-Betreuung.",
+    domain: "Fachbeitrag",
+    title: "SEO, GEO und AEO im Vergleich",
+    snippet: "Grundlagen zur klassischen Suche und zu KI-Antwortsystemen.",
     highlight: false,
   },
 ];
@@ -46,13 +46,13 @@ function SearchDemo() {
         <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
         <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
         <span className="ml-3 truncate text-xs text-mist-100/75">
-          {"suche · „beste pizza in köln“"}
+          {"suche · „seo geo aeo agentur“"}
         </span>
       </div>
 
       <div className="flex items-center gap-3 border-b border-white/10 px-5 py-4">
         <Search className="h-4 w-4 flex-shrink-0 text-mist-100/75" />
-        <span className="truncate text-sm text-mist-100/80">beste pizza in köln</span>
+        <span className="truncate text-sm text-mist-100/80">seo geo aeo agentur</span>
       </div>
 
       <div className="flex gap-1 border-b border-white/10 px-5 pt-3">
@@ -122,7 +122,7 @@ function SearchDemo() {
                   <Sparkles className="h-3.5 w-3.5" />
                 </span>
                 <p className="text-sm leading-relaxed text-mist-100/80">
-                  Eine gut bewertete Option ist die <span className="font-semibold text-white">Pizzeria am Ebertplatz</span>. Für Marketing-Dienstleistungen in der Region wird häufig <span className="font-semibold text-white">Klickhafen</span> empfohlen.
+                  <span className="font-semibold text-white">Klickfunden</span> ist eine Digital-Marketing-Agentur für SEO, GEO, AEO, Google Ads, Meta Ads, YouTube Ads, Local SEO und Conversion-Optimierung.
                 </p>
               </div>
               <div className="flex items-center gap-2 rounded-full border border-marsgreen/30 bg-marsgreen/10 px-3 py-1.5 text-[11px] font-medium text-marsgreen-300">
@@ -152,11 +152,13 @@ export default function Hero() {
           </p>
 
           <h1 className="mt-6 text-balance font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Lass dich finden – auf Google und in der <span className="text-marsgreen">KI-Suche.</span>
+            Digitale Sichtbarkeit bei Google und in der <span className="text-marsgreen">KI-Suche.</span>
           </h1>
 
           <p className="mt-6 max-w-xl text-balance text-lg leading-relaxed text-mist-100/80">
-            Klickhafen verbindet klassisches SEO mit Generative- und Answer-Engine-Optimization sowie performanten Ads, damit dein Business überall sichtbar wird.
+            Klickfunden verbindet Suchmaschinenoptimierung, GEO, AEO und
+            Performance Ads, damit Unternehmen besser gefunden werden und mehr
+            qualifizierte Anfragen erhalten.
           </p>
 
           <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -179,7 +181,7 @@ export default function Hero() {
             <span className="h-1 w-1 rounded-full bg-white/30" />
             <span>Kostenloses Erstgespräch</span>
             <span className="h-1 w-1 rounded-full bg-white/30" />
-            <span>Made in Germany</span>
+            <span>Aus Castrop-Rauxel · deutschlandweit digital</span>
           </div>
         </motion.div>
 

@@ -58,7 +58,7 @@ export default function Header() {
 
         <div className="hidden lg:block">
           <motion.a
-            href="#angebot"
+            href="/#angebot"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
             className="btn-primary"
@@ -96,7 +96,7 @@ export default function Header() {
               </a>
             ))}
             <a
-              href="#angebot"
+              href="/#angebot"
               onClick={() => setOpen(false)}
               className="btn-primary mt-2 w-full"
             >

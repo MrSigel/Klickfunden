@@ -18,7 +18,7 @@ export default function AboutFounder() {
           <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-4xl border border-white/10 bg-gradient-to-br from-ink-600 via-ink-700 to-ink-900">
             <Image
               src="/founder.png"
-              alt="Gründer und Geschäftsführer von Klickhafen"
+              alt="Enrico Gross, Inhaber von Klickfunden"
               fill
               sizes="(min-width: 1024px) 360px, 90vw"
               className="object-cover"
@@ -28,7 +28,7 @@ export default function AboutFounder() {
               <p className="font-display text-sm font-semibold text-white">
                 Enrico Gross
               </p>
-              <p className="text-xs text-mist-100/75">Klickhafen</p>
+              <p className="text-xs text-mist-100/75">Klickfunden</p>
             </div>
           </div>
 
@@ -47,15 +47,15 @@ export default function AboutFounder() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
         >
-          <span className="eyebrow">Über Klickhafen</span>
+          <span className="eyebrow">Über Klickfunden</span>
           <h2 className="section-label mt-5 text-balance">
             Mehr Partner als Agentur
           </h2>
 
           <div className="mt-6 space-y-4 text-lg leading-relaxed text-mist-100/80 [text-wrap:pretty]">
             <p>
-              Klickhafen betreibt Klickfunden.de, weil viele Unternehmen online
-              theoretisch auffindbar, aber praktisch unsichtbar sind. Zu
+              Klickfunden unterstützt Unternehmen, die online theoretisch
+              auffindbar, aber praktisch kaum sichtbar sind. Zu
               technisch, zu unklar kommuniziert, oder schlicht nicht da, wo
               heute gesucht wird.
             </p>
@@ -72,9 +72,14 @@ export default function AboutFounder() {
               Strategie, ehrlicher Kommunikation und konsequenter Umsetzung.“
             </p>
             <footer className="mt-4 text-sm text-mist-100/75">
-              Enrico Gross, Inhaber von Klickhafen
+              Enrico Gross, Inhaber von Klickfunden
             </footer>
           </blockquote>
+
+          <p className="mt-6 flex items-start gap-2 text-sm leading-relaxed text-mist-100/75">
+            Klickfunden arbeitet digital und datenorientiert mit Unternehmen in
+            ganz Deutschland. Der Sitz ist in Castrop-Rauxel im Ruhrgebiet, NRW.
+          </p>
 
           <div className="mt-8 grid grid-cols-3 gap-4">
             {[

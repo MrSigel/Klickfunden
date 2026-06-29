@@ -1,8 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Plus } from "lucide-react";
+import { motion } from "framer-motion";
 import { faqItems } from "@/lib/data";
 
 function FaqSchema() {
@@ -12,10 +10,7 @@ function FaqSchema() {
     mainEntity: faqItems.map((item) => ({
       "@type": "Question",
       name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
     })),
   };
 
@@ -27,58 +22,7 @@ function FaqSchema() {
   );
 }
 
-function AccordionRow({
-  question,
-  answer,
-  isOpen,
-  onToggle,
-}: {
-  question: string;
-  answer: string;
-  isOpen: boolean;
-  onToggle: () => void;
-}) {
-  return (
-    <div className="overflow-hidden rounded-2xl border border-white/10 bg-ink-700/50">
-      <button
-        onClick={onToggle}
-        aria-expanded={isOpen}
-        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
-      >
-        <span className="text-balance font-display text-base font-semibold text-white sm:text-lg">
-          {question}
-        </span>
-        <motion.span
-          animate={{ rotate: isOpen ? 45 : 0 }}
-          transition={{ duration: 0.25, ease: "easeOut" }}
-          className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-marsgreen/15 text-marsgreen"
-        >
-          <Plus className="h-4 w-4" />
-        </motion.span>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            key="content"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <p className="px-6 pb-6 text-sm leading-relaxed text-mist-100/75 [text-wrap:pretty] sm:text-base">
-              {answer}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
   return (
     <section id="faq" className="relative bg-ink-800 py-24 sm:py-32">
       <FaqSchema />
@@ -92,32 +36,36 @@ export default function FAQ() {
         >
           <span className="eyebrow">Häufige Fragen</span>
           <h2 className="section-label mt-5 text-balance">
-            Antworten, bevor du fragen musst
+            SEO, GEO, AEO und Ads kurz beantwortet
           </h2>
           <p className="mt-5 text-balance text-lg leading-relaxed text-mist-100/75">
-            Die wichtigsten Fragen rund um SEO, GEO, AEO und Ads – kurz und
-            klar beantwortet.
+            Klare Antworten für Menschen, Suchmaschinen und KI-Antwortsysteme.
           </p>
         </motion.div>
 
         <div className="mx-auto mt-12 max-w-3xl space-y-4">
           {faqItems.map((item, index) => (
-            <motion.div
+            <motion.details
               key={item.question}
+              open={index === 0}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.45, delay: index * 0.05 }}
+              transition={{ duration: 0.45, delay: index * 0.04 }}
+              className="group overflow-hidden rounded-2xl border border-white/10 bg-ink-700/50"
             >
-              <AccordionRow
-                question={item.question}
-                answer={item.answer}
-                isOpen={openIndex === index}
-                onToggle={() =>
-                  setOpenIndex((prev) => (prev === index ? null : index))
-                }
-              />
-            </motion.div>
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left">
+                <span className="text-balance font-display text-base font-semibold text-white sm:text-lg">
+                  {item.question}
+                </span>
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-marsgreen/15 text-xl text-marsgreen transition-transform group-open:rotate-45">
+                  +
+                </span>
+              </summary>
+              <p className="px-6 pb-6 text-sm leading-relaxed text-mist-100/75 [text-wrap:pretty] sm:text-base">
+                {item.answer}
+              </p>
+            </motion.details>
           ))}
         </div>
       </div>

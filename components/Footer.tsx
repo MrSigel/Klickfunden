@@ -42,6 +42,7 @@ const footerColumns = [
       { label: "Über uns", href: "/#ueber-uns" },
       { label: "FAQ", href: "/#faq" },
       { label: "Angebot anfordern", href: "/#angebot" },
+      { label: "Standort Castrop-Rauxel", href: "/standort/castrop-rauxel" },
     ],
   },
   {
@@ -103,8 +104,8 @@ export default function Footer() {
 
         <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-7 text-xs text-mist-100/75 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} Klickhafen — Klickfunden.de. Alle Rechte
-            vorbehalten.
+            © {new Date().getFullYear()} Klickfunden. Betreiber: Klickhafen.
+            Alle Rechte vorbehalten.
           </p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <CookieSettingsButton />

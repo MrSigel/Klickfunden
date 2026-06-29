@@ -4,13 +4,15 @@ export type NavLink = {
 };
 
 export const navLinks: NavLink[] = [
-  { label: "Leistungen", href: "#leistungen" },
-  { label: "Über uns", href: "#ueber-uns" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Leistungen", href: "/#leistungen" },
+  { label: "Zielgruppen", href: "/#zielgruppen" },
+  { label: "Über uns", href: "/#ueber-uns" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 export type Service = {
   id: string;
+  href: string;
   shortTitle: string;
   title: string;
   description: string;
@@ -20,6 +22,7 @@ export type Service = {
 export const services: Service[] = [
   {
     id: "seo",
+    href: "/services/seo",
     shortTitle: "SEO",
     title: "Suchmaschinenoptimierung",
     description:
@@ -32,6 +35,7 @@ export const services: Service[] = [
   },
   {
     id: "geo",
+    href: "/services/geo",
     shortTitle: "GEO",
     title: "Generative Engine Optimization",
     description:
@@ -44,6 +48,7 @@ export const services: Service[] = [
   },
   {
     id: "aeo",
+    href: "/services/aeo",
     shortTitle: "AEO",
     title: "Answer Engine Optimization",
     description:
@@ -55,16 +60,71 @@ export const services: Service[] = [
     ],
   },
   {
-    id: "ads",
-    shortTitle: "Ads",
-    title: "Performance Ads",
+    id: "google-ads",
+    href: "/services/google-ads",
+    shortTitle: "Google Ads",
+    title: "Google Ads Betreuung",
     description:
-      "Bezahlte Reichweite mit Plan: Google, Meta und TikTok Ads, die wirklich zu Leads und Umsatz führen.",
+      "Suchkampagnen mit klarer Keyword-Struktur, relevanten Zielseiten und messbaren Anfragen.",
     bullets: [
-      "Google & YouTube Ads",
-      "Meta Ads (Facebook & Instagram)",
-      "TikTok Ads für junge Zielgruppen",
+      "Suchanzeigen & Kampagnenstruktur",
+      "Conversion-Tracking",
+      "Optimierung der Kosten pro Anfrage",
     ],
+  },
+  {
+    id: "meta-ads",
+    href: "/services/meta-ads",
+    shortTitle: "Meta Ads",
+    title: "Facebook & Instagram Ads",
+    description:
+      "Zielgruppenorientierte Kampagnen für Reichweite, Leads, Retargeting und Wiedererkennung.",
+    bullets: ["Creative-Tests", "Lead-Kampagnen", "Retargeting"],
+  },
+  {
+    id: "youtube-ads",
+    href: "/services/youtube-ads",
+    shortTitle: "YouTube",
+    title: "YouTube Ads Betreuung",
+    description:
+      "Videoanzeigen für Aufmerksamkeit, Markenaufbau und erklärungsbedürftige Angebote.",
+    bullets: ["Video-Strategie", "Remarketing", "Zielgruppen & Placements"],
+  },
+  {
+    id: "local-seo",
+    href: "/services/local-seo",
+    shortTitle: "Local SEO",
+    title: "Regionale Auffindbarkeit",
+    description:
+      "Bessere Präsenz in Google Maps, lokalen Suchergebnissen und relevanten Standortanfragen.",
+    bullets: ["Google Unternehmensprofil", "Standortseiten", "Lokale Suchanfragen"],
+  },
+  {
+    id: "technical-seo",
+    href: "/services/technical-seo",
+    shortTitle: "Technical",
+    title: "Technical SEO",
+    description:
+      "Technische Grundlagen für Crawling, Indexierung, Ladezeiten und strukturierte Daten.",
+    bullets: ["Core Web Vitals", "Sitemap & Canonicals", "Indexierbarkeit"],
+  },
+  {
+    id: "content-seo",
+    href: "/services/content-seo",
+    shortTitle: "Content",
+    title: "Content SEO",
+    description:
+      "Inhalte entlang von Suchintentionen, Themenclustern und klaren Antwortformaten.",
+    bullets: ["Keyword-Cluster", "Leistungsseiten", "GEO- & AEO-Struktur"],
+  },
+  {
+    id: "conversion",
+    href: "/services/conversion-optimierung",
+    shortTitle: "CRO",
+    title: "Conversion-Optimierung",
+    description:
+      "Klare Nutzerführung, CTAs und Formulare, die vorhandenen Traffic besser in Anfragen übersetzen.",
+    bullets: ["Landingpages", "Formularoptimierung", "Messbare Anfragequote"],
   },
 ];
 
@@ -75,19 +135,19 @@ export type FaqItem = {
 
 export const faqItems: FaqItem[] = [
   {
-    question: "Was unterscheidet Klickhafen von einer klassischen SEO-Agentur?",
+    question: "Was macht Klickfunden?",
     answer:
-      "Klickhafen denkt Sichtbarkeit ganzheitlich: Neben klassischem SEO optimieren wir gezielt für KI-Suchassistenten (GEO) und Answer Engines (AEO) und kombinieren das mit performanten Ads auf Google, Meta und TikTok. So wirst du dort gefunden, wo deine Zielgruppe heute tatsächlich sucht.",
+      "Klickfunden unterstützt Unternehmen bei SEO, GEO, AEO, Google Ads, Meta Ads, YouTube Ads, Local SEO und Conversion-Optimierung, damit sie online besser gefunden werden und mehr qualifizierte Anfragen erhalten.",
   },
   {
     question: "Was bedeutet GEO (Generative Engine Optimization)?",
     answer:
-      "GEO ist die Optimierung von Inhalten für generative KI-Systeme wie ChatGPT, Gemini oder Perplexity. Ziel ist es, dass dein Unternehmen in KI-generierten Antworten erwähnt, zitiert oder empfohlen wird – ein zunehmend wichtiger Kanal neben der klassischen Google-Suche.",
+      "GEO steht für Generative Engine Optimization. Dabei werden Inhalte so strukturiert, dass KI-Suchsysteme wie ChatGPT, Gemini oder Perplexity ein Unternehmen besser verstehen und als relevante Quelle einordnen können.",
   },
   {
     question: "Was bedeutet AEO (Answer Engine Optimization)?",
     answer:
-      "AEO strukturiert deine Inhalte so, dass Suchmaschinen sie direkt als Antwort anzeigen können, etwa in Featured Snippets oder Sprachassistenten. Klare Frage-Antwort-Formate und strukturierte Daten sind dabei zentrale Werkzeuge.",
+      "AEO steht für Answer Engine Optimization. Ziel ist es, Inhalte so klar zu formulieren, dass Suchmaschinen und Antwortsysteme direkte Antworten aus einer Seite ableiten können.",
   },
   {
     question: "Wie lange dauert es, bis ich Ergebnisse sehe?",
@@ -95,13 +155,33 @@ export const faqItems: FaqItem[] = [
       "Performance-Ads liefern oft schon innerhalb der ersten Wochen erste Resultate. SEO, GEO und AEO sind nachhaltige Strategien, die in der Regel nach zwei bis vier Monaten spürbar an Fahrt gewinnen und langfristig wachsen.",
   },
   {
-    question: "Was kostet die Zusammenarbeit mit Klickhafen?",
+    question: "Was kostet die Zusammenarbeit mit Klickfunden?",
     answer:
       "Jedes Business hat andere Ziele, Kanäle und einen anderen Wettbewerb. Deshalb erstellen wir kein Standardpaket, sondern ein individuelles Angebot nach einem kurzen, kostenlosen Erstgespräch. Fordere dazu einfach dein persönliches Angebot über unser Formular an.",
   },
   {
-    question: "Für welche Unternehmen ist das Angebot von Klickhafen geeignet?",
+    question: "Für welche Unternehmen ist das Angebot von Klickfunden geeignet?",
     answer:
       "Wir arbeiten mit lokalen Dienstleistern, wachsenden B2B-Unternehmen und E-Commerce-Marken, die online sichtbarer werden und planbar neue Kund:innen gewinnen möchten.",
+  },
+  {
+    question: "Was ist der Unterschied zwischen SEO, GEO und AEO?",
+    answer:
+      "SEO optimiert für klassische Suchmaschinen wie Google. AEO optimiert Inhalte für direkte Antworten. GEO optimiert Inhalte für KI-Suchsysteme und generative Antworten.",
+  },
+  {
+    question: "Wann sind Google Ads sinnvoll?",
+    answer:
+      "Google Ads sind sinnvoll, wenn Menschen bereits aktiv nach einer Leistung suchen und kurzfristig qualifizierte Besucher oder Anfragen gewonnen werden sollen.",
+  },
+  {
+    question: "Wann sind Meta Ads sinnvoll?",
+    answer:
+      "Meta Ads eignen sich besonders für Reichweite, Zielgruppenansprache, Wiedererkennung, Retargeting und Angebote, die visuell oder emotional erklärt werden können.",
+  },
+  {
+    question: "Was ist Local SEO?",
+    answer:
+      "Local SEO verbessert die Auffindbarkeit eines Unternehmens in regionalen Suchergebnissen, Google Maps und standortbezogenen Suchanfragen.",
   },
 ];

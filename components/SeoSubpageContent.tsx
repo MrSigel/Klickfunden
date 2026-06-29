@@ -1,12 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   BarChart3,
   CheckCircle2,
-  ChevronDown,
   Search,
   Sparkles,
   Target,
@@ -20,7 +18,25 @@ type SeoSubpageContentProps = {
 const benefitIcons = [Search, Sparkles, Target, BarChart3];
 
 export default function SeoSubpageContent({ page }: SeoSubpageContentProps) {
-  const [openFaq, setOpenFaq] = useState(0);
+  const relatedLinks = (
+    page.category === "Leistung"
+      ? [
+          { label: "SEO", href: "/services/seo" },
+          { label: "GEO", href: "/services/geo" },
+          { label: "AEO", href: "/services/aeo" },
+          { label: "Google Ads", href: "/services/google-ads" },
+          { label: "Local SEO", href: "/services/local-seo" },
+          { label: "Conversion-Optimierung", href: "/services/conversion-optimierung" },
+        ]
+      : [
+          { label: "SEO", href: "/services/seo" },
+          { label: "Local SEO", href: "/services/local-seo" },
+          { label: "Google Ads", href: "/services/google-ads" },
+          { label: "Meta Ads", href: "/services/meta-ads" },
+          { label: "Content SEO", href: "/services/content-seo" },
+          { label: "Conversion-Optimierung", href: "/services/conversion-optimierung" },
+        ]
+  ).filter((link) => link.href !== page.path);
 
   return (
     <main className="relative overflow-hidden bg-ink pt-32">
@@ -96,6 +112,29 @@ export default function SeoSubpageContent({ page }: SeoSubpageContentProps) {
         </div>
       </section>
 
+      <section className="border-y border-white/10 bg-ink-800/45 py-14">
+        <div className="container-page grid gap-5 md:grid-cols-3">
+          <article className="rounded-3xl border border-white/10 bg-ink-900/40 p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-marsgreen-300">Kurz erklärt</p>
+            <p className="mt-3 text-sm leading-relaxed text-mist-100/85">{page.description}</p>
+          </article>
+          <article className="rounded-3xl border border-white/10 bg-ink-900/40 p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-marsgreen-300">Für wen geeignet?</p>
+            <p className="mt-3 text-sm leading-relaxed text-mist-100/85">
+              {page.category === "Leistung"
+                ? "Für Unternehmen, die ihre digitale Auffindbarkeit strukturiert verbessern und relevante Nachfrage in qualifizierte Anfragen übersetzen möchten."
+                : "Für Unternehmen dieser Branche, die Leistungen klar positionieren, regional oder deutschlandweit gefunden werden und Anfragewege verbessern möchten."}
+            </p>
+          </article>
+          <article className="rounded-3xl border border-white/10 bg-ink-900/40 p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-marsgreen-300">Was wird gemessen?</p>
+            <p className="mt-3 text-sm leading-relaxed text-mist-100/85">
+              Sichtbarkeit, relevante Suchbegriffe, Klicks, qualifizierte Anfragen, Conversion-Rate und – bei Kampagnen – Kosten pro Lead.
+            </p>
+          </article>
+        </div>
+      </section>
+
       <section className="relative bg-ink-900/35 py-20 sm:py-24">
         <div className="container-page">
           <motion.div
@@ -148,7 +187,7 @@ export default function SeoSubpageContent({ page }: SeoSubpageContentProps) {
               Von Suchintention zu qualifizierter Anfrage
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-mist-100/75">
-              Klickhafen verbindet SEO, GEO, AEO und Performance-Denken in
+              Klickfunden verbindet SEO, GEO, AEO und Performance-Denken in
               einem kompakten Prozess. Jede Seite bekommt eine klare Aufgabe:
               gefunden werden, verstanden werden und zur Anfrage führen.
             </p>
@@ -195,49 +234,42 @@ export default function SeoSubpageContent({ page }: SeoSubpageContentProps) {
           </div>
 
           <div className="space-y-3">
-            {page.faq.map((item, index) => {
-              const open = openFaq === index;
-
-              return (
-                <motion.div
+            {page.faq.map((item, index) => (
+                <motion.details
                   key={item.question}
+                  open={index === 0}
                   initial={{ opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.45, delay: index * 0.05 }}
-                  className="overflow-hidden rounded-2xl border border-white/10 bg-ink-800/60"
+                  className="group overflow-hidden rounded-2xl border border-white/10 bg-ink-800/60"
                 >
-                  <button
-                    type="button"
-                    onClick={() => setOpenFaq(open ? -1 : index)}
-                    className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left"
+                  <summary
+                    className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left"
                   >
                     <span className="font-display text-base font-semibold text-white">
                       {item.question}
                     </span>
-                    <ChevronDown
-                      className={`h-5 w-5 flex-shrink-0 text-marsgreen transition-transform duration-200 ${
-                        open ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-                  <AnimatePresence initial={false}>
-                    {open && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25 }}
-                      >
-                        <p className="px-5 pb-5 text-sm leading-relaxed text-mist-100/80">
-                          {item.answer}
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              );
-            })}
+                    <span className="text-xl text-marsgreen transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="px-5 pb-5 text-sm leading-relaxed text-mist-100/80">
+                    {item.answer}
+                  </p>
+                </motion.details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 bg-ink-900/35 py-16">
+        <div className="container-page">
+          <h2 className="font-display text-2xl font-semibold text-white">Verwandte Leistungen</h2>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {relatedLinks.map((link) => (
+              <a key={link.href} href={link.href} className="rounded-full border border-white/15 bg-ink-800 px-5 py-3 text-sm font-semibold text-mist-100/85 transition-colors hover:border-marsgreen hover:text-marsgreen">
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
       </section>

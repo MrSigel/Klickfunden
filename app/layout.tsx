@@ -18,10 +18,11 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.klickfunden.de"),
   applicationName: "Klickfunden.de",
-  title: "Klickfunden.de – Sichtbarkeit für dein Business | SEO, GEO, AEO & Ads",
+  title: "Klickfunden – SEO, GEO, AEO & Ads für digitale Sichtbarkeit",
   description:
-    "Klickhafen macht dein Business über Klickfunden.de in Google, KI-Antworten und Social Ads sichtbar. SEO, GEO, AEO und Performance-Ads aus einer Hand – individuell, messbar, partnerschaftlich.",
+    "Klickfunden unterstützt Unternehmen mit SEO, GEO, AEO, Google Ads, Meta Ads, YouTube Ads, Local SEO und Conversion-Optimierung.",
   manifest: "/site.webmanifest",
   keywords: [
     "SEO Agentur",
@@ -29,16 +30,19 @@ export const metadata: Metadata = {
     "AEO Answer Engine Optimization",
     "Google Ads Agentur",
     "Meta Ads",
-    "TikTok Ads",
+    "YouTube Ads Betreuung",
+    "Local SEO",
+    "Conversion-Optimierung",
     "Klickfunden.de",
   ],
   openGraph: {
-    title: "Klickfunden.de – Lass dich finden.",
+    title: "Klickfunden – SEO, GEO, AEO & Ads Agentur",
     description:
       "SEO, GEO, AEO und Ads aus einer Hand. Wir machen dein Business überall dort sichtbar, wo deine Kund:innen heute suchen.",
     siteName: "Klickfunden.de",
     locale: "de_DE",
     type: "website",
+    url: "https://www.klickfunden.de",
   },
   icons: {
     icon: [
@@ -56,6 +60,12 @@ export const metadata: Metadata = {
     title: "Klickfunden.de",
     capable: true,
     statusBarStyle: "default",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Klickfunden – Agentur für digitale Sichtbarkeit",
+    description:
+      "SEO, GEO, AEO, Ads, Local SEO und Conversion-Optimierung für Unternehmen.",
   },
 };
 

@@ -84,25 +84,46 @@ function ReferenceCard({ reference }: { reference: HomepageReference }) {
 }
 
 function EmptyReferences() {
+  const metrics = [
+    "Sichtbarkeit",
+    "Klicks",
+    "Qualifizierte Anfragen",
+    "Conversion-Rate",
+    "Kosten pro Lead",
+    "Rankingentwicklung",
+    "Suchbegriffe",
+    "Kampagnenleistung",
+    "Nutzerführung",
+  ];
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      className="mx-auto mt-14 max-w-2xl rounded-3xl border border-marsgreen/25 bg-ink-700/70 p-8 text-center shadow-card backdrop-blur sm:p-10"
+      className="mx-auto mt-14 max-w-4xl rounded-3xl border border-marsgreen/25 bg-ink-700/70 p-8 text-center shadow-card backdrop-blur sm:p-10"
     >
       <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-marsgreen/30 bg-marsgreen/15 text-marsgreen shadow-glow">
         <ShieldCheck className="h-6 w-6" />
       </div>
       <h3 className="mt-6 font-display text-2xl font-semibold tracking-tight text-white">
-        Aktuell sind keine Referenzen vorhanden.
+        Case Studies im Aufbau
       </h3>
       <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-mist-100/80 sm:text-base">
-        Sobald geprüfte Kundenergebnisse vorliegen, erscheinen hier echte,
-        transparente Erfolgsgeschichten mit nachvollziehbaren Ergebnissen und
-        Live-Nachweisen.
+        Klickfunden baut transparente Auswertungen und Case Studies Schritt
+        für Schritt auf. Im Fokus stehen nachvollziehbare Kennzahlen wie
+        Sichtbarkeit, Klicks, Anfragen, Conversion-Rate, Kosten pro Lead und
+        Rankingentwicklung.
       </p>
+      <h4 className="mt-8 font-display text-lg font-semibold text-white">Was wir messen</h4>
+      <ul className="mt-4 flex flex-wrap justify-center gap-2">
+        {metrics.map((metric) => (
+          <li key={metric} className="rounded-full border border-white/10 bg-ink-900/45 px-4 py-2 text-xs font-medium text-mist-100/80">
+            {metric}
+          </li>
+        ))}
+      </ul>
     </motion.div>
   );
 }
@@ -192,7 +213,7 @@ export default function References() {
             Referenzen
           </span>
           <h2 className="section-label mt-5 text-balance">
-            Echte Ergebnisse, sauber nachweisbar
+            Transparente Case Studies statt unbelegter Versprechen
           </h2>
           <p className="mt-5 text-balance text-lg leading-relaxed text-mist-100/80">
             Hier erscheinen ausschließlich transparente Case Studies mit realen

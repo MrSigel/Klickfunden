@@ -1,14 +1,32 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, BrainCircuit, MessageCircleQuestion, Megaphone, Check } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  BrainCircuit,
+  Check,
+  FileSearch,
+  MapPin,
+  Megaphone,
+  MessageCircleQuestion,
+  Search,
+  Settings2,
+  Video,
+} from "lucide-react";
 import { services } from "@/lib/data";
 
 const icons = {
   seo: Search,
   geo: BrainCircuit,
   aeo: MessageCircleQuestion,
-  ads: Megaphone,
+  "google-ads": Megaphone,
+  "meta-ads": BarChart3,
+  "youtube-ads": Video,
+  "local-seo": MapPin,
+  "technical-seo": Settings2,
+  "content-seo": FileSearch,
+  conversion: BarChart3,
 } as const;
 
 const container = {
@@ -36,11 +54,12 @@ export default function ServicesGrid() {
         >
           <span className="eyebrow">Unsere Leistungen</span>
           <h2 className="section-label mt-5 text-balance">
-            Vier Hebel für deine Sichtbarkeit
+            Leistungen für Sichtbarkeit und qualifizierte Anfragen
           </h2>
           <p className="mt-5 text-balance text-lg leading-relaxed text-mist-100/75">
-            Klassische Suche, KI-Antworten und bezahlte Reichweite – wir
-            kombinieren alle Kanäle so, wie es zu deinem Business passt.
+            Von der SEO Agentur über GEO und AEO bis zu Google Ads, Meta Ads,
+            YouTube Ads und Conversion-Optimierung: Klickfunden verbindet die
+            Kanäle passend zu Zielgruppe, Nachfrage und Angebot.
           </p>
         </motion.div>
 
@@ -49,7 +68,7 @@ export default function ServicesGrid() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-60px" }}
-          className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
+          className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 lg:gap-6"
         >
           {services.map((service) => {
             const Icon = icons[service.id as keyof typeof icons];
@@ -88,6 +107,14 @@ export default function ServicesGrid() {
                     </li>
                   ))}
                 </ul>
+
+                <a
+                  href={service.href}
+                  className="mt-auto inline-flex items-center gap-2 pt-7 text-sm font-semibold text-marsgreen hover:underline"
+                >
+                  Mehr erfahren
+                  <ArrowRight className="h-4 w-4" />
+                </a>
 
                 <span className="pointer-events-none absolute inset-x-6 bottom-0 h-px scale-x-0 bg-marsgreen/60 transition-transform duration-300 group-hover:scale-x-100" />
               </motion.div>

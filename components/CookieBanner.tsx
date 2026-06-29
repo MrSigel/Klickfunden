@@ -68,7 +68,7 @@ export default function CookieBanner() {
                 Datenschutz-Einstellungen
               </p>
               <p className="mt-2 max-w-4xl text-sm leading-relaxed text-mist-100/80">
-                Klickhafen verwendet technisch notwendige Speicherzugriffe, damit
+                Klickfunden verwendet technisch notwendige Speicherzugriffe, damit
                 diese Auswahl gespeichert bleibt. Vercel Web Analytics wird
                 nur nach deiner Zustimmung genutzt und arbeitet
                 datenschutzfreundlich ohne dauerhaft gesetzte

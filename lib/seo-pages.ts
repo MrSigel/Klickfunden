@@ -31,7 +31,7 @@ type SeoPageInput = Omit<SeoPage, "metadata"> & {
   metaDescription: string;
 };
 
-const siteUrl = "https://klickfunden.de";
+const siteUrl = "https://www.klickfunden.de";
 
 function definePage(page: SeoPageInput): SeoPage {
   const url = `${siteUrl}${page.path}`;
@@ -49,7 +49,7 @@ function definePage(page: SeoPageInput): SeoPage {
         title: page.metaTitle,
         description: page.metaDescription,
         url,
-        siteName: "Klickfunden.de",
+        siteName: "Klickfunden",
         locale: "de_DE",
         type: "website",
       },
@@ -68,13 +68,13 @@ export const seoPages = {
     category: "Leistung",
     eyebrow: "SEO Agentur",
     title: "SEO, das Nachfrage sichtbar macht",
-    metaTitle: "SEO Agentur für B2B, Dienstleister & lokale Unternehmen | Klickfunden.de",
+    metaTitle: "SEO Agentur für bessere Sichtbarkeit bei Google | Klickfunden",
     metaDescription:
-      "Klickhafen entwickelt SEO-Strategien für nachhaltige Google-Sichtbarkeit, relevante Rankings und messbare Anfragen.",
+      "Klickfunden entwickelt SEO-Strategien für nachhaltige Google-Sichtbarkeit, relevante Rankings und qualifizierte Anfragen.",
     description:
       "Wir verbinden technische Suchmaschinenoptimierung, klare Content-Architektur und Conversion-orientierte Seitenstruktur, damit dein Unternehmen nicht nur gefunden, sondern gewählt wird.",
     serviceType: "Suchmaschinenoptimierung",
-    keywords: ["SEO Agentur", "Suchmaschinenoptimierung", "Google Sichtbarkeit", "SEO Strategie", "Klickfunden.de"],
+    keywords: ["SEO Agentur", "Suchmaschinenoptimierung", "Google Sichtbarkeit", "Google Ranking verbessern", "Klickfunden"],
     badges: ["Technisches SEO", "Content-Cluster", "E-E-A-T", "Lead-Fokus"],
     benefits: [
       {
@@ -110,7 +110,7 @@ export const seoPages = {
     ],
     faq: [
       {
-        question: "Für wen ist SEO mit Klickhafen geeignet?",
+        question: "Für wen ist SEO mit Klickfunden geeignet?",
         answer:
           "SEO eignet sich für Unternehmen, die planbar über Google gefunden werden möchten: Dienstleister, lokale Betriebe, B2B-Anbieter, E-Commerce-Shops und beratungsintensive Angebote.",
       },
@@ -131,13 +131,13 @@ export const seoPages = {
     category: "Leistung",
     eyebrow: "Generative Engine Optimization",
     title: "GEO für Sichtbarkeit in ChatGPT, Gemini und Perplexity",
-    metaTitle: "GEO Agentur für KI-Sichtbarkeit | Klickfunden.de",
+    metaTitle: "GEO Agentur für Sichtbarkeit in KI-Suchen | Klickfunden",
     metaDescription:
-      "Klickhafen optimiert Inhalte für generative Suchsysteme und KI-Antworten, damit Marken in ChatGPT, Gemini und Perplexity auffindbar werden.",
+      "Klickfunden optimiert Inhalte für generative Suchsysteme und KI-Antworten, damit Unternehmen in ChatGPT, Gemini und Perplexity auffindbar werden.",
     description:
       "Generative Engine Optimization macht dein Unternehmen für KI-Systeme verständlich, zitierfähig und empfehlungswürdig. Wir strukturieren Inhalte so, dass sie in Antworten statt nur in Linklisten auftauchen können.",
     serviceType: "Generative Engine Optimization",
-    keywords: ["GEO Agentur", "Generative Engine Optimization", "KI Suche", "ChatGPT Sichtbarkeit", "Perplexity SEO"],
+    keywords: ["GEO Agentur", "Generative Engine Optimization", "KI-Suche optimieren", "Sichtbarkeit in ChatGPT", "Sichtbarkeit in Gemini", "Sichtbarkeit in Perplexity"],
     badges: ["KI-Suche", "Entitäten", "Zitierfähigkeit", "Markenpräsenz"],
     benefits: [
       {
@@ -194,9 +194,9 @@ export const seoPages = {
     category: "Leistung",
     eyebrow: "Answer Engine Optimization",
     title: "AEO: Antworten liefern, bevor Wettbewerber gefunden werden",
-    metaTitle: "AEO Agentur für Answer Engines, Snippets & Sprachsuche | Klickfunden.de",
+    metaTitle: "AEO Agentur für direkte Antworten & Sprachsuche | Klickfunden",
     metaDescription:
-      "Klickhafen optimiert Websites für Answer Engines, Featured Snippets, KI-Antworten und sprachbasierte Suchanfragen.",
+      "Klickfunden optimiert Websites für Answer Engines, Featured Snippets, KI-Antworten und sprachbasierte Suchanfragen.",
     description:
       "Answer Engine Optimization macht Inhalte so klar, präzise und strukturiert, dass Suchmaschinen und KI-Systeme konkrete Antworten direkt erkennen können.",
     serviceType: "Answer Engine Optimization",
@@ -257,11 +257,11 @@ export const seoPages = {
     category: "Leistung",
     eyebrow: "Google Ads",
     title: "Google Ads für Nachfrage, die jetzt kaufbereit ist",
-    metaTitle: "Google Ads Agentur für qualifizierte Leads | Klickfunden.de",
+    metaTitle: "Google Ads Agentur für qualifizierte Anfragen | Klickfunden",
     metaDescription:
-      "Klickhafen plant und optimiert Google Ads Kampagnen für B2B, lokale Dienstleister und wachstumsorientierte Unternehmen.",
+      "Klickfunden plant und optimiert Google Ads Kampagnen für B2B, lokale Dienstleister und wachstumsorientierte Unternehmen.",
     description:
-      "Wir bauen Google Ads Kampagnen entlang echter Suchintentionen auf: sauber getrennte Keywords, klare Anzeigen, relevante Landingpages und Conversion-Fokus statt Budgetstreuverlust.",
+      "Google Ads Kampagnen erstellen lassen bedeutet bei Klickfunden: sauber getrennte Keywords, klare Suchanzeigen, relevante Landingpages, Conversion Tracking und ein Fokus auf qualifizierte Leads statt Budgetstreuverlust.",
     serviceType: "Google Ads Management",
     keywords: ["Google Ads Agentur", "SEA Agentur", "Google Werbung", "Lead Kampagnen", "Performance Marketing"],
     badges: ["Search Ads", "Landingpages", "Conversion Tracking", "Budgetsteuerung"],
@@ -304,7 +304,7 @@ export const seoPages = {
           "Google Ads lohnen sich, wenn bereits aktive Nachfrage existiert und Nutzer nach konkreten Leistungen, Produkten oder Lösungen suchen.",
       },
       {
-        question: "Wie verhindert Klickhafen Streuverluste?",
+        question: "Wie reduziert Klickfunden Streuverluste?",
         answer:
           "Durch genaue Keyword-Struktur, negative Keywords, regionale Eingrenzung, klare Anzeigen und Landingpages, die zur Suchintention passen.",
       },
@@ -320,9 +320,9 @@ export const seoPages = {
     category: "Leistung",
     eyebrow: "Meta Ads",
     title: "Meta Ads, die Aufmerksamkeit in Anfragen verwandeln",
-    metaTitle: "Meta Ads Agentur für Facebook & Instagram Kampagnen | Klickfunden.de",
+    metaTitle: "Meta Ads Agentur für Facebook & Instagram | Klickfunden",
     metaDescription:
-      "Klickhafen entwickelt Meta Ads Kampagnen für Reichweite, Leads und Retargeting auf Facebook und Instagram.",
+      "Klickfunden entwickelt Meta Ads Kampagnen für Reichweite, Leads und Retargeting auf Facebook und Instagram.",
     description:
       "Meta Ads funktionieren, wenn Zielgruppe, Creative, Angebot und Funnel zusammenpassen. Wir entwickeln Kampagnen, die nicht nur Reichweite erzeugen, sondern konkrete Nachfrage aufbauen.",
     serviceType: "Meta Ads Management",
@@ -383,9 +383,9 @@ export const seoPages = {
     category: "Leistung",
     eyebrow: "YouTube Ads",
     title: "YouTube Ads für erklärungsstarke Angebote",
-    metaTitle: "YouTube Ads Agentur für Sichtbarkeit, Vertrauen & Leads | Klickfunden.de",
+    metaTitle: "YouTube Ads Betreuung für Sichtbarkeit & Leads | Klickfunden",
     metaDescription:
-      "Klickhafen plant YouTube Ads Kampagnen für Markenaufbau, Nachfragegenerierung und Performance-orientierte Video-Funnels.",
+      "Klickfunden plant YouTube Ads Kampagnen für Markenaufbau, Nachfragegenerierung und Performance-orientierte Video-Funnels.",
     description:
       "YouTube Ads verbinden Reichweite mit Such- und Interessenintention. Wir entwickeln Video-Kampagnen, die komplexe Leistungen verständlich machen und Vertrauen vor der Anfrage aufbauen.",
     serviceType: "YouTube Ads Management",
@@ -446,9 +446,9 @@ export const seoPages = {
     category: "Leistung",
     eyebrow: "Local SEO",
     title: "Local SEO für regionale Nachfrage",
-    metaTitle: "Local SEO Agentur für Google Maps & regionale Sichtbarkeit | Klickfunden.de",
+    metaTitle: "Local SEO Agentur für Google Maps & regionale Sichtbarkeit | Klickfunden",
     metaDescription:
-      "Klickhafen optimiert lokale Sichtbarkeit in Google Maps, regionalen Suchergebnissen und standortbezogenen Anfragepfaden.",
+      "Klickfunden optimiert lokale Sichtbarkeit in Google Maps, regionalen Suchergebnissen und standortbezogenen Anfragepfaden.",
     description:
       "Lokale Suchanfragen sind oft kaufnah. Wir optimieren Google Unternehmensprofil, Standortseiten und regionale Inhalte, damit dein Betrieb in der Nähe sichtbar und vertrauenswürdig erscheint.",
     serviceType: "Local SEO",
@@ -509,9 +509,9 @@ export const seoPages = {
     category: "Leistung",
     eyebrow: "Technical SEO",
     title: "Technisches SEO für saubere Indexierung",
-    metaTitle: "Technical SEO Audit & Optimierung | Klickfunden.de",
+    metaTitle: "Technical SEO für Crawling, Indexierung & Ladezeiten | Klickfunden",
     metaDescription:
-      "Klickhafen prüft und optimiert technische SEO-Grundlagen: Indexierung, Core Web Vitals, Crawling, Struktur und Performance.",
+      "Klickfunden prüft und optimiert technische SEO-Grundlagen: Indexierung, Core Web Vitals, Crawling, Struktur und Performance.",
     description:
       "Technisches SEO sorgt dafür, dass Suchmaschinen deine wichtigsten Inhalte effizient crawlen, verstehen und bewerten können. Wir priorisieren technische Arbeit nach Ranking- und Business-Wirkung.",
     serviceType: "Technical SEO",
@@ -572,13 +572,13 @@ export const seoPages = {
     category: "Leistung",
     eyebrow: "Content SEO",
     title: "Content SEO für Themenführerschaft und Leads",
-    metaTitle: "Content SEO Strategie für B2B & Dienstleister | Klickfunden.de",
+    metaTitle: "Content SEO für Suchintention, Themencluster & Leads | Klickfunden",
     metaDescription:
-      "Klickhafen entwickelt Content SEO Strategien mit Themenclustern, Leistungsseiten, FAQ-Struktur und conversionstarken Inhalten.",
+      "Klickfunden entwickelt Content-SEO-Strategien mit Themenclustern, Leistungsseiten, FAQ-Struktur und conversionstarken Inhalten.",
     description:
       "Content SEO macht Nachfrage sichtbar, beantwortet Einwände und führt Nutzer zur Anfrage. Wir planen Inhalte nicht als Blog-Füllmaterial, sondern als systematische Sichtbarkeitsarchitektur.",
     serviceType: "Content SEO",
-    keywords: ["Content SEO", "SEO Texte", "Themencluster", "Content Strategie", "SEO Content Agentur"],
+    keywords: ["Content SEO", "SEO Texte", "Keyword-Cluster", "Suchintention", "Ratgeberseiten", "SEO Content Agentur"],
     badges: ["Themencluster", "SEO-Texte", "FAQ-Struktur", "Conversion"],
     benefits: [
       {
@@ -635,11 +635,11 @@ export const seoPages = {
     category: "Leistung",
     eyebrow: "Conversion Optimierung",
     title: "Mehr Anfragen aus bestehender Sichtbarkeit",
-    metaTitle: "Conversion Optimierung für SEO, Ads & Landingpages | Klickfunden.de",
+    metaTitle: "Conversion-Optimierung für mehr Anfragen | Klickfunden",
     metaDescription:
-      "Klickhafen optimiert Landingpages, CTAs und Nutzerführung, damit SEO- und Ads-Traffic mehr qualifizierte Anfragen erzeugt.",
+      "Klickfunden optimiert Landingpages, CTAs und Nutzerführung, damit SEO- und Ads-Traffic mehr qualifizierte Anfragen erzeugt.",
     description:
-      "Sichtbarkeit ist nur der erste Schritt. Conversion Optimierung sorgt dafür, dass Besucher verstehen, vertrauen und handeln. Wir verbessern Struktur, Botschaft und Anfragewege.",
+      "Sichtbarkeit ist nur der erste Schritt. Conversion-Optimierung verbessert Anfragequote, CTA-Struktur, Nutzerführung, Formularoptimierung und Landingpage-Optimierung auf einer messbaren Grundlage.",
     serviceType: "Conversion Rate Optimization",
     keywords: ["Conversion Optimierung", "Landingpage Optimierung", "CRO", "Leadgenerierung", "CTA Optimierung"],
     badges: ["Landingpages", "CTA-Logik", "Trust-Signale", "Lead-Qualität"],
@@ -698,9 +698,9 @@ export const seoPages = {
     category: "Branche",
     eyebrow: "Marketing für Handwerker",
     title: "SEO, Local SEO und Ads für Handwerksbetriebe",
-    metaTitle: "Online-Marketing für Handwerker: SEO, Google Ads & Local SEO | Klickfunden.de",
+    metaTitle: "Online-Marketing für Handwerker: SEO, Ads & Local SEO | Klickfunden",
     metaDescription:
-      "Klickhafen macht Handwerksbetriebe regional sichtbar: Google Maps, lokale SEO, SEO-Landingpages und Ads für qualifizierte Anfragen.",
+      "Klickfunden macht Handwerksbetriebe regional sichtbar: Google Maps, lokale SEO, Leistungsseiten und Ads für qualifizierte Anfragen.",
     description:
       "Ob Sanitär, Elektro, Dach, Gartenbau oder Ausbau: Wir helfen Handwerksbetrieben, in ihrer Region gefunden zu werden und planbar bessere Anfragen zu erhalten.",
     serviceType: "Digitalmarketing für Handwerker",
@@ -761,9 +761,9 @@ export const seoPages = {
     category: "Branche",
     eyebrow: "Marketing für Dienstleister",
     title: "Mehr qualifizierte Anfragen für Dienstleister",
-    metaTitle: "SEO & Ads für Dienstleister | Klickfunden.de",
+    metaTitle: "SEO & Ads für Dienstleister | Klickfunden",
     metaDescription:
-      "Klickhafen entwickelt SEO-, GEO-, AEO- und Ads-Strategien für Dienstleister, die online sichtbarer und planbarer gefunden werden möchten.",
+      "Klickfunden entwickelt SEO-, GEO-, AEO- und Ads-Strategien für Dienstleister, die online sichtbarer und gezielter gefunden werden möchten.",
     description:
       "Dienstleistungen werden oft über Vertrauen, Expertise und klare Problemlösung verkauft. Wir machen diese Signale sichtbar und führen Interessenten strukturiert zur Anfrage.",
     serviceType: "Digitalmarketing für Dienstleister",
@@ -813,7 +813,7 @@ export const seoPages = {
           "FAQ beantworten Einwände und machen Expertise maschinenlesbar. Das unterstützt SEO, AEO und generative Suchsysteme.",
       },
       {
-        question: "Kann Klickhafen auch erklärungsbedürftige Leistungen vermarkten?",
+        question: "Kann Klickfunden auch erklärungsbedürftige Leistungen vermarkten?",
         answer:
           "Ja. Gerade erklärungsbedürftige Dienstleistungen profitieren von klarer Struktur, Answer-Content und einem starken Lead-Funnel.",
       },
@@ -824,9 +824,9 @@ export const seoPages = {
     category: "Branche",
     eyebrow: "Marketing für Pflege & Pflegedienste",
     title: "Digitale Auffindbarkeit für Pflegeanbieter",
-    metaTitle: "SEO & Google Ads für Pflegedienste und Pflegeanbieter | Klickfunden.de",
+    metaTitle: "SEO & Google Ads für Pflegedienste | Klickfunden",
     metaDescription:
-      "Klickhafen unterstützt Pflegedienste mit Local SEO, Google Sichtbarkeit, AEO-Inhalten und Kampagnen für regionale Anfragen.",
+      "Klickfunden unterstützt Pflegedienste mit Local SEO, Google-Sichtbarkeit, AEO-Inhalten und Kampagnen für regionale Anfragen.",
     description:
       "Pflegeentscheidungen sind sensibel, lokal und vertrauensbasiert. Wir helfen Pflegediensten, Pflegeeinrichtungen und Beratungsangeboten, online verständlich und auffindbar zu werden.",
     serviceType: "Digitalmarketing für Pflegedienste",
@@ -887,9 +887,9 @@ export const seoPages = {
     category: "Branche",
     eyebrow: "SEO für Ärzte & Praxen",
     title: "Mehr Sichtbarkeit für Praxen und medizinische Angebote",
-    metaTitle: "SEO & Local SEO für Ärzte, Praxen und Medizinanbieter | Klickfunden.de",
+    metaTitle: "SEO & Local SEO für Ärzte und Praxen | Klickfunden",
     metaDescription:
-      "Klickhafen optimiert lokale Sichtbarkeit, Praxis-Websites und medizinische FAQ-Inhalte für Ärzte und Gesundheitsanbieter.",
+      "Klickfunden optimiert lokale Sichtbarkeit, Praxis-Websites und medizinische FAQ-Inhalte für Ärzte und Gesundheitsanbieter.",
     description:
       "Patienten suchen lokal, vertrauensbasiert und häufig mit konkreten Fragen. Wir strukturieren Praxis-Websites so, dass Leistungen, Standort und Expertise verständlich sichtbar werden.",
     serviceType: "Digitalmarketing für Arztpraxen",
@@ -950,9 +950,9 @@ export const seoPages = {
     category: "Branche",
     eyebrow: "SEO für Kanzleien",
     title: "Sichtbarkeit für Anwälte und Kanzleien",
-    metaTitle: "SEO & Google Ads für Anwälte und Kanzleien | Klickfunden.de",
+    metaTitle: "SEO & Google Ads für Anwälte und Kanzleien | Klickfunden",
     metaDescription:
-      "Klickhafen entwickelt SEO-, AEO- und Ads-Strategien für Kanzleien, die in relevanten Rechtsgebieten und Regionen sichtbar werden möchten.",
+      "Klickfunden entwickelt SEO-, AEO- und Ads-Strategien für Kanzleien, die in relevanten Rechtsgebieten und Regionen sichtbar werden möchten.",
     description:
       "Mandanten suchen meist mit konkretem Problem, Ort und hoher Dringlichkeit. Wir helfen Kanzleien, Fachgebiete klar zu positionieren und qualifizierte Erstkontakte zu gewinnen.",
     serviceType: "Digitalmarketing für Kanzleien",
@@ -1013,9 +1013,9 @@ export const seoPages = {
     category: "Branche",
     eyebrow: "Marketing für Immobilien",
     title: "SEO und Ads für Immobilienanbieter",
-    metaTitle: "SEO & Ads für Immobilienmakler und Immobilienunternehmen | Klickfunden.de",
+    metaTitle: "SEO & Ads für Immobilienmakler | Klickfunden",
     metaDescription:
-      "Klickhafen unterstützt Immobilienmakler und Immobilienunternehmen mit lokaler Sichtbarkeit, Lead-Funnels und Performance-Kampagnen.",
+      "Klickfunden unterstützt Immobilienmakler und Immobilienunternehmen mit lokaler Sichtbarkeit, Lead-Funnels und Performance-Kampagnen.",
     description:
       "Immobilienentscheidungen sind lokal, vertrauensbasiert und wettbewerbsintensiv. Wir helfen, Verkäufer, Käufer und Eigentümer mit klaren Seiten und Kampagnen zu erreichen.",
     serviceType: "Digitalmarketing für Immobilienanbieter",
@@ -1076,9 +1076,9 @@ export const seoPages = {
     category: "Branche",
     eyebrow: "SEO für Steuerberater",
     title: "Digitale Sichtbarkeit für Steuerkanzleien",
-    metaTitle: "SEO & Local SEO für Steuerberater und Steuerkanzleien | Klickfunden.de",
+    metaTitle: "SEO & Local SEO für Steuerberater | Klickfunden",
     metaDescription:
-      "Klickhafen optimiert Steuerkanzlei-Websites für lokale Sichtbarkeit, B2B-Anfragen, AEO-Fragen und qualifizierte Mandantenkontakte.",
+      "Klickfunden optimiert Steuerkanzlei-Websites für lokale Sichtbarkeit, B2B-Anfragen, AEO-Fragen und qualifizierte Mandantenkontakte.",
     description:
       "Steuerberatung lebt von Vertrauen, Spezialisierung und passender Mandantschaft. Wir machen Kanzleileistungen verständlich sichtbar und richten die Website auf qualifizierte Anfragen aus.",
     serviceType: "Digitalmarketing für Steuerberater",
@@ -1139,9 +1139,9 @@ export const seoPages = {
     category: "Branche",
     eyebrow: "SEO & Ads für E-Commerce",
     title: "Mehr Sichtbarkeit und Umsatz für Online-Shops",
-    metaTitle: "E-Commerce SEO, GEO & Ads für Online-Shops | Klickfunden.de",
+    metaTitle: "E-Commerce SEO, GEO & Ads für Online-Shops | Klickfunden",
     metaDescription:
-      "Klickhafen optimiert Online-Shops mit technischer SEO, Kategorie-Content, Shopping-nahen Kampagnen und Conversion-Fokus.",
+      "Klickfunden optimiert Online-Shops mit technischer SEO, Kategorie-Content, Shopping-nahen Kampagnen und Conversion-Fokus.",
     description:
       "E-Commerce braucht saubere Technik, starke Kategorien, klare Produktinformationen und rentable Kampagnen. Wir optimieren Shop-Strukturen für Suche, KI-Antworten und Kaufentscheidungen.",
     serviceType: "E-Commerce SEO und Ads",
@@ -1202,9 +1202,9 @@ export const seoPages = {
     category: "Branche",
     eyebrow: "B2B SEO & Demand Generation",
     title: "Digitale Sichtbarkeit für B2B-Entscheidungen",
-    metaTitle: "B2B SEO, GEO und Ads für erklärungsbedürftige Angebote | Klickfunden.de",
+    metaTitle: "B2B SEO, GEO & Ads für komplexe Angebote | Klickfunden",
     metaDescription:
-      "Klickhafen entwickelt B2B-Sichtbarkeitsstrategien für SEO, GEO, AEO, Google Ads und qualifizierte Leadgenerierung.",
+      "Klickfunden entwickelt B2B-Sichtbarkeitsstrategien für SEO, GEO, AEO, Google Ads und qualifizierte Leadgenerierung.",
     description:
       "B2B-Kaufprozesse sind lang, informationsintensiv und vertrauensbasiert. Wir strukturieren Inhalte so, dass Entscheider dein Angebot verstehen, vergleichen und anfragen können.",
     serviceType: "B2B Digitalmarketing",
@@ -1265,9 +1265,9 @@ export const seoPages = {
     category: "Branche",
     eyebrow: "Marketing für Gastronomie",
     title: "Mehr lokale Sichtbarkeit für Restaurants und Gastronomie",
-    metaTitle: "Local SEO & Ads für Restaurants, Cafés und Gastronomie | Klickfunden.de",
+    metaTitle: "Local SEO & Ads für Restaurants und Gastronomie | Klickfunden",
     metaDescription:
-      "Klickhafen optimiert Gastronomie-Betriebe für Google Maps, lokale Suche, Bewertungen, Reservierungen und regionale Kampagnen.",
+      "Klickfunden optimiert Gastronomie-Betriebe für Google Maps, lokale Suche, Bewertungen, Reservierungen und regionale Kampagnen.",
     description:
       "Gäste suchen mobil, lokal und oft spontan. Wir sorgen dafür, dass Restaurant, Café oder Bar in Google Maps, lokaler Suche und relevanten Entscheidungsfragen sichtbar wird.",
     serviceType: "Digitalmarketing für Gastronomie",
