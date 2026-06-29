@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #003333;
+    color: #f4f7f5;
+  }
+
+  ::selection {
+    background-color: #99cc33;
+    color: #001f1f;
+  }
+
+  :focus-visible {
+    outline: 2px solid #99cc33;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #001f1f;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #155050;
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #99cc33;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-marsgreen/30 bg-marsgreen/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-marsgreen-300;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-marsgreen px-6 py-3.5 text-sm font-semibold text-ink-900 shadow-glow transition-colors duration-200 hover:bg-marsgreen-400;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition-colors duration-200 hover:border-marsgreen/40 hover:bg-white/10;
+  }
+
+  .section-label {
+    @apply font-display text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
