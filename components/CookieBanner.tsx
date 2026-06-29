@@ -26,6 +26,14 @@ export default function CookieBanner() {
     const stored = window.localStorage.getItem(consentStorageKey);
     setVisible(stored !== "accepted" && stored !== "essential");
     setReady(true);
+
+    const openSettings = () => setVisible(true);
+    window.addEventListener("klickfunden-open-cookie-settings", openSettings);
+    return () =>
+      window.removeEventListener(
+        "klickfunden-open-cookie-settings",
+        openSettings,
+      );
   }, []);
 
   const saveChoice = (choice: ConsentChoice) => {

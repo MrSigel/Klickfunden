@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
 
 const footerColumns = [
   {
@@ -105,7 +106,10 @@ export default function Footer() {
             © {new Date().getFullYear()} Klickhafen — Klickfunden.de. Alle Rechte
             vorbehalten.
           </p>
-          <p>GESUCHT. GEFUNDEN. GEBUCHT.</p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <CookieSettingsButton />
+            <p>GESUCHT. GEFUNDEN. GEBUCHT.</p>
+          </div>
         </div>
       </div>
     </footer>

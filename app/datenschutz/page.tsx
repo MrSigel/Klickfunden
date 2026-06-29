@@ -214,7 +214,8 @@ export default function DatenschutzPage() {
               <p>
                 Du kannst eine erteilte Einwilligung jederzeit mit Wirkung für
                 die Zukunft widerrufen, indem du die gespeicherte
-                Consent-Auswahl im Browser löschst oder uns unter
+                die Cookie-Einstellungen im Footer erneut öffnest und deine
+                Auswahl änderst oder uns unter
                 kontakt@klickfunden.de kontaktierst. Die Rechtmäßigkeit der
                 bis zum Widerruf erfolgten Verarbeitung bleibt unberührt.
               </p>
