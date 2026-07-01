@@ -1,7 +1,6 @@
 "use server";
 
 import { getSupabaseAdmin } from "@/lib/supabase/server";
-import type { Json } from "@/lib/supabase/types";
 import { headers } from "next/headers";
 
 export type SubmitLeadInput = {
@@ -112,22 +111,17 @@ export async function submitLead(
     return validationError("Bitte gib eine gültige E-Mail-Adresse ein.");
   }
 
-  const formData: Json = {
-    goal: input.goal,
-    goalLabel: input.goalLabel,
-    noWebsite: input.noWebsite,
-    submittedFrom: "Multi-Step-Formular",
-  };
-
   try {
-    const { data, error } = await getSupabaseAdmin()
-      .from("leads")
+    const { data, error } = await (getSupabaseAdmin() as any)
+      .from("admin_inquiries")
       .insert({
         name,
         email,
-        telefon,
+        phone: telefon,
         website,
-        form_data: formData,
+        service: input.goalLabel,
+        message: `Ziel: ${input.goalLabel}`,
+        source: "Website",
         status: "Neu",
       })
       .select("id")

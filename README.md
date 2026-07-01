@@ -1,11 +1,7 @@
 # Klickfunden.de — Landing Page (Frontend-Template)
 
-Eine vollständig responsive, animierte Next.js-Landingpage für eine
-Digital-Marketing-Agentur (SEO, GEO, AEO, Ads). **Reines Frontend-Template**
-— es ist keine Datenbank- oder Backend-Logik enthalten. Das Lead-Formular
-speichert seinen Zustand aktuell nur clientseitig (React State); für eine
-echte Einreichung muss `handleSubmit` in `components/LeadForm.tsx` an eine
-API-Route, ein CRM oder einen E-Mail-Dienst angebunden werden.
+Responsive Next.js-Website für Klickfunden mit Supabase-Anfrageformular und
+geschütztem Admin-Bereich für SEO, GEO, AEO, Ads und interne Prozesse.
 
 ## Tech-Stack
 
@@ -14,6 +10,7 @@ API-Route, ein CRM oder einen E-Mail-Dienst angebunden werden.
 - **Tailwind CSS** (Design-Tokens für Farben, Typo, Schatten)
 - **Framer Motion** (Seiten-, Scroll- und Hover-Animationen)
 - **lucide-react** (Icons)
+- **Supabase** (Anfragen und Admin-Daten)
 
 ## Schnellstart
 
@@ -23,6 +20,21 @@ npm run dev
 ```
 
 Die Seite läuft danach unter `http://localhost:3000`.
+
+## Admin-Konfiguration
+
+Der Admin-Bereich liegt unter `/admin`, die Anmeldung unter `/login`. Vor dem
+ersten Einsatz muss `supabase_schema.sql` einmal im Supabase SQL Editor
+ausgeführt werden. Zusätzlich müssen lokal und im Deployment ausschließlich
+serverseitig folgende Werte gesetzt sein:
+
+- `ADMIN_EMAIL`
+- `ADMIN_PASSWORD`
+- `ADMIN_SESSION_SECRET` mit mindestens 32 zufälligen Zeichen
+- `SUPABASE_SERVICE_ROLE_KEY`
+
+Vorlagen stehen in `.env.example`. `.env.local` und echte Zugangsdaten dürfen
+nicht committed werden.
 
 Build für Produktion:
 
@@ -64,8 +76,8 @@ Definiert in `tailwind.config.ts`:
 
 - Inhalte (Texte, FAQ, Services, Navigation) zentral in `lib/data.ts` pflegen.
 - Farben/Schriften in `tailwind.config.ts` anpassen.
-- Lead-Formular an ein echtes Backend anbinden: `handleSubmit` in
-  `components/LeadForm.tsx` ersetzen (z. B. `fetch("/api/lead", ...)`).
+- Eingehende Website-Anfragen werden in `admin_inquiries` gespeichert und im
+  Admin-Bereich unter `/admin/anfragen` verwaltet.
 - Bilder/Fotos für die Über-uns-Section in `public/` ablegen und in
   `components/AboutFounder.tsx` per `next/image` einbinden.
 

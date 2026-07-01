@@ -24,6 +24,10 @@ export function createAdminSession() {
   return { value: `${payload}.${sign(payload)}`, maxAge: SESSION_TTL_SECONDS };
 }
 
+export function isAdminAuthConfigured() {
+  return Boolean(secret() && process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD);
+}
+
 export function verifyAdminSession(value?: string) {
   if (!value || !secret()) return false;
   const [role, expiresRaw, signature] = value.split(".");
@@ -47,12 +51,9 @@ export function assertAdminSession() {
 export function validCredentials(email: string, password: string) {
   const expectedEmail = process.env.ADMIN_EMAIL;
   const expectedPassword = process.env.ADMIN_PASSWORD;
-  const passwordHash = process.env.ADMIN_PASSWORD_HASH;
-  if (!expectedEmail || (!expectedPassword && !passwordHash)) return false;
+  if (!expectedEmail || !expectedPassword || !secret()) return false;
   const emailOk = safeEqual(email.trim().toLowerCase(), expectedEmail.trim().toLowerCase());
-  const passwordOk = passwordHash
-    ? safeEqual(createHmac("sha256", secret() || "").update(password).digest("hex"), passwordHash)
-    : safeEqual(password, expectedPassword || "");
+  const passwordOk = safeEqual(password, expectedPassword);
   return emailOk && passwordOk;
 }
 

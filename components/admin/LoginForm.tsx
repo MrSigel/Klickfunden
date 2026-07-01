@@ -13,7 +13,7 @@ export default function LoginForm() {
     event.preventDefault(); setError(""); setPending(true);
     const data = new FormData(event.currentTarget);
     const response = await fetch("/api/admin/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: data.get("email"), password: data.get("password") }) });
-    if (!response.ok) { setError("Die eingegebenen Zugangsdaten sind nicht korrekt."); setPending(false); return; }
+    if (!response.ok) { setError(response.status === 503 ? "Die Anmeldung ist aktuell nicht verfügbar. Bitte später erneut versuchen." : "Die eingegebenen Zugangsdaten sind nicht korrekt."); setPending(false); return; }
     const target = params.get("redirect");
     router.replace(target?.startsWith("/admin") ? target : "/admin"); router.refresh();
   }

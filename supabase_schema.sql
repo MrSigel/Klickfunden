@@ -24,6 +24,31 @@ alter table public.admin_settings enable row level security;
 
 revoke all on public.admin_inquiries, public.admin_leads, public.admin_audits, public.admin_keywords, public.admin_ads_campaigns, public.admin_reports, public.admin_tasks, public.admin_content_plans, public.admin_settings from anon, authenticated;
 
+create index if not exists admin_inquiries_status_idx on public.admin_inquiries(status);
+create index if not exists admin_inquiries_created_at_idx on public.admin_inquiries(created_at desc);
+create index if not exists admin_leads_status_idx on public.admin_leads(status);
+create index if not exists admin_audits_status_idx on public.admin_audits(status);
+create index if not exists admin_tasks_status_due_date_idx on public.admin_tasks(status, due_date);
+create index if not exists admin_reports_status_idx on public.admin_reports(status);
+
+create or replace function public.set_updated_at()
+returns trigger language plpgsql set search_path = public as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$;
+
+do $$
+declare table_name text;
+begin
+  foreach table_name in array array['admin_inquiries','admin_leads','admin_audits','admin_keywords','admin_ads_campaigns','admin_reports','admin_tasks','admin_content_plans','admin_settings'] loop
+    execute format('drop trigger if exists set_updated_at on public.%I', table_name);
+    execute format('create trigger set_updated_at before update on public.%I for each row execute function public.set_updated_at()', table_name);
+  end loop;
+end;
+$$;
+
 create or replace function public.is_admin()
 returns boolean
 language sql
