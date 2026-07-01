@@ -9,6 +9,8 @@ Unternehmen, Dienstleister, Handwerker, Praxen, Kanzleien, Immobilienanbieter, G
 ## Wichtige Seiten
 
 - Startseite und Kontakt: https://www.klickfunden.de/#angebot
+- Über Klickfunden: https://www.klickfunden.de/ueber-uns
+- Häufige Fragen: https://www.klickfunden.de/faq
 - SEO: https://www.klickfunden.de/services/seo
 - GEO: https://www.klickfunden.de/services/geo
 - AEO: https://www.klickfunden.de/services/aeo

@@ -39,8 +39,8 @@ const footerColumns = [
   {
     title: "Agentur",
     links: [
-      { label: "Über uns", href: "/#ueber-uns" },
-      { label: "FAQ", href: "/#faq" },
+      { label: "Über uns", href: "/ueber-uns" },
+      { label: "FAQ", href: "/faq" },
       { label: "Angebot anfordern", href: "/#angebot" },
       { label: "Standort Castrop-Rauxel", href: "/standort/castrop-rauxel" },
     ],

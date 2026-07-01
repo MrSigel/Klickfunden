@@ -6,8 +6,8 @@ export type NavLink = {
 export const navLinks: NavLink[] = [
   { label: "Leistungen", href: "/#leistungen" },
   { label: "Zielgruppen", href: "/#zielgruppen" },
-  { label: "Über uns", href: "/#ueber-uns" },
-  { label: "FAQ", href: "/#faq" },
+  { label: "Über uns", href: "/ueber-uns" },
+  { label: "FAQ", href: "/faq" },
 ];
 
 export type Service = {
@@ -135,6 +135,11 @@ export type FaqItem = {
 
 export const faqItems: FaqItem[] = [
   {
+    question: "Was ist SEO?",
+    answer:
+      "SEO steht für Suchmaschinenoptimierung. Technik, Inhalte und interne Verlinkung werden so verbessert, dass Suchmaschinen relevante Seiten verstehen und für passende Suchanfragen anzeigen können.",
+  },
+  {
     question: "Was macht Klickfunden?",
     answer:
       "Klickfunden unterstützt Unternehmen bei SEO, GEO, AEO, Google Ads, Meta Ads, YouTube Ads, Local SEO und Conversion-Optimierung, damit sie online besser gefunden werden und mehr qualifizierte Anfragen erhalten.",
@@ -180,8 +185,23 @@ export const faqItems: FaqItem[] = [
       "Meta Ads eignen sich besonders für Reichweite, Zielgruppenansprache, Wiedererkennung, Retargeting und Angebote, die visuell oder emotional erklärt werden können.",
   },
   {
+    question: "Wann sind YouTube Ads sinnvoll?",
+    answer:
+      "YouTube Ads sind sinnvoll, wenn ein Angebot visuell erklärt werden muss, Aufmerksamkeit aufgebaut oder eine bereits bekannte Zielgruppe per Retargeting erneut erreicht werden soll.",
+  },
+  {
     question: "Was ist Local SEO?",
     answer:
       "Local SEO verbessert die Auffindbarkeit eines Unternehmens in regionalen Suchergebnissen, Google Maps und standortbezogenen Suchanfragen.",
+  },
+  {
+    question: "Was ist Conversion-Optimierung?",
+    answer:
+      "Conversion-Optimierung verbessert Nutzerführung, Vertrauen, CTAs und Formulare, damit mehr passende Besucher den nächsten sinnvollen Schritt bis zur qualifizierten Anfrage gehen.",
+  },
+  {
+    question: "Wie läuft eine Zusammenarbeit ab?",
+    answer:
+      "Nach einem Erstgespräch analysiert Klickfunden Ziele, Nachfrage und bestehende Kanäle. Daraus entstehen priorisierte Maßnahmen, eine strukturierte Umsetzung und regelmäßige Auswertungen anhand nachvollziehbarer Kennzahlen.",
   },
 ];

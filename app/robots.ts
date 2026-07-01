@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/dashboard/", "/login", "/api/"],
+      disallow: ["/admin/", "/dashboard/", "/login", "/api/"],
     },
     sitemap: "https://www.klickfunden.de/sitemap.xml",
     host: "https://www.klickfunden.de",

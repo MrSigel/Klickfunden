@@ -6,7 +6,7 @@ import { Quote } from "lucide-react";
 
 export default function AboutFounder() {
   return (
-    <section id="ueber-uns" className="relative bg-ink py-24 sm:py-32">
+    <section id="ueber-uns" className="relative overflow-hidden bg-ink py-24 sm:py-32">
       <div className="container-page grid items-center gap-14 lg:grid-cols-[0.85fr_1.15fr]">
         <motion.div
           initial={{ opacity: 0, x: -24 }}

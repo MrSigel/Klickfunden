@@ -56,8 +56,8 @@ export default function AgencyOverview() {
           </div>
           <div className="rounded-3xl border border-marsgreen/25 bg-marsgreen/10 p-6 shadow-glow sm:p-8">
             <p className="text-lg leading-relaxed text-white">
-              Klickfunden ist eine Digital-Marketing-Agentur für SEO, GEO,
-              AEO, Google Ads, Meta Ads, YouTube Ads, Local SEO und
+              Klickfunden ist eine Digital-Marketing-Agentur aus Castrop-Rauxel
+              für SEO, GEO, AEO, Google Ads, Meta Ads, YouTube Ads, Local SEO und
               Conversion-Optimierung. Der Fokus liegt auf digitaler
               Sichtbarkeit, Auffindbarkeit bei Google und KI-Suchen sowie auf
               Kampagnen, die aus Besuchern qualifizierte Anfragen machen.

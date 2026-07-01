@@ -25,7 +25,11 @@ export default function SeoSubpageContent({ page }: SeoSubpageContentProps) {
           { label: "GEO", href: "/services/geo" },
           { label: "AEO", href: "/services/aeo" },
           { label: "Google Ads", href: "/services/google-ads" },
+          { label: "Meta Ads", href: "/services/meta-ads" },
+          { label: "YouTube Ads", href: "/services/youtube-ads" },
           { label: "Local SEO", href: "/services/local-seo" },
+          { label: "Technical SEO", href: "/services/technical-seo" },
+          { label: "Content SEO", href: "/services/content-seo" },
           { label: "Conversion-Optimierung", href: "/services/conversion-optimierung" },
         ]
       : [
@@ -262,15 +266,21 @@ export default function SeoSubpageContent({ page }: SeoSubpageContentProps) {
       </section>
 
       <section className="border-t border-white/10 bg-ink-900/35 py-16">
-        <div className="container-page">
-          <h2 className="font-display text-2xl font-semibold text-white">Verwandte Leistungen</h2>
+        <div className="container-page grid gap-10 lg:grid-cols-2">
+          <div><h2 className="font-display text-2xl font-semibold text-white">Verwandte Leistungen</h2>
           <div className="mt-6 flex flex-wrap gap-3">
             {relatedLinks.map((link) => (
               <a key={link.href} href={link.href} className="rounded-full border border-white/15 bg-ink-800 px-5 py-3 text-sm font-semibold text-mist-100/85 transition-colors hover:border-marsgreen hover:text-marsgreen">
                 {link.label}
               </a>
             ))}
-          </div>
+          </div></div>
+          {page.category === "Leistung" && <div><h2 className="font-display text-2xl font-semibold text-white">Passende Branchen</h2><div className="mt-6 flex flex-wrap gap-3">{[
+            { label: "Handwerker", href: "/industries/handwerker" },
+            { label: "Dienstleister", href: "/industries/dienstleister" },
+            { label: "B2B-Unternehmen", href: "/industries/b2b" },
+            { label: "E-Commerce", href: "/industries/ecommerce" },
+          ].map((link) => <a key={link.href} href={link.href} className="rounded-full border border-white/15 bg-ink-800 px-5 py-3 text-sm font-semibold text-mist-100/85 transition-colors hover:border-marsgreen hover:text-marsgreen">{link.label}</a>)}</div></div>}
         </div>
       </section>
 
