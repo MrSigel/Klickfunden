@@ -43,6 +43,8 @@ const footerColumns = [
       { label: "FAQ", href: "/faq" },
       { label: "Angebot anfordern", href: "/#angebot" },
       { label: "Standort Castrop-Rauxel", href: "/standort/castrop-rauxel" },
+      { label: "Partnerprogramm", href: "/partner" },
+      { label: "Partner Login", href: "/partner/login" },
     ],
   },
   {
@@ -50,6 +52,7 @@ const footerColumns = [
     links: [
       { label: "Impressum", href: "/impressum" },
       { label: "Datenschutz", href: "/datenschutz" },
+      { label: "Partnerbedingungen", href: "/partnerbedingungen" },
     ],
   },
 ];

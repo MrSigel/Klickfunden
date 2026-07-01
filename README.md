@@ -36,6 +36,17 @@ serverseitig folgende Werte gesetzt sein:
 Vorlagen stehen in `.env.example`. `.env.local` und echte Zugangsdaten dürfen
 nicht committed werden.
 
+## Partnerprogramm
+
+Das öffentliche Partnerprogramm liegt unter `/partner`. Registrierung, Login,
+Dashboard, Admin-Verwaltung und Keyword-Kontingente verwenden die Tabellen aus
+`supabase_schema.sql`. Vor dem Einsatz müssen außerdem
+`PARTNER_SESSION_SECRET`, die vier `PARTNER_BANK_*`-Werte und `CRON_SECRET` in
+der Deployment-Umgebung gesetzt werden. Der Cron-Endpunkt wird über
+`vercel.json` freitags aufgerufen und führt den Reset nur am letzten Freitag
+des Monats aus. E-Mail-Vorlagen sind vorbereitet; ein Versand bleibt deaktiviert,
+bis ein freigegebener Mail-Provider konfiguriert wurde.
+
 Build für Produktion:
 
 ```bash

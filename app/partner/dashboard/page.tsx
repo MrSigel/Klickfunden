@@ -1,0 +1,2 @@
+import type {Metadata} from "next";import {redirect} from "next/navigation";import PartnerDashboard from "@/components/partner/PartnerDashboard";import {getPartnerSession} from "@/lib/partner-auth";
+export const metadata:Metadata={title:"Partner Dashboard | Klickfunden",robots:{index:false,follow:false}};export const dynamic="force-dynamic";export default function Page(){if(!getPartnerSession())redirect("/partner/login");return <main className="min-h-screen bg-ink px-5 py-10 text-white sm:px-8"><div className="mx-auto max-w-7xl"><PartnerDashboard/></div></main>}

@@ -319,7 +319,31 @@ export default function DatenschutzPage() {
               </p>
             </Section>
 
-            <Section title="14. Änderungen dieser Datenschutzerklärung">
+            <Section title="14. Partnerregistrierung und Partnerkonto">
+              <p>
+                Bei der Registrierung für das Partnerprogramm verarbeiten wir insbesondere Ansprechpartner, Organisation, E-Mail-Adresse, Passwort-Hash, Website, Telefon, Branche, Region, Partnerbereich, Paketwahl, Bestätigungen und freiwillige Nachrichten. Das Passwort wird nicht im Klartext gespeichert. Die Verarbeitung dient der Prüfung, Durchführung und Verwaltung des Partnerverhältnisses auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO.
+              </p>
+            </Section>
+
+            <Section title="15. Paket-, Zahlungs- und Dashboard-Daten">
+              <p>
+                Im Partnerkonto verarbeiten wir Paketdaten, Zahlungsstatus, persönlichen Verwendungszweck, Monatskontingente, Keyword-Anfragen, Antworten und interne Bearbeitungsinformationen. Bankdaten werden nur angemeldeten und freigeschalteten Partnern angezeigt. Partnerdaten sind nicht öffentlich abrufbar.
+              </p>
+            </Section>
+
+            <Section title="16. E-Mail-Benachrichtigungen und Löschung">
+              <p>
+                Soweit ein E-Mail-Versand eingerichtet ist, können sachliche Benachrichtigungen zu Registrierung, Freischaltung, Zahlung oder beantworteten Anfragen versendet werden. Passwörter werden nicht per E-Mail verschickt. Löschanfragen können an kontakt@klickfunden.de gerichtet werden; gesetzliche Aufbewahrungsfristen bleiben unberührt.
+              </p>
+            </Section>
+
+            <Section title="17. Notwendige Login- und Session-Cookies">
+              <p>
+                Für geschützte Admin- und Partnerbereiche werden technisch notwendige, signierte Session-Cookies verwendet. Sie dienen ausschließlich der Anmeldung und Zugriffskontrolle, sind als HttpOnly und SameSite geschützt und werden nicht für Werbung oder Profilbildung genutzt. Für diese notwendigen Cookies ist keine Marketing-Einwilligung erforderlich.
+              </p>
+            </Section>
+
+            <Section title="18. Änderungen dieser Datenschutzerklärung">
               <p>
                 Wir behalten uns vor, diese Datenschutzerklärung anzupassen,
                 wenn sich rechtliche Anforderungen, technische Funktionen oder

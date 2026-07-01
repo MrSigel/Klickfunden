@@ -1,5 +1,61 @@
 create extension if not exists pgcrypto;
 
+create table if not exists public.partners (
+  id uuid primary key default gen_random_uuid(), contact_name text not null, organization_name text not null,
+  email text not null unique, password_hash text not null, website text, phone text, industry text not null,
+  region text, partner_area text not null, status text not null default 'wartet_auf_pruefung', selected_package text not null,
+  payment_status text not null default 'offen', permanent_payment_reference text unique, message text, no_competing_service_confirmed boolean not null default false,
+  terms_accepted_at timestamptz not null, no_guarantee_confirmed_at timestamptz not null, admin_notes text,
+  created_at timestamptz not null default now(), updated_at timestamptz not null default now()
+);
+create table if not exists public.partner_payments (
+  id uuid primary key default gen_random_uuid(), partner_id uuid not null references public.partners(id) on delete cascade,
+  package_name text not null, amount numeric, status text not null default 'offen', payment_reference text not null,
+  paid_at timestamptz, period_start date, period_end date, created_at timestamptz not null default now(), updated_at timestamptz not null default now()
+);
+create table if not exists public.partner_keyword_requests (
+  id uuid primary key default gen_random_uuid(), partner_id uuid not null references public.partners(id) on delete cascade,
+  topic text not null, industry text not null, target_group text, region text, website text, goal text not null,
+  description text not null, status text not null default 'neu', admin_answer text, recommended_keywords text[],
+  search_intent_notes text, optimization_notes text, answered_at timestamptz,
+  created_at timestamptz not null default now(), updated_at timestamptz not null default now()
+);
+create table if not exists public.partner_monthly_quotas (
+  id uuid primary key default gen_random_uuid(), partner_id uuid not null references public.partners(id) on delete cascade,
+  month_key text not null, package_name text not null, quota_total integer not null default 4,
+  quota_used integer not null default 0, quota_remaining integer not null default 4, reset_at timestamptz,
+  payment_required boolean not null default true, is_active boolean not null default false,
+  created_at timestamptz not null default now(), updated_at timestamptz not null default now(), unique(partner_id, month_key)
+);
+create table if not exists public.partner_admin_notes (
+  id uuid primary key default gen_random_uuid(), partner_id uuid not null references public.partners(id) on delete cascade,
+  note text not null, created_at timestamptz not null default now()
+);
+alter table public.partners enable row level security;
+alter table public.partner_payments enable row level security;
+alter table public.partner_keyword_requests enable row level security;
+alter table public.partner_monthly_quotas enable row level security;
+alter table public.partner_admin_notes enable row level security;
+revoke all on public.partners, public.partner_payments, public.partner_keyword_requests, public.partner_monthly_quotas, public.partner_admin_notes from anon, authenticated;
+create index if not exists partners_status_idx on public.partners(status);
+create index if not exists partner_requests_partner_created_idx on public.partner_keyword_requests(partner_id, created_at desc);
+create index if not exists partner_payments_partner_created_idx on public.partner_payments(partner_id, created_at desc);
+
+create or replace function public.create_partner_keyword_request(
+  p_partner_id uuid, p_topic text, p_industry text, p_target_group text, p_region text, p_website text, p_goal text, p_description text, p_month_key text
+) returns uuid language plpgsql security definer set search_path = public as $$
+declare q public.partner_monthly_quotas; new_id uuid;
+begin
+  select * into q from public.partner_monthly_quotas where partner_id=p_partner_id and month_key=p_month_key for update;
+  if q.id is null or not q.is_active or q.quota_remaining <= 0 then raise exception 'quota_unavailable'; end if;
+  insert into public.partner_keyword_requests(partner_id,topic,industry,target_group,region,website,goal,description)
+  values(p_partner_id,p_topic,p_industry,nullif(p_target_group,''),nullif(p_region,''),nullif(p_website,''),p_goal,p_description) returning id into new_id;
+  update public.partner_monthly_quotas set quota_used=quota_used+1, quota_remaining=quota_remaining-1, updated_at=now() where id=q.id;
+  return new_id;
+end; $$;
+revoke all on function public.create_partner_keyword_request(uuid,text,text,text,text,text,text,text,text) from public, anon, authenticated;
+grant execute on function public.create_partner_keyword_request(uuid,text,text,text,text,text,text,text,text) to service_role;
+
 -- Interne Klickfunden-Admin-Daten. Zugriff erfolgt ausschließlich serverseitig
 -- über den Service Role Key; anon/authenticated erhalten keine Policies.
 create table if not exists public.admin_inquiries (id uuid primary key default gen_random_uuid(), created_at timestamptz not null default now(), updated_at timestamptz not null default now(), name text not null, company text, email text not null, phone text, website text, service text, message text, source text, status text not null default 'Neu', notes text);
@@ -42,7 +98,7 @@ $$;
 do $$
 declare table_name text;
 begin
-  foreach table_name in array array['admin_inquiries','admin_leads','admin_audits','admin_keywords','admin_ads_campaigns','admin_reports','admin_tasks','admin_content_plans','admin_settings'] loop
+  foreach table_name in array array['admin_inquiries','admin_leads','admin_audits','admin_keywords','admin_ads_campaigns','admin_reports','admin_tasks','admin_content_plans','admin_settings','partners','partner_payments','partner_keyword_requests','partner_monthly_quotas'] loop
     execute format('drop trigger if exists set_updated_at on public.%I', table_name);
     execute format('create trigger set_updated_at before update on public.%I for each row execute function public.set_updated_at()', table_name);
   end loop;
