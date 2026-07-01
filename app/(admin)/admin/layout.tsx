@@ -1,0 +1,3 @@
+import type { Metadata } from "next"; import { redirect } from "next/navigation"; import AdminSidebar from "@/components/admin/AdminSidebar"; import { hasAdminSession } from "@/lib/admin-auth";
+export const metadata:Metadata={title:"Admin Dashboard | Klickfunden",robots:{index:false,follow:false}}; export const dynamic="force-dynamic";
+export default function AdminLayout({children}:{children:React.ReactNode}){if(!hasAdminSession())redirect("/login");return <div className="min-h-screen bg-ink text-white lg:flex"><AdminSidebar/><main className="min-w-0 flex-1 px-5 py-8 sm:px-8 lg:px-10">{children}</main></div>}

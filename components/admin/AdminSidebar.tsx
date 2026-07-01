@@ -1,119 +1,13 @@
 "use client";
-
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import {
-  FileText,
-  Home,
-  Inbox,
-  LayoutDashboard,
-  ReceiptText,
-  Star,
-  Users,
-} from "lucide-react";
-
-const navItems = [
-  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Anfragen", href: "/dashboard/anfragen", icon: Inbox },
-  { label: "Kunden", href: "/dashboard/kunden", icon: Users },
-  { label: "Angebot", href: "/dashboard/angebot", icon: FileText },
-  { label: "Rechnung", href: "/dashboard/rechnung", icon: ReceiptText },
-  { label: "Referenzen", href: "/dashboard/referenzen", icon: Star },
-];
-
-function formatClock(date: Date) {
-  return {
-    day: new Intl.DateTimeFormat("de-DE", { weekday: "long" }).format(date),
-    date: new Intl.DateTimeFormat("de-DE", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    }).format(date),
-    time: new Intl.DateTimeFormat("de-DE", {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-    }).format(date),
-  };
-}
-
-export default function AdminSidebar() {
-  const pathname = usePathname();
-  const [clock, setClock] = useState(() => formatClock(new Date()));
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setClock(formatClock(new Date()));
-    }, 1000);
-
-    return () => window.clearInterval(timer);
-  }, []);
-
-  return (
-    <aside className="flex min-h-screen w-full shrink-0 flex-col border-b border-white/10 bg-ink-900/95 px-5 py-6 text-white shadow-card lg:sticky lg:top-0 lg:h-screen lg:w-72 lg:border-b-0 lg:border-r">
-      <Link href="/dashboard" className="block">
-        <Image
-          src="/brand/klickfunden/logo-header.png"
-          alt="Klickfunden"
-          width={184}
-          height={42}
-          priority
-          className="h-auto w-44"
-        />
-      </Link>
-
-      <div className="mt-6 h-px w-full bg-white/10" />
-
-      <nav className="mt-7 flex flex-col gap-2">
-        {navItems.map((item) => {
-          const Icon = item.icon;
-          const isActive =
-            item.href === "/dashboard"
-              ? pathname === item.href
-              : pathname.startsWith(item.href);
-
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold transition-colors ${
-                isActive
-                  ? "border border-marsgreen/35 bg-marsgreen/15 text-marsgreen"
-                  : "text-mist-100/80 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              <Icon className="h-4 w-4" />
-              {item.label}
-            </Link>
-          );
-        })}
-      </nav>
-
-      <div className="mt-10 flex flex-1 flex-col justify-end">
-        <div className="rounded-3xl border border-white/10 bg-ink-800/70 px-4 py-5 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-marsgreen-300">
-            {clock.day}
-          </p>
-          <p className="mt-2 text-sm text-mist-100/80">{clock.date}</p>
-          <p className="mt-2 font-display text-3xl font-semibold text-white">
-            {clock.time}
-          </p>
-          <div className="mt-5 text-sm leading-relaxed text-mist-100/80">
-            <p>44577</p>
-            <p>Castrop-Rauxel</p>
-          </div>
-          <div className="my-5 h-px w-full bg-white/10" />
-          <Link
-            href="/"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-red-400/80 px-4 py-3 text-sm font-semibold text-red-100 transition-colors hover:bg-red-500/10"
-          >
-            <Home className="h-4 w-4" />
-            Zur Startseite
-          </Link>
-        </div>
-      </div>
-    </aside>
-  );
-}
+import Image from "next/image"; import Link from "next/link"; import { usePathname } from "next/navigation"; import { useState } from "react";
+import { BarChart3, ClipboardCheck, FileBarChart, FileText, Inbox, KeyRound, LayoutDashboard, ListTodo, LogOut, Menu, Megaphone, Settings, Users, X } from "lucide-react";
+const items=[["Dashboard","/admin",LayoutDashboard],["Anfragen","/admin/anfragen",Inbox],["Leads","/admin/leads",Users],["Audits","/admin/audits",ClipboardCheck],["Keywords","/admin/keywords",KeyRound],["Ads","/admin/ads",Megaphone],["Reports","/admin/reports",FileBarChart],["Aufgaben","/admin/aufgaben",ListTodo],["Content","/admin/content",FileText],["Einstellungen","/admin/einstellungen",Settings]] as const;
+export default function AdminSidebar(){ const path=usePathname(); const [open,setOpen]=useState(false); return <>
+ <header className="sticky top-0 z-30 flex items-center justify-between border-b border-white/10 bg-ink-900 px-5 py-4 lg:hidden"><Image src="/brand/klickfunden/logo-header.png" alt="Klickfunden" width={150} height={34}/><button aria-label="Navigation öffnen" onClick={()=>setOpen(true)}><Menu/></button></header>
+ {open&&<button aria-label="Navigation schließen" className="fixed inset-0 z-40 bg-black/60 lg:hidden" onClick={()=>setOpen(false)}/>}
+ <aside className={`${open?"translate-x-0":"-translate-x-full"} fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-white/10 bg-ink-900 p-5 transition-transform lg:sticky lg:top-0 lg:h-screen lg:translate-x-0`}>
+  <div className="flex items-center justify-between"><Link href="/admin"><Image src="/brand/klickfunden/logo-header.png" alt="Klickfunden" width={170} height={40}/></Link><button className="lg:hidden" aria-label="Schließen" onClick={()=>setOpen(false)}><X/></button></div>
+  <p className="mt-5 border-t border-white/10 pt-5 text-xs font-semibold uppercase tracking-[.2em] text-marsgreen">Admin Bereich</p>
+  <nav className="mt-5 flex-1 space-y-1 overflow-y-auto">{items.map(([label,href,Icon])=>{const active=href==="/admin"?path===href:path.startsWith(href);return <Link onClick={()=>setOpen(false)} key={href} href={href} className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium ${active?"bg-marsgreen text-ink-900":"text-mist-100 hover:bg-white/10 hover:text-white"}`}><Icon className="h-4 w-4"/>{label}</Link>})}</nav>
+  <form action="/api/admin/logout" method="post"><button className="flex w-full items-center gap-3 rounded-xl border border-white/10 px-3 py-3 text-sm hover:bg-white/10"><LogOut className="h-4 w-4"/>Logout</button></form>
+ </aside></> }

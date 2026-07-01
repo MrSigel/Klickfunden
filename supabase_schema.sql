@@ -1,5 +1,29 @@
 create extension if not exists pgcrypto;
 
+-- Interne Klickfunden-Admin-Daten. Zugriff erfolgt ausschließlich serverseitig
+-- über den Service Role Key; anon/authenticated erhalten keine Policies.
+create table if not exists public.admin_inquiries (id uuid primary key default gen_random_uuid(), created_at timestamptz not null default now(), updated_at timestamptz not null default now(), name text not null, company text, email text not null, phone text, website text, service text, message text, source text, status text not null default 'Neu', notes text);
+create table if not exists public.admin_leads (id uuid primary key default gen_random_uuid(), created_at timestamptz not null default now(), updated_at timestamptz not null default now(), company text not null, website text, email text, phone text, industry text, location text, service_potential text, source text, status text not null default 'Offen', notes text, last_contact date);
+create table if not exists public.admin_audits (id uuid primary key default gen_random_uuid(), created_at timestamptz not null default now(), updated_at timestamptz not null default now(), company text not null, website text not null, industry text, seo_score numeric, geo_score numeric, aeo_score numeric, local_seo_score numeric, conversion_score numeric, google_ads_potential text, meta_ads_potential text, youtube_ads_potential text, technical_notes text, recommended_actions text, status text not null default 'Offen');
+create table if not exists public.admin_keywords (id uuid primary key default gen_random_uuid(), created_at timestamptz not null default now(), updated_at timestamptz not null default now(), keyword text not null, search_intent text, category text, priority text, service text, industry text, notes text, status text not null default 'Idee');
+create table if not exists public.admin_ads_campaigns (id uuid primary key default gen_random_uuid(), created_at timestamptz not null default now(), updated_at timestamptz not null default now(), company text not null, website text, channel text, campaign_name text not null, goal text, planned_budget numeric, target_group text, keywords text, negative_keywords text, ad_copy text, creative_notes text, status text not null default 'Entwurf', start_date date, end_date date);
+create table if not exists public.admin_reports (id uuid primary key default gen_random_uuid(), created_at timestamptz not null default now(), updated_at timestamptz not null default now(), company text not null, website text, period text, report_type text, summary text, actions text, results text, next_steps text, status text not null default 'Entwurf');
+create table if not exists public.admin_tasks (id uuid primary key default gen_random_uuid(), created_at timestamptz not null default now(), updated_at timestamptz not null default now(), title text not null, description text, area text, priority text, status text not null default 'Offen', due_date date, related_contact text);
+create table if not exists public.admin_content_plans (id uuid primary key default gen_random_uuid(), created_at timestamptz not null default now(), updated_at timestamptz not null default now(), page_title text not null, target_keyword text, search_intent text, aeo_questions text, geo_entity_notes text, internal_links text, status text not null default 'Idee', notes text);
+create table if not exists public.admin_settings (id uuid primary key default gen_random_uuid(), created_at timestamptz not null default now(), updated_at timestamptz not null default now(), company_name text not null, website text, contact_email text, default_cta text, default_sender_name text, default_notes text);
+
+alter table public.admin_inquiries enable row level security;
+alter table public.admin_leads enable row level security;
+alter table public.admin_audits enable row level security;
+alter table public.admin_keywords enable row level security;
+alter table public.admin_ads_campaigns enable row level security;
+alter table public.admin_reports enable row level security;
+alter table public.admin_tasks enable row level security;
+alter table public.admin_content_plans enable row level security;
+alter table public.admin_settings enable row level security;
+
+revoke all on public.admin_inquiries, public.admin_leads, public.admin_audits, public.admin_keywords, public.admin_ads_campaigns, public.admin_reports, public.admin_tasks, public.admin_content_plans, public.admin_settings from anon, authenticated;
+
 create or replace function public.is_admin()
 returns boolean
 language sql

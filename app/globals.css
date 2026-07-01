@@ -58,6 +58,22 @@
   .section-label {
     @apply font-display text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl;
   }
+
+  .admin-input {
+    @apply w-full rounded-xl border border-white/10 bg-ink-700 px-4 py-3 text-white outline-none transition-colors focus:border-marsgreen;
+  }
+
+  .admin-empty {
+    @apply mt-5 rounded-2xl border border-dashed border-white/15 bg-ink-800 p-8 text-center text-sm text-mist-100/75;
+  }
+
+  .admin-panel {
+    @apply rounded-2xl border border-white/10 bg-ink-800 p-6 shadow-card;
+  }
+
+  .admin-heading {
+    @apply font-display text-xl font-semibold text-white;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
