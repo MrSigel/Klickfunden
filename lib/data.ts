@@ -8,6 +8,7 @@ export const navLinks: NavLink[] = [
   { label: "Zielgruppen", href: "/#zielgruppen" },
   { label: "Über uns", href: "/ueber-uns" },
   { label: "FAQ", href: "/faq" },
+  { label: "Partnerprogramm", href: "/partner" },
 ];
 
 export type Service = {
