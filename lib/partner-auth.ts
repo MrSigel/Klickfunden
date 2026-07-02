@@ -7,6 +7,7 @@ const scrypt = promisify(scryptCallback);
 export const PARTNER_COOKIE = "klickfunden_partner_session";
 const ttl = 60 * 60 * 24 * 7;
 function secret() { const value = process.env.PARTNER_SESSION_SECRET; return value && value.length >= 32 ? value : null; }
+export function isPartnerAuthConfigured() { return Boolean(secret()); }
 function sign(payload: string) { const key = secret(); return key ? createHmac("sha256", key).update(payload).digest("base64url") : ""; }
 
 export async function hashPassword(password: string) {
