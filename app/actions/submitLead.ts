@@ -14,6 +14,11 @@ export type SubmitLeadInput = {
   telefon: string;
   companyWebsite?: string;
   startedAt?: number;
+  formType?: "lead" | "first-check";
+  company?: string;
+  industry?: string;
+  focus?: string;
+  message?: string;
 };
 
 export type SubmitLeadErrorType = "VALIDATION_ERROR" | "DATABASE_DOWN";
@@ -102,7 +107,7 @@ export async function submitLead(
     );
   }
 
-  if (!name || !email || !telefon || !website || !input.goal) {
+  if (!name || !email || (!telefon && input.formType !== "first-check") || !website || !input.goal) {
     return validationError(
       "Bitte fülle Name, E-Mail, Telefonnummer, Website und Ziel vollständig aus.",
     );
@@ -117,12 +122,13 @@ export async function submitLead(
       .from("admin_inquiries")
       .insert({
         name,
+        company: input.company?.trim() || null,
         email,
-        phone: telefon,
+        phone: telefon || null,
         website,
-        service: input.goalLabel,
-        message: `Ziel: ${input.goalLabel}`,
-        source: "Website",
+        service: input.focus?.trim() || input.goalLabel,
+        message: [input.industry && `Branche: ${input.industry.trim()}`, input.message?.trim(), `Ziel: ${input.goalLabel}`].filter(Boolean).join("\n"),
+        source: input.formType === "first-check" ? "Kostenlose Erstprüfung" : "Website",
         status: "Neu",
       })
       .select("id")
@@ -134,7 +140,7 @@ export async function submitLead(
 
     const [adminMail, confirmationMail] = await Promise.all([
       process.env.ADMIN_NOTIFICATION_EMAIL
-        ? sendPartnerEmail(process.env.ADMIN_NOTIFICATION_EMAIL, partnerEmailTemplates.inquiryAdmin({ name, email, phone: telefon, website, goal: input.goalLabel }))
+        ? sendPartnerEmail(process.env.ADMIN_NOTIFICATION_EMAIL, partnerEmailTemplates.inquiryAdmin({ name, email, phone: telefon || "Nicht angegeben", website, goal: input.focus || input.goalLabel }))
         : Promise.resolve({ sent: false as const, reason: "not_configured" as const }),
       sendPartnerEmail(email, partnerEmailTemplates.inquiryConfirmation(name)),
     ]);

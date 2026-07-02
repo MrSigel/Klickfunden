@@ -7,6 +7,7 @@ import FAQ from "@/components/FAQ";
 import LeadForm from "@/components/LeadForm";
 import Footer from "@/components/Footer";
 import AgencyOverview from "@/components/AgencyOverview";
+import SeoResources from "@/components/SeoResources";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -75,6 +76,7 @@ export default function Home() {
       <Hero />
       <AgencyOverview />
       <ServicesGrid />
+      <SeoResources />
       <References />
       <AboutFounder />
       <FAQ />

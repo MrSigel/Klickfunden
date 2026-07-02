@@ -266,7 +266,7 @@ export default function SeoSubpageContent({ page }: SeoSubpageContentProps) {
       </section>
 
       <section className="border-t border-white/10 bg-ink-900/35 py-16">
-        <div className="container-page grid gap-10 lg:grid-cols-2">
+        <div className="container-page grid gap-10 lg:grid-cols-3">
           <div><h2 className="font-display text-2xl font-semibold text-white">Verwandte Leistungen</h2>
           <div className="mt-6 flex flex-wrap gap-3">
             {relatedLinks.map((link) => (
@@ -281,6 +281,13 @@ export default function SeoSubpageContent({ page }: SeoSubpageContentProps) {
             { label: "B2B-Unternehmen", href: "/industries/b2b" },
             { label: "E-Commerce", href: "/industries/ecommerce" },
           ].map((link) => <a key={link.href} href={link.href} className="rounded-full border border-white/15 bg-ink-800 px-5 py-3 text-sm font-semibold text-mist-100/85 transition-colors hover:border-marsgreen hover:text-marsgreen">{link.label}</a>)}</div></div>}
+          <div><h2 className="font-display text-2xl font-semibold text-white">Prüfung & Ratgeber</h2><div className="mt-6 flex flex-wrap gap-3">{[
+            {label:"Kostenlose Erstprüfung",href:"/kostenlose-erstpruefung"},
+            {label:"Was ist GEO?",href:"/fragen/was-ist-geo"},
+            {label:"Was ist AEO?",href:"/fragen/was-ist-aeo"},
+            {label:"SEO für Handwerker",href:"/seo-fuer-handwerker"},
+            {label:"SEO für Dienstleister",href:"/seo-fuer-dienstleister"},
+          ].map(link=><a key={link.href} href={link.href} className="rounded-full border border-white/15 bg-ink-800 px-5 py-3 text-sm font-semibold text-mist-100/85 transition-colors hover:border-marsgreen hover:text-marsgreen">{link.label}</a>)}</div></div>
         </div>
       </section>
 
