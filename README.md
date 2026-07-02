@@ -44,8 +44,9 @@ Dashboard, Admin-Verwaltung und Keyword-Kontingente verwenden die Tabellen aus
 `PARTNER_SESSION_SECRET`, die vier `PARTNER_BANK_*`-Werte und `CRON_SECRET` in
 der Deployment-Umgebung gesetzt werden. Der Cron-Endpunkt wird über
 `vercel.json` freitags aufgerufen und führt den Reset nur am letzten Freitag
-des Monats aus. E-Mail-Vorlagen sind vorbereitet; ein Versand bleibt deaktiviert,
-bis ein freigegebener Mail-Provider konfiguriert wurde.
+des Monats aus. Der E-Mail-Versand nutzt zentral Nodemailer und STRATO SMTP.
+Die erforderlichen `SMTP_*`-, `MAIL_*`-, Admin- und Support-Variablen sind in
+`.env.example` dokumentiert und müssen in der Deployment-Umgebung gesetzt sein.
 
 Build für Produktion:
 

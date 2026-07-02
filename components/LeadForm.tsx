@@ -72,6 +72,7 @@ export default function LeadForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
   const [databaseDown, setDatabaseDown] = useState(false);
+  const [emailWarning, setEmailWarning] = useState("");
   const [form, setForm] = useState<FormState>({
     goal: null,
     website: "",
@@ -134,6 +135,7 @@ export default function LeadForm() {
         return;
       }
 
+      setEmailWarning(result.emailWarning || "");
       setSubmitted(true);
     } catch {
       setDatabaseDown(true);
@@ -493,6 +495,11 @@ export default function LeadForm() {
                   Wir haben deine Angaben erhalten und melden uns innerhalb
                   von 24 Stunden mit deinem individuellen Angebot.
                 </p>
+                {emailWarning && (
+                  <p className="mt-5 max-w-md rounded-xl border border-amber-300/30 bg-amber-400/10 px-4 py-3 text-sm text-amber-100">
+                    {emailWarning}
+                  </p>
+                )}
               </motion.div>
             )}
           </motion.div>

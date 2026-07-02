@@ -2,6 +2,7 @@
 
 import { getSupabaseAdmin } from "@/lib/supabase/server";
 import { headers } from "next/headers";
+import { partnerEmailTemplates, sendPartnerEmail } from "@/lib/partner-emails";
 
 export type SubmitLeadInput = {
   goal: string;
@@ -18,7 +19,7 @@ export type SubmitLeadInput = {
 export type SubmitLeadErrorType = "VALIDATION_ERROR" | "DATABASE_DOWN";
 
 export type SubmitLeadResult =
-  | { success: true; id: string }
+  | { success: true; id: string; emailWarning?: string }
   | {
       success: false;
       errorType: SubmitLeadErrorType;
@@ -131,7 +132,19 @@ export async function submitLead(
       return databaseDownError();
     }
 
-    return { success: true, id: data.id };
+    const [adminMail, confirmationMail] = await Promise.all([
+      process.env.ADMIN_NOTIFICATION_EMAIL
+        ? sendPartnerEmail(process.env.ADMIN_NOTIFICATION_EMAIL, partnerEmailTemplates.inquiryAdmin({ name, email, phone: telefon, website, goal: input.goalLabel }))
+        : Promise.resolve({ sent: false as const, reason: "not_configured" as const }),
+      sendPartnerEmail(email, partnerEmailTemplates.inquiryConfirmation(name)),
+    ]);
+    return {
+      success: true,
+      id: data.id,
+      emailWarning: adminMail.sent && confirmationMail.sent
+        ? undefined
+        : "Die Anfrage wurde gespeichert, aber die Bestätigungs-E-Mail konnte aktuell nicht versendet werden.",
+    };
   } catch {
     return databaseDownError();
   }

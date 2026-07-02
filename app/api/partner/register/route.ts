@@ -16,7 +16,11 @@ export async function POST(request: NextRequest) {
     const {data,error}=await db.from("partners").insert({contact_name:String(input.contact_name).trim(),organization_name:String(input.organization_name).trim(),email,password_hash,website:String(input.website).trim(),phone:String(input.phone||"").trim()||null,industry:String(input.industry).trim(),region:String(input.region).trim(),partner_area:String(input.partner_area).trim(),selected_package:String(input.selected_package),message:String(input.message||"").trim()||null,no_competing_service_confirmed:true,terms_accepted_at:new Date().toISOString(),no_guarantee_confirmed_at:new Date().toISOString()}).select("id,contact_name,selected_package").single();
     if(error)throw error; const reference=`KF-PARTNER-${String(data.id).split("-")[0].toUpperCase()}`; await db.from("partners").update({permanent_payment_reference:reference}).eq("id",data.id);
     const pkg=packageDetails(data.selected_package)!; await db.from("partner_payments").insert({partner_id:data.id,package_name:pkg.name,amount:pkg.price,status:pkg.price===null?"nicht_erforderlich":"offen",payment_reference:reference});
-    await sendPartnerEmail(email,partnerEmailTemplates.registration(data.contact_name));
-    return NextResponse.json({ok:true},{status:201});
+    const createdAt=new Intl.DateTimeFormat("de-DE",{dateStyle:"medium",timeStyle:"short",timeZone:"Europe/Berlin"}).format(new Date());
+    const [partnerMail,adminMail]=await Promise.all([
+      sendPartnerEmail(email,partnerEmailTemplates.registration(data.contact_name,pkg.name)),
+      process.env.ADMIN_NOTIFICATION_EMAIL?sendPartnerEmail(process.env.ADMIN_NOTIFICATION_EMAIL,partnerEmailTemplates.adminRegistration({name:data.contact_name,organization:String(input.organization_name),email,website:String(input.website),industry:String(input.industry),region:String(input.region),packageName:pkg.name,createdAt})):Promise.resolve({sent:false as const,reason:"not_configured" as const}),
+    ]);
+    return NextResponse.json({ok:true,mailSent:partnerMail.sent,adminMailSent:adminMail.sent},{status:201});
   } catch(error){console.error("Partner registration failed",error);return NextResponse.json({error:"registration_failed"},{status:409});}
 }
