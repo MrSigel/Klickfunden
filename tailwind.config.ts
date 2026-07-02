@@ -9,6 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        cream: "#F8F3EA",
+        sand: "#D8B98C",
+        olive: "#6F7B55",
+        deepOlive: "#38412C",
+        warmBlack: "#1F211A",
+        softGold: "#C7A974",
+        sibylleMist: "#EEE5D6",
         // Primary background — deep, near-black green
         ink: {
           DEFAULT: "#003333",
@@ -38,6 +45,8 @@ const config: Config = {
         },
       },
       fontFamily: {
+        serif: ["var(--font-serif)", "Georgia", "serif"],
+        sans: ["var(--font-sans)", "Inter", "sans-serif"],
         display: ["var(--font-jakarta)", "system-ui", "sans-serif"],
         body: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
