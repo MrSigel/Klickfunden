@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { CTAButton } from './CTAButton';
 import { ctaLinks, heroQuestions } from '@/lib/sibylle/siteData';
 
@@ -13,7 +14,7 @@ export function HeroSection() {
       <div className="absolute -right-24 top-12 h-[30rem] w-[30rem] rounded-full bg-olive/10 blur-[110px]" />
       <div className="container relative z-10">
         <div className="grid items-center gap-14 lg:grid-cols-[1.08fr_.78fr] lg:gap-20">
-          <motion.div initial="hidden" animate="show" variants={{ hidden: {}, show: { transition: { staggerChildren: .13 } } }}>
+          <motion.div initial={false} animate="show" variants={{ hidden: {}, show: { transition: { staggerChildren: .13 } } }}>
             <motion.p variants={{ hidden:{opacity:0,y:16},show:{opacity:1,y:0,transition:{duration:.7,ease}} }} className="eyebrow">Systemische Klarheit · persönlich begleitet</motion.p>
             <motion.h1 variants={{ hidden:{opacity:0,y:30},show:{opacity:1,y:0,transition:{duration:1,ease}} }} className="editorial mt-7 max-w-[760px] text-[clamp(3.4rem,7vw,7.3rem)] leading-[.88] text-warmBlack">
               Wenn sich dein Leben <span className="italic text-deepOlive">wiederholt,</span> will etwas gesehen werden.
@@ -27,26 +28,17 @@ export function HeroSection() {
             </motion.div>
           </motion.div>
 
-          <motion.div initial={{opacity:0,x:35,rotate:2}} animate={{opacity:1,x:0,rotate:0}} transition={{duration:1.1,delay:.25,ease}} className="relative mx-auto w-full max-w-[480px] lg:mx-0">
-            <motion.div animate={{y:[0,-10,0]}} transition={{duration:7,repeat:Infinity,ease:'easeInOut'}} className="premium-panel relative aspect-[4/5] overflow-hidden rounded-[2.6rem] p-3">
-              <div className="relative h-full overflow-hidden rounded-[2.15rem] bg-gradient-to-br from-[#e6d4b8] via-[#c8b087] to-[#596448]">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_18%,rgba(255,255,255,.65),transparent_26%),radial-gradient(circle_at_25%_76%,rgba(31,33,26,.24),transparent_42%)]" />
-                <div className="absolute left-1/2 top-1/2 h-[54%] w-[54%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-cream/50" />
-                <div className="absolute left-1/2 top-1/2 h-[40%] w-[40%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-cream/25" />
-                <button aria-label="Vorstellungsvideo abspielen" className="focus-ring absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/55 bg-cream/80 text-deepOlive shadow-[0_18px_60px_rgba(31,33,26,.25)] backdrop-blur-xl transition duration-500 hover:scale-105 hover:bg-white">
-                  <span className="ml-1 text-xl">▶</span>
-                </button>
-                <div className="absolute inset-x-6 bottom-6 rounded-3xl border border-white/30 bg-warmBlack/35 p-5 text-cream backdrop-blur-xl">
-                  <p className="text-[.65rem] font-bold uppercase tracking-[.24em] text-cream/70">Begegnung statt Inszenierung</p>
-                  <p className="editorial mt-2 text-2xl leading-tight">Sibylles Ansatz in 90 Sekunden</p>
-                </div>
-              </div>
-            </motion.div>
-            <div className="absolute -left-5 top-16 hidden rounded-full border border-white/60 bg-cream/75 px-5 py-3 text-xs font-bold tracking-wide text-deepOlive shadow-soft backdrop-blur-xl sm:block">15+ Jahre Erfahrung</div>
+          <motion.div initial={false} animate={{opacity:1,x:0}} transition={{duration:1.1,delay:.25,ease}} className="relative mx-auto w-full max-w-[500px] lg:mx-0">
+            <div className="relative aspect-square overflow-hidden rounded-[3rem] border border-olive/15 bg-sibylleMist shadow-[0_35px_100px_rgba(35,42,26,.12)]">
+              <div className="absolute inset-8 rounded-full border border-softGold/20" />
+              <div className="absolute inset-16 rounded-full border border-olive/10" />
+              <Image src="/sibylle/brand/logo-primary.png" alt="Sibylle Bergold – systemische Klarheit" fill priority sizes="(min-width: 1024px) 500px, 90vw" className="relative object-contain p-12 sm:p-16" />
+            </div>
+            <div className="absolute -bottom-5 -right-3 flex h-24 w-24 items-center justify-center rounded-full bg-deepOlive shadow-soft sm:h-28 sm:w-28"><Image src="/sibylle/brand/monogram-cream.png" alt="" width={618} height={799} className="h-16 w-auto sm:h-20" /></div>
           </motion.div>
         </div>
 
-        <motion.div initial="hidden" animate="show" variants={{hidden:{},show:{transition:{delayChildren:.8,staggerChildren:.12}}}} className="mt-16 grid gap-3 md:mt-20 md:grid-cols-3">
+        <motion.div initial={false} animate="show" variants={{hidden:{},show:{transition:{delayChildren:.8,staggerChildren:.12}}}} className="mt-16 grid gap-3 md:mt-20 md:grid-cols-3">
           {heroQuestions.map((question,index)=><motion.div key={question} variants={{hidden:{opacity:0,y:24},show:{opacity:1,y:0,transition:{duration:.7,ease}}}} whileHover={{y:-5}} className="premium-panel group rounded-[1.6rem] p-5 md:p-6">
             <div className="flex items-start gap-4"><span className="editorial text-2xl text-softGold">0{index+1}</span><p className="text-[.95rem] leading-7 text-warmBlack">{question}</p></div>
           </motion.div>)}

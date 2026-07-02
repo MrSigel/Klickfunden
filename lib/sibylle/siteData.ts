@@ -13,13 +13,12 @@ export const navLinks = [
 export const ctaLinks = {
   primary: { href: 'mailto:kontakt@sibylle-bergold.de', label: 'Jetzt persönlich bei Sibylle melden' },
   secondary: { href: 'https://calendly.com/sibylle-bergold/erstgespraech', label: 'Kostenloses Erstgespräch buchen' },
-  whatsapp: { href: 'https://wa.me/491701234567', label: 'WhatsApp' },
 };
 
 export const trustItems = [
-  '5,0 Google-Bewertungen',
-  '15+ Jahre Erfahrung',
-  'Gründerin der Deutschen Akademie für Systemaufstellungen',
+  'Klarheit und Wahrnehmung',
+  'Persönliche Begleitung',
+  'Systemische Tiefe',
 ];
 
 export const heroQuestions = [
@@ -79,37 +78,8 @@ export const methodSteps = [
 ];
 
 export const pricingPackages = [
-  {
-    title: 'Erstklarheit',
-    price: '399 EUR',
-    description: 'Ein fokussiertes Gespräch für die erste Orientierung und das Anliegen im Blick.',
-  },
-  {
-    title: 'Klarheits-Session',
-    price: '1.490 EUR',
-    description: 'Eine intensive systemische Session für mehr Halt im eigenen Erleben.',
-  },
-  {
-    title: 'System-Reset',
-    price: '3.490 EUR',
-    description: 'Mehrere Treffen für wirkliche Entlastung in Beziehungsthemen und Familienmustern.',
-  },
-  {
-    title: 'Tiefe Transformation',
-    price: '6.490 EUR',
-    description: 'Eine tiefere Begleitung für nachhaltige innere und äußere Veränderungen.',
-  },
-  {
-    title: 'Full Legacy Begleitung',
-    price: '9.999 EUR',
-    description: 'Ein kompletter Entwicklungsweg für klaren Selbstbezug und neues Lebensgefühl.',
-  },
-  {
-    title: 'Academy-Mitgliedschaft',
-    price: '47–97 EUR/Monat',
-    description: 'Wissen, Austausch und Inspiration für Alltag, Beziehung und Bewusstheit.',
-    href: '/sibylle/academy',
-  },
+  { title: 'Persönliches Erstgespräch', description: 'Im ersten Kontakt klärt ihr dein Anliegen und ob eine Begleitung stimmig ist.' },
+  { title: 'Individuelle Begleitung', description: 'Rahmen, Dauer und Konditionen werden passend zum Anliegen persönlich vereinbart.' },
 ];
 
 export const faqItems = [

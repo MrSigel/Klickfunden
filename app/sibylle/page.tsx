@@ -5,11 +5,9 @@ import { EmotionalPatternCards } from '@/components/sibylle/EmotionalPatternCard
 import { ThemeCards } from '@/components/sibylle/ThemeCards';
 import { AboutSibylle } from '@/components/sibylle/AboutSibylle';
 import { MethodStory } from '@/components/sibylle/MethodStory';
-import { PricingCards } from '@/components/sibylle/PricingCards';
-import { ReferenceWall } from '@/components/sibylle/ReferenceWall';
 import { FAQAccordion } from '@/components/sibylle/FAQAccordion';
 import { ClosingCTA } from '@/components/sibylle/ClosingCTA';
 
 export default function HomePage() {
-  return <main><HeroSection /><TrustStrip /><EditorialSection /><EmotionalPatternCards /><ThemeCards /><AboutSibylle /><MethodStory /><PricingCards /><ReferenceWall /><FAQAccordion /><ClosingCTA /></main>;
+  return <main><HeroSection /><TrustStrip /><EditorialSection /><EmotionalPatternCards /><ThemeCards /><AboutSibylle /><MethodStory /><FAQAccordion /><ClosingCTA /></main>;
 }

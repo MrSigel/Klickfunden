@@ -6,22 +6,13 @@ export default function AcademyPage() {
       <div className="container space-y-10">
         <div className="space-y-4">
           <p className="text-sm font-semibold uppercase tracking-[0.32em] text-deepOlive">Academy</p>
-          <h1 className="text-3xl font-semibold sm:text-4xl md:text-5xl">Monatliche Impulse für mehr Klarheit und Bewusstheit</h1>
+          <h1 className="editorial text-4xl sm:text-5xl md:text-6xl">Raum für Wissen und systemische Vertiefung</h1>
           <p className="max-w-3xl text-base leading-8 text-deepOlive md:text-lg">
-            Die Academy unterstützt dich mit regelmäßigen Impulsen, Übungen und Hintergrundwissen, um Beziehungsmuster und Lebensfragen nachhaltig zu begleiten.
+            Informationen zu aktuellen Formaten und Inhalten erhältst du direkt im persönlichen Kontakt.
           </p>
         </div>
-        <div className="rounded-[2rem] border border-mist bg-white p-10 shadow-soft">
-          <h2 className="text-2xl font-semibold text-warmBlack">Highlights</h2>
-          <ul className="mt-6 space-y-4 text-base leading-8 text-deepOlive">
-            <li>Monatliche Themen zu Beziehung, Herkunft und Selbstführung.</li>
-            <li>Impulse für Alltag und Bewusstseinsarbeit.</li>
-            <li>Sanfte Begleitung ohne Druck.</li>
-          </ul>
-          <p className="mt-6 text-base leading-8 text-deepOlive">Preis: 47–97 EUR/Monat.</p>
-        </div>
-        <Link href="/sibylle/preise" className="inline-flex rounded-[1.75rem] bg-warmBlack px-8 py-4 text-sm font-semibold text-cream transition hover:bg-[#11120f]">
-          Zur Preisübersicht
+        <Link href="mailto:kontakt@sibylle-bergold.de" className="inline-flex rounded-[1.75rem] bg-deepOlive px-8 py-4 text-sm font-semibold text-cream transition hover:bg-warmBlack">
+          Jetzt persönlich bei Sibylle melden
         </Link>
       </div>
     </main>
