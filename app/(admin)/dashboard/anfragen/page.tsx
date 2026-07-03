@@ -1,5 +1,7 @@
 import { CheckCircle2 } from "lucide-react";
 import { getJsonString, getLeads, LeadRow } from "@/lib/supabase/queries";
+import AdminPageHeader from "@/components/ui/AdminPageHeader";
+import ErrorAlert from "@/components/ui/ErrorAlert";
 
 const mandatoryColumns = ["E-Mail", "Telefonnummer", "Website"];
 
@@ -20,17 +22,11 @@ export default async function AnfragenPage() {
 
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-marsgreen-300">
-        Lead Eingang
-      </p>
-      <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-white">
-        Anfragen
-      </h1>
-      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mist-100/80">
-        Übersicht aller eingehenden Formular-Leads. E-Mail, Telefonnummer und
-        Website sind als Pflichtfelder hervorgehoben, damit jede Anfrage direkt
-        qualifizierbar bleibt.
-      </p>
+      <AdminPageHeader
+        eyebrow="Lead Eingang"
+        title="Anfragen"
+        description="Übersicht aller eingehenden Formular-Leads. E-Mail, Telefonnummer und Website sind als Pflichtfelder hervorgehoben, damit jede Anfrage direkt qualifizierbar bleibt."
+      />
 
       <div className="mt-6 flex flex-wrap gap-2">
         {mandatoryColumns.map((column) => (
@@ -45,10 +41,10 @@ export default async function AnfragenPage() {
       </div>
 
       {loadError && (
-        <div className="mt-6 rounded-2xl border border-red-400/30 bg-red-500/10 px-5 py-4 text-sm leading-relaxed text-red-100">
-          {loadError} Bitte führe zuerst die Datei supabase_schema.sql im
-          Supabase SQL Editor aus.
-        </div>
+        <ErrorAlert
+          message={loadError}
+          hint="Bitte führe zuerst die Datei supabase_schema.sql im Supabase SQL Editor aus."
+        />
       )}
 
       <section className="mt-8 overflow-hidden rounded-3xl border border-white/10 bg-ink-800/70 shadow-card">

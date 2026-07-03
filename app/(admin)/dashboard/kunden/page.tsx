@@ -1,10 +1,8 @@
 import { getKunden, KundeWithLead } from "@/lib/supabase/queries";
+import AdminPageHeader from "@/components/ui/AdminPageHeader";
+import ErrorAlert from "@/components/ui/ErrorAlert";
 
 export const dynamic = "force-dynamic";
-
-function formatLeadSource(source: string | null) {
-  return source || "Nicht zugeordnet";
-}
 
 export default async function KundenPage() {
   let kunden: KundeWithLead[] = [];
@@ -21,22 +19,17 @@ export default async function KundenPage() {
 
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-marsgreen-300">
-        Kundenverwaltung
-      </p>
-      <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-white">
-        Kunden
-      </h1>
-      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mist-100/80">
-        Relationale Übersicht aktiver Kunden, die aus eingehenden Anfragen
-        ausgewählt und in laufende Betreuung überführt wurden.
-      </p>
+      <AdminPageHeader
+        eyebrow="Kundenverwaltung"
+        title="Kunden"
+        description="Relationale Übersicht aktiver Kunden, die aus eingehenden Anfragen ausgewählt und in laufende Betreuung überführt wurden."
+      />
 
       {loadError && (
-        <div className="mt-6 rounded-2xl border border-red-400/30 bg-red-500/10 px-5 py-4 text-sm leading-relaxed text-red-100">
-          {loadError} Bitte führe zuerst die Datei supabase_schema.sql im
-          Supabase SQL Editor aus.
-        </div>
+        <ErrorAlert
+          message={loadError}
+          hint="Bitte führe zuerst die Datei supabase_schema.sql im Supabase SQL Editor aus."
+        />
       )}
 
       <section className="mt-8 overflow-hidden rounded-3xl border border-white/10 bg-ink-800/70 shadow-card">
@@ -74,7 +67,7 @@ export default async function KundenPage() {
                       </p>
                     </td>
                     <td className="px-5 py-5">
-                      {formatLeadSource(kunde.leads?.name || null)}
+                      {kunde.leads?.name || "Nicht zugeordnet"}
                     </td>
                     <td className="px-5 py-5">
                       <p>{kunde.email}</p>
