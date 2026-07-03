@@ -30,10 +30,8 @@ export default async function DashboardPage() {
       getAdminReferenzen(),
     ]);
   } catch (error) {
-    loadError =
-      error instanceof Error
-        ? error.message
-        : "Dashboard-Daten konnten nicht aus Supabase geladen werden.";
+    console.error("Dashboard data load failed", { name: error instanceof Error ? error.name : "UnknownError" });
+    loadError = "Dashboard-Daten konnten nicht aus Supabase geladen werden.";
   }
   const convertedLeads = leads.filter(
     (lead) => lead.status === "In Kunde umgewandelt",

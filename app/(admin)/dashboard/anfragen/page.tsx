@@ -12,10 +12,8 @@ export default async function AnfragenPage() {
   try {
     leads = await getLeads();
   } catch (error) {
-    loadError =
-      error instanceof Error
-        ? error.message
-        : "Anfragen konnten nicht aus Supabase geladen werden.";
+    console.error("Anfragen load failed", { name: error instanceof Error ? error.name : "UnknownError" });
+    loadError = "Anfragen konnten nicht aus Supabase geladen werden.";
   }
 
   return (

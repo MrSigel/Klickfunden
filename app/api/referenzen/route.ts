@@ -8,11 +8,7 @@ export async function GET() {
     const referenzen = await getPublicReferenzen();
     return NextResponse.json({ referenzen });
   } catch (error) {
-    const message =
-      error instanceof Error
-        ? error.message
-        : "Referenzen konnten nicht geladen werden.";
-
-    return NextResponse.json({ referenzen: [], message }, { status: 500 });
+    console.error("Referenzen load failed", { name: error instanceof Error ? error.name : "UnknownError" });
+    return NextResponse.json({ referenzen: [], message: "Referenzen konnten nicht geladen werden." }, { status: 500 });
   }
 }

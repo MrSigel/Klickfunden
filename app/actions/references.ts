@@ -56,9 +56,10 @@ export async function createReference(
     .single();
 
   if (error) {
+    console.error("Reference save failed", { name: error.name || "DatabaseError" });
     return {
       ok: false,
-      message: `Referenz konnte nicht gespeichert werden: ${error.message}`,
+      message: "Referenz konnte nicht gespeichert werden. Bitte versuche es erneut.",
     };
   }
 

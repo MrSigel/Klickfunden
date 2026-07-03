@@ -85,9 +85,10 @@ export async function uploadAsset(formData: FormData): Promise<UploadAssetResult
   });
 
   if (error) {
+    console.error("Asset upload failed", { name: error.name || "StorageError" });
     return {
       ok: false,
-      message: `Upload fehlgeschlagen: ${error.message}`,
+      message: "Upload fehlgeschlagen. Bitte versuche es erneut.",
     };
   }
 

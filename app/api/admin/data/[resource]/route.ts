@@ -29,7 +29,7 @@ export async function GET(_: NextRequest, context: { params: { resource: string 
   if (!hasAdminSession()) return NextResponse.json({ error:"Unauthorized" },{status:401});
   const resource=contextResource(context); if(!resource) return NextResponse.json({error:"Not found"},{status:404});
   try { const {data,error}=await (getSupabaseAdmin() as any).from(resource.table).select("*").order("created_at",{ascending:false}); if(error) throw error; return NextResponse.json({data}); }
-  catch(error){ console.error("Admin data load failed", error); return NextResponse.json({error:"load"},{status:503}); }
+  catch(error){ console.error("Admin data load failed", {name:error instanceof Error?error.name:"UnknownError"}); return NextResponse.json({error:"load"},{status:503}); }
 }
 export async function POST(request: NextRequest, context: { params: { resource: string } }) {
   if (!hasAdminSession()) return NextResponse.json({ error:"Unauthorized" },{status:401});
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest, context: { params: { resource: 
   const resource=contextResource(context); if(!resource) return NextResponse.json({error:"Not found"},{status:404});
   let input: Record<string, unknown>; try { input=await request.json(); } catch { return NextResponse.json({error:"validation"},{status:400}); }
   try { const allowed=cleanInput(resource,input); if(resource.slug==="einstellungen"){const {data:existing}=await (getSupabaseAdmin() as any).from(resource.table).select("id").limit(1).maybeSingle(); if(existing?.id){const {data,error}=await (getSupabaseAdmin() as any).from(resource.table).update({...allowed,updated_at:new Date().toISOString()}).eq("id",existing.id).select().single();if(error)throw error;return NextResponse.json({data});}} const {data,error}=await (getSupabaseAdmin() as any).from(resource.table).insert(allowed).select().single(); if(error) throw error; return NextResponse.json({data},{status:201}); }
-  catch(error){ if(error instanceof Error&&error.message==="validation")return NextResponse.json({error:"validation"},{status:400}); console.error("Admin data save failed", error); return NextResponse.json({error:"save"},{status:503}); }
+  catch(error){ if(error instanceof Error&&error.message==="validation")return NextResponse.json({error:"validation"},{status:400}); console.error("Admin data save failed", {name:error instanceof Error?error.name:"UnknownError"}); return NextResponse.json({error:"save"},{status:503}); }
 }
 export async function PUT(request: NextRequest, context: { params: { resource: string } }) {
   if (!hasAdminSession()) return NextResponse.json({ error:"Unauthorized" },{status:401});
@@ -45,12 +45,12 @@ export async function PUT(request: NextRequest, context: { params: { resource: s
   const resource=contextResource(context); if(!resource) return NextResponse.json({error:"Not found"},{status:404});
   let input: Record<string, unknown>; try { input=await request.json(); } catch { return NextResponse.json({error:"validation"},{status:400}); } if(!validId(input.id))return NextResponse.json({error:"validation"},{status:400});
   try { const allowed=cleanInput(resource,input); const {data,error}=await (getSupabaseAdmin() as any).from(resource.table).update({...allowed,updated_at:new Date().toISOString()}).eq("id",input.id).select().single(); if(error) throw error; return NextResponse.json({data}); }
-  catch(error){ if(error instanceof Error&&error.message==="validation")return NextResponse.json({error:"validation"},{status:400}); console.error("Admin data update failed", error); return NextResponse.json({error:"save"},{status:503}); }
+  catch(error){ if(error instanceof Error&&error.message==="validation")return NextResponse.json({error:"validation"},{status:400}); console.error("Admin data update failed", {name:error instanceof Error?error.name:"UnknownError"}); return NextResponse.json({error:"save"},{status:503}); }
 }
 export async function DELETE(request: NextRequest, context: { params: { resource: string } }) {
   if (!hasAdminSession()) return NextResponse.json({ error:"Unauthorized" },{status:401});
   if (!sameOrigin(request)) return NextResponse.json({ error:"Forbidden" },{status:403});
   const resource=contextResource(context); if(!resource) return NextResponse.json({error:"Not found"},{status:404});
   let id: unknown; try { id=(await request.json()).id; } catch { return NextResponse.json({error:"validation"},{status:400}); } if(!validId(id))return NextResponse.json({error:"validation"},{status:400}); try { const {error}=await (getSupabaseAdmin() as any).from(resource.table).delete().eq("id",id); if(error) throw error; return NextResponse.json({ok:true}); }
-  catch(error){ console.error("Admin data delete failed", error); return NextResponse.json({error:"delete"},{status:503}); }
+  catch(error){ console.error("Admin data delete failed", {name:error instanceof Error?error.name:"UnknownError"}); return NextResponse.json({error:"delete"},{status:503}); }
 }
