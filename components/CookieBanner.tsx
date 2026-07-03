@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 type ConsentChoice = "accepted" | "essential";
 
@@ -19,8 +20,12 @@ function emitConsent(choice: ConsentChoice) {
 }
 
 export default function CookieBanner() {
+  const pathname = usePathname();
   const [ready, setReady] = useState(false);
   const [visible, setVisible] = useState(false);
+  const isSibylle = pathname.startsWith("/sibylle");
+  const legalBasePath = isSibylle ? "/sibylle" : "";
+  const siteName = isSibylle ? "Sibylle Bergold" : "Klickfunden";
 
   useEffect(() => {
     const stored = window.localStorage.getItem(consentStorageKey);
@@ -68,20 +73,29 @@ export default function CookieBanner() {
                 Datenschutz-Einstellungen
               </p>
               <p className="mt-2 max-w-4xl text-sm leading-relaxed text-mist-100/80">
-                Klickfunden verwendet technisch notwendige Speicherzugriffe, damit
+                {siteName} verwendet technisch notwendige Speicherzugriffe, damit
                 diese Auswahl gespeichert bleibt. Vercel Web Analytics wird
                 nur nach deiner Zustimmung genutzt und arbeitet
                 datenschutzfreundlich ohne dauerhaft gesetzte
                 Drittanbieter-Cookies. Details findest du in der{" "}
                 <a
-                  href="/datenschutz"
+                  href={`${legalBasePath}/datenschutz`}
                   className="font-semibold text-marsgreen hover:underline"
                 >
                   Datenschutzerklärung
-                </a>{" "}
+                </a>
+                {isSibylle && <>
+                  , in den{" "}
+                  <a
+                    href="/sibylle/cookies"
+                    className="font-semibold text-marsgreen hover:underline"
+                  >
+                    Cookie-Informationen
+                  </a>
+                </>}{" "}
                 und im{" "}
                 <a
-                  href="/impressum"
+                  href={`${legalBasePath}/impressum`}
                   className="font-semibold text-marsgreen hover:underline"
                 >
                   Impressum

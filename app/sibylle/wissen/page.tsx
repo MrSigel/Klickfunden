@@ -14,7 +14,7 @@ export default function WissenPage() {
         <div className="rounded-[2rem] border border-mist bg-white p-10 shadow-soft">
           <h2 className="text-2xl font-semibold text-warmBlack">Worum es geht</h2>
           <p className="mt-4 text-base leading-8 text-deepOlive">
-            Systemische Aufstellungen machen Beziehungs- und Familienstoff sichtbar. Sie ersetzen keine medizinische oder therapeutische Behandlung, sondern dienen der eigenen Klarheit und Veränderung.
+            Systemische Aufstellungen können Beziehungs- und Familiendynamiken aus einer neuen Perspektive sichtbar machen und Impulse für persönliche Klarheit und Veränderung geben.
           </p>
         </div>
         <Link href="/sibylle/methode" className="inline-flex rounded-[1.75rem] bg-warmBlack px-8 py-4 text-sm font-semibold text-cream transition hover:bg-[#11120f]">

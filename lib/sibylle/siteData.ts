@@ -1,17 +1,19 @@
 export const navLinks = [
   { href: '/sibylle', label: 'Start' },
+  { href: '/sibylle/ueber-mich', label: 'Über mich' },
   { href: '/sibylle/beziehungsmuster', label: 'Beziehungsmuster' },
   { href: '/sibylle/partnerschaft', label: 'Partnerschaft' },
   { href: '/sibylle/sinnfrage', label: 'Sinnfrage' },
   { href: '/sibylle/familienmuster', label: 'Familienmuster' },
   { href: '/sibylle/methode', label: 'Methode' },
+  { href: '/sibylle/systemaufstellung', label: 'Systemaufstellung' },
   { href: '/sibylle/preise', label: 'Preise' },
   { href: '/sibylle/referenzen', label: 'Referenzen' },
   { href: '/sibylle/faq', label: 'FAQ' },
 ];
 
 export const ctaLinks = {
-  primary: { href: 'mailto:kontakt@sibylle-bergold.de', label: 'Jetzt persönlich bei Sibylle melden' },
+  primary: { href: 'mailto:info@sibylle-bergold.de', label: 'Jetzt persönlich bei Sibylle melden' },
   secondary: { href: 'https://calendly.com/sibylle-bergold/erstgespraech', label: 'Kostenloses Erstgespräch buchen' },
 };
 
@@ -84,10 +86,6 @@ export const pricingPackages = [
 
 export const faqItems = [
   {
-    question: 'Ist das Coaching eine Heilbehandlung?',
-    answer: 'Nein. Es handelt sich um Coaching und Selbsterfahrung. Systemische Aufstellungen ersetzen keine medizinische, psychotherapeutische oder heilpraktische Behandlung.',
-  },
-  {
     question: 'Wie läuft eine Sitzung ab?',
     answer: 'Wir besprechen dein Anliegen, wählen das zentrale Thema und arbeiten mit Stellvertretern, Bildern und Worten, damit inneres Wissen sichtbar wird.',
   },
@@ -97,7 +95,7 @@ export const faqItems = [
   },
   {
     question: 'Wie schnell spüre ich eine Veränderung?',
-    answer: 'Jeder Prozess ist individuell. Eine konkrete Wirkung oder ein bestimmter Zeitpunkt lässt sich nicht versprechen. Die Begleitung lädt dazu ein, Zusammenhänge neu wahrzunehmen und eigene nächste Schritte zu entwickeln.',
+    answer: 'Jeder Prozess hat sein eigenes Tempo. Manche Zusammenhänge werden bereits im ersten Gespräch klarer, andere entfalten sich Schritt für Schritt im Alltag und in weiteren Begegnungen.',
   },
   {
     question: 'Welche Rolle spielt die Deutsche Akademie für Systemaufstellungen?',
@@ -110,4 +108,5 @@ export const footerLinks = [
   { href: '/sibylle/datenschutz', label: 'Datenschutz' },
   { href: '/sibylle/agb', label: 'AGB' },
   { href: '/sibylle/widerruf', label: 'Widerruf' },
+  { href: '/sibylle/cookies', label: 'Cookies' },
 ];

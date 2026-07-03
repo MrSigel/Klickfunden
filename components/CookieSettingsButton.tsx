@@ -2,7 +2,7 @@
 
 const consentStorageKey = "klickfunden_cookie_consent";
 
-export default function CookieSettingsButton() {
+export default function CookieSettingsButton({ className = "text-left transition-colors hover:text-marsgreen" }: { className?: string }) {
   const openSettings = () => {
     window.localStorage.removeItem(consentStorageKey);
     window.dispatchEvent(
@@ -17,7 +17,7 @@ export default function CookieSettingsButton() {
     <button
       type="button"
       onClick={openSettings}
-      className="text-left transition-colors hover:text-marsgreen"
+      className={className}
     >
       Cookie-Einstellungen
     </button>
