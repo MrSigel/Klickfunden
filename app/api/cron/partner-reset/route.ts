@@ -1,2 +1,20 @@
 import { NextRequest,NextResponse } from "next/server";import { lastFriday,monthKey } from "@/lib/partner-config";import { getSupabaseAdmin } from "@/lib/supabase/server";
-export async function GET(request:NextRequest){const secret=process.env.CRON_SECRET;if(!secret||request.headers.get("authorization")!==`Bearer ${secret}`)return NextResponse.json({error:"unauthorized"},{status:401});const now=new Date();const reset=lastFriday(now.getUTCFullYear(),now.getUTCMonth());if(now.toISOString().slice(0,10)!==reset.toISOString().slice(0,10))return NextResponse.json({ok:true,reset:false});const db=getSupabaseAdmin() as any;const {data:payments,error}=await db.from("partner_payments").select("partner_id,package_name").eq("status","bezahlt").lte("period_start",now.toISOString().slice(0,10)).gte("period_end",now.toISOString().slice(0,10));if(error)throw error;for(const payment of payments||[]){if(payment.package_name==="Keyword Support Paket")await db.from("partner_monthly_quotas").upsert({partner_id:payment.partner_id,month_key:monthKey(now),package_name:payment.package_name,quota_total:4,quota_used:0,quota_remaining:4,reset_at:now.toISOString(),payment_required:true,is_active:true},{onConflict:"partner_id,month_key"})}return NextResponse.json({ok:true,reset:true,count:payments?.length||0})}
+export async function GET(request:NextRequest){
+  const secret=process.env.CRON_SECRET;
+  if(!secret||request.headers.get("authorization")!==`Bearer ${secret}`)return NextResponse.json({error:"unauthorized"},{status:401});
+  const now=new Date();const reset=lastFriday(now.getUTCFullYear(),now.getUTCMonth());
+  if(now.toISOString().slice(0,10)!==reset.toISOString().slice(0,10))return NextResponse.json({ok:true,reset:false});
+  const db=getSupabaseAdmin() as any;
+  try {
+    const {data:payments,error}=await db.from("partner_payments").select("partner_id,package_name").eq("status","bezahlt").lte("period_start",now.toISOString().slice(0,10)).gte("period_end",now.toISOString().slice(0,10));
+    if(error)throw error;
+    const errors:string[]=[];
+    for(const payment of payments||[]){
+      if(payment.package_name==="Keyword Support Paket"){
+        const {error:upsertErr}=await db.from("partner_monthly_quotas").upsert({partner_id:payment.partner_id,month_key:monthKey(now),package_name:payment.package_name,quota_total:4,quota_used:0,quota_remaining:4,reset_at:now.toISOString(),payment_required:true,is_active:true},{onConflict:"partner_id,month_key"});
+        if(upsertErr){console.error("Quota reset failed for partner",payment.partner_id,upsertErr);errors.push(payment.partner_id)}
+      }
+    }
+    return NextResponse.json({ok:true,reset:true,count:payments?.length||0,errors:errors.length?errors:undefined});
+  } catch(error){console.error("Partner quota reset cron failed",error);return NextResponse.json({error:"reset_failed"},{status:503})}
+}

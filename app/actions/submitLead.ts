@@ -151,7 +151,8 @@ export async function submitLead(
         ? undefined
         : "Die Anfrage wurde gespeichert, aber die Bestätigungs-E-Mail konnte aktuell nicht versendet werden.",
     };
-  } catch {
+  } catch (error) {
+    console.error("Lead submission failed", error);
     return databaseDownError();
   }
 }
