@@ -14,8 +14,12 @@ export async function POST(request: NextRequest) {
   try {
     const password_hash=await hashPassword(String(input.password)); const db=getSupabaseAdmin() as any;
     const {data,error}=await db.from("partners").insert({contact_name:String(input.contact_name).trim(),organization_name:String(input.organization_name).trim(),email,password_hash,website:String(input.website).trim(),phone:String(input.phone||"").trim()||null,industry:String(input.industry).trim(),region:String(input.region).trim(),partner_area:String(input.partner_area).trim(),selected_package:String(input.selected_package),message:String(input.message||"").trim()||null,no_competing_service_confirmed:true,terms_accepted_at:new Date().toISOString(),no_guarantee_confirmed_at:new Date().toISOString()}).select("id,contact_name,selected_package").single();
-    if(error)throw error; const reference=`KF-PARTNER-${String(data.id).split("-")[0].toUpperCase()}`; await db.from("partners").update({permanent_payment_reference:reference}).eq("id",data.id);
-    const pkg=packageDetails(data.selected_package)!; await db.from("partner_payments").insert({partner_id:data.id,package_name:pkg.name,amount:pkg.price,status:pkg.price===null?"nicht_erforderlich":"offen",payment_reference:reference});
+    if(error)throw error; const reference=`KF-PARTNER-${String(data.id).split("-")[0].toUpperCase()}`;
+    const {error:refErr}=await db.from("partners").update({permanent_payment_reference:reference}).eq("id",data.id);
+    if(refErr){console.error("Failed to set payment reference",refErr)}
+    const pkg=packageDetails(data.selected_package)!;
+    const {error:payErr}=await db.from("partner_payments").insert({partner_id:data.id,package_name:pkg.name,amount:pkg.price,status:pkg.price===null?"nicht_erforderlich":"offen",payment_reference:reference});
+    if(payErr){console.error("Failed to create initial payment record",payErr)}
     const createdAt=new Intl.DateTimeFormat("de-DE",{dateStyle:"medium",timeStyle:"short",timeZone:"Europe/Berlin"}).format(new Date());
     const [partnerMail,adminMail]=await Promise.all([
       sendPartnerEmail(email,partnerEmailTemplates.registration(data.contact_name,pkg.name)),

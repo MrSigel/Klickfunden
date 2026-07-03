@@ -11,11 +11,13 @@ export default function LoginForm() {
   const [pending, setPending] = useState(false);
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); setError(""); setPending(true);
-    const data = new FormData(event.currentTarget);
-    const response = await fetch("/api/admin/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: data.get("email"), password: data.get("password") }) });
-    if (!response.ok) { setError(response.status === 503 ? "Die Anmeldung ist aktuell nicht verfügbar. Bitte später erneut versuchen." : "Die eingegebenen Zugangsdaten sind nicht korrekt."); setPending(false); return; }
-    const target = params.get("redirect");
-    router.replace(target?.startsWith("/admin") ? target : "/admin"); router.refresh();
+    try {
+      const data = new FormData(event.currentTarget);
+      const response = await fetch("/api/admin/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: data.get("email"), password: data.get("password") }) });
+      if (!response.ok) { setError(response.status === 503 ? "Die Anmeldung ist aktuell nicht verfügbar. Bitte später erneut versuchen." : "Die eingegebenen Zugangsdaten sind nicht korrekt."); setPending(false); return; }
+      const target = params.get("redirect");
+      router.replace(target?.startsWith("/admin") ? target : "/admin"); router.refresh();
+    } catch { setError("Die Verbindung zum Server konnte nicht hergestellt werden. Bitte prüfe deine Internetverbindung."); setPending(false); }
   }
   return <main className="flex min-h-screen items-center justify-center bg-ink px-5 py-12 text-white">
     <form onSubmit={submit} className="w-full max-w-md rounded-3xl border border-white/10 bg-ink-800 p-8 shadow-card">

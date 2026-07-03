@@ -7,6 +7,8 @@ export async function POST(request: NextRequest) {
   if(!hasAdminSession()||!origin||new URL(origin).host!==host)return NextResponse.json({error:"unauthorized"},{status:401});
   const target=process.env.ADMIN_NOTIFICATION_EMAIL;
   if(!target)return NextResponse.json({error:"not_configured"},{status:503});
-  const result=await sendPartnerEmail(target,partnerEmailTemplates.test());
-  return result.sent?NextResponse.json({ok:true}):NextResponse.json({error:"send_failed"},{status:503});
+  try {
+    const result=await sendPartnerEmail(target,partnerEmailTemplates.test());
+    return result.sent?NextResponse.json({ok:true}):NextResponse.json({error:"send_failed"},{status:503});
+  } catch(error){console.error("Test mail sending failed",error);return NextResponse.json({error:"send_failed"},{status:503});}
 }

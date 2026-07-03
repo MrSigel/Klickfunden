@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "configuration" }, { status: 503 });
   }
   let body: { email?: string; password?: string } = {};
-  try { body = await request.json(); } catch { /* invalid input */ }
+  try { body = await request.json(); } catch { return NextResponse.json({ ok: false, error: "invalid" }, { status: 400 }); }
   if (!validCredentials(body.email || "", body.password || "")) {
     await new Promise((resolve) => setTimeout(resolve, 350));
     return NextResponse.json({ ok: false }, { status: 401 });
