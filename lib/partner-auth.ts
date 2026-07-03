@@ -1,14 +1,28 @@
 import "server-only";
-import { createHmac, randomBytes, scrypt as scryptCallback, timingSafeEqual } from "crypto";
+import { randomBytes, scrypt as scryptCallback, timingSafeEqual } from "crypto";
 import { promisify } from "util";
-import { cookies } from "next/headers";
+import {
+  type SessionConfig,
+  createSession,
+  getSessionFromCookie,
+  isAuthConfigured,
+  verifySession,
+} from "@/lib/session";
 
 const scrypt = promisify(scryptCallback);
-export const PARTNER_COOKIE = "klickfunden_partner_session";
-const ttl = 60 * 60 * 24 * 7;
-function secret() { const value = process.env.PARTNER_SESSION_SECRET; return value && value.length >= 32 ? value : null; }
-export function isPartnerAuthConfigured() { return Boolean(secret()); }
-function sign(payload: string) { const key = secret(); return key ? createHmac("sha256", key).update(payload).digest("base64url") : ""; }
+
+const partnerSessionConfig: SessionConfig = {
+  cookieName: "klickfunden_partner_session",
+  secretEnvVar: "PARTNER_SESSION_SECRET",
+  ttlSeconds: 60 * 60 * 24 * 7,
+  role: "partner",
+};
+
+export const PARTNER_COOKIE = partnerSessionConfig.cookieName;
+
+export function isPartnerAuthConfigured() {
+  return isAuthConfigured(partnerSessionConfig);
+}
 
 export async function hashPassword(password: string) {
   const salt = randomBytes(16).toString("hex");
@@ -25,20 +39,15 @@ export async function verifyPassword(password: string, stored: string) {
 }
 
 export function createPartnerSession(partnerId: string) {
-  if (!secret()) throw new Error("Partner-Session ist nicht konfiguriert.");
-  const expires = Math.floor(Date.now() / 1000) + ttl;
-  const payload = `${partnerId}.${expires}`;
-  return { value: `${payload}.${sign(payload)}`, maxAge: ttl };
+  return createSession(partnerSessionConfig, partnerId);
 }
 
-export function verifyPartnerSession(value?: string) {
-  if (!value || !secret()) return null;
-  const [partnerId, expiresRaw, signature] = value.split(".");
-  const expected = sign(`${partnerId}.${expiresRaw}`);
-  const expires = Number(expiresRaw);
-  if (!/^[0-9a-f-]{36}$/i.test(partnerId) || !expected || !signature || expires <= Date.now() / 1000) return null;
-  const a = Buffer.from(signature); const b = Buffer.from(expected);
-  return a.length === b.length && timingSafeEqual(a, b) ? partnerId : null;
+export function verifyPartnerSession(value?: string): string | null {
+  const identifier = verifySession(partnerSessionConfig, value);
+  if (!identifier || !/^[0-9a-f-]{36}$/i.test(identifier)) return null;
+  return identifier;
 }
 
-export function getPartnerSession() { return verifyPartnerSession(cookies().get(PARTNER_COOKIE)?.value); }
+export function getPartnerSession() {
+  return getSessionFromCookie(partnerSessionConfig);
+}
