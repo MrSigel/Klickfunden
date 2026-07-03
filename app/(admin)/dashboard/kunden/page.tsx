@@ -13,10 +13,8 @@ export default async function KundenPage() {
   try {
     kunden = await getKunden();
   } catch (error) {
-    loadError =
-      error instanceof Error
-        ? error.message
-        : "Kunden konnten nicht aus Supabase geladen werden.";
+    console.error("Kunden load failed", { name: error instanceof Error ? error.name : "UnknownError" });
+    loadError = "Kunden konnten nicht aus Supabase geladen werden.";
   }
 
   return (

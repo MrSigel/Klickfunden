@@ -22,5 +22,5 @@ export async function POST(request: NextRequest) {
       process.env.ADMIN_NOTIFICATION_EMAIL?sendPartnerEmail(process.env.ADMIN_NOTIFICATION_EMAIL,partnerEmailTemplates.adminRegistration({name:data.contact_name,organization:String(input.organization_name),email,website:String(input.website),industry:String(input.industry),region:String(input.region),packageName:pkg.name,createdAt})):Promise.resolve({sent:false as const,reason:"not_configured" as const}),
     ]);
     return NextResponse.json({ok:true,mailSent:partnerMail.sent,adminMailSent:adminMail.sent},{status:201});
-  } catch(error){console.error("Partner registration failed",error);return NextResponse.json({error:"registration_failed"},{status:409});}
+  } catch(error){console.error("Partner registration failed",{name:error instanceof Error?error.name:"UnknownError"});return NextResponse.json({error:"registration_failed"},{status:409});}
 }

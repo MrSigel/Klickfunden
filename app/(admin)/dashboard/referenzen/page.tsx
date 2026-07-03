@@ -13,10 +13,8 @@ export default async function ReferenzenPage() {
   try {
     referenzen = await getAdminReferenzen();
   } catch (error) {
-    loadError =
-      error instanceof Error
-        ? error.message
-        : "Referenzen konnten nicht aus Supabase geladen werden.";
+    console.error("Referenzen load failed", { name: error instanceof Error ? error.name : "UnknownError" });
+    loadError = "Referenzen konnten nicht aus Supabase geladen werden.";
   }
 
   return (
