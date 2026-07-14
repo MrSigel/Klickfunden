@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { SignatureRating } from "./SignatureRating";
 import { WhatsAppCta } from "./WhatsAppCta";
+import { CountUp } from "./CountUp";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -17,10 +18,10 @@ const item = {
 };
 
 const TRUST = [
-  { big: "5,0★", small: "Google-Bewertung" },
-  { big: "140+", small: "Betriebe betreut" },
-  { big: "Ø +1,6★", small: "in 90 Tagen" },
-  { big: "3,4×", small: "mehr Anfragen" },
+  { value: 5.0, decimals: 1, suffix: "★", small: "Google-Bewertung" },
+  { value: 140, decimals: 0, suffix: "+", small: "Betriebe betreut" },
+  { value: 1.6, decimals: 1, prefix: "Ø +", suffix: "★", small: "in 90 Tagen" },
+  { value: 3.4, decimals: 1, suffix: "×", small: "mehr Anfragen" },
 ];
 
 export function Hero() {
@@ -83,9 +84,13 @@ export function Hero() {
             >
               {TRUST.map((t) => (
                 <div key={t.small}>
-                  <div className="font-display text-[22px] font-semibold leading-none tracking-[-0.01em] text-paper">
-                    {t.big}
-                  </div>
+                  <CountUp
+                    value={t.value}
+                    decimals={t.decimals}
+                    prefix={t.prefix}
+                    suffix={t.suffix}
+                    className="block font-display text-[22px] font-semibold leading-none tracking-[-0.01em] text-paper tabular-nums"
+                  />
                   <div className="mt-1.5 text-[12.5px] text-fog">{t.small}</div>
                 </div>
               ))}
@@ -101,15 +106,20 @@ export function Hero() {
           >
             <SignatureRating />
 
-            <div className="pointer-events-none absolute -left-4 top-8 hidden rotate-[-4deg] rounded-2xl border border-line bg-surface/90 px-4 py-3 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] backdrop-blur lg:block">
-              <div className="font-display text-[20px] font-semibold text-signal">−38&nbsp;%</div>
+            <div className="chip-float-a pointer-events-none absolute -left-16 top-6 hidden rounded-2xl border border-line bg-surface/90 px-4 py-3 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.85)] backdrop-blur lg:block">
+              <CountUp
+                value={38}
+                prefix="−"
+                suffix=" %"
+                className="font-display text-[20px] font-semibold text-signal tabular-nums"
+              />
               <div className="text-[12px] text-fog">Cost-per-Lead</div>
             </div>
 
-            <div className="pointer-events-none absolute -right-3 bottom-10 hidden rotate-[3deg] rounded-2xl border border-line bg-surface/90 px-4 py-3 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] backdrop-blur lg:block">
+            <div className="chip-float-b pointer-events-none absolute -right-4 bottom-10 hidden rounded-2xl border border-line bg-surface/90 px-4 py-3 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.85)] backdrop-blur lg:block">
               <div className="flex items-center gap-2">
                 <span className="text-signal">★</span>
-                <span className="font-display text-[20px] font-semibold text-paper">+280</span>
+                <CountUp value={280} prefix="+" className="font-display text-[20px] font-semibold text-paper tabular-nums" />
               </div>
               <div className="text-[12px] text-fog">neue Bewertungen</div>
             </div>

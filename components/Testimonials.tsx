@@ -1,5 +1,6 @@
 import { TESTIMONIALS, RATING } from "@/lib/testimonials";
 import { Reveal } from "./Reveal";
+import { CountUp } from "./CountUp";
 
 export function Testimonials() {
   return (
@@ -11,8 +12,10 @@ export function Testimonials() {
         </div>
         <div className="flex items-center gap-3 rounded-full border border-line bg-surface px-5 py-3">
           <span className="text-signal">★★★★★</span>
-          <span className="font-display text-[22px] font-semibold tabular-nums">{RATING.value}</span>
-          <span className="text-[14px] text-fog">/ {RATING.count}+ Bewertungen</span>
+          <CountUp value={5} decimals={1} className="font-display text-[22px] font-semibold tabular-nums" />
+          <span className="text-[14px] text-fog">
+            / <CountUp value={RATING.count} suffix="+" className="tabular-nums" /> Bewertungen
+          </span>
         </div>
       </Reveal>
 

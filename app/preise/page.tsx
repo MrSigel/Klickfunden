@@ -7,6 +7,7 @@ import { WhatsAppCta } from "@/components/WhatsAppCta";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { PriceCalculator } from "@/components/PriceCalculator";
+import { CountUp } from "@/components/CountUp";
 
 export const metadata: Metadata = {
   title: "Pakete & Preise + Kostenrechner | Klickfunden",
@@ -92,9 +93,11 @@ export default function PreisePage() {
 
               <div className="mt-5 flex items-baseline gap-2">
                 <span className="font-mono text-[12px]  tracking-[0.02em] text-fog-dim">ab</span>
-                <span className="font-display text-[40px] font-semibold leading-none tracking-[-0.008em] tabular-nums">
-                  {fmtEur(p.monthlyFrom)}
-                </span>
+                <CountUp
+                  value={p.monthlyFrom}
+                  suffix=" €"
+                  className="font-display text-[40px] font-semibold leading-none tracking-[-0.008em] tabular-nums"
+                />
                 <span className="text-[14px] text-fog">/ Monat</span>
               </div>
 
