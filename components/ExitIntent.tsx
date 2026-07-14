@@ -81,7 +81,6 @@ export function ExitIntent() {
         <div className="mt-6 flex justify-center">
           <WhatsAppCta
             label="Jetzt kurz schreiben"
-            message="Hallo Klickfunden, ich habe noch eine kurze Frage."
           />
         </div>
         <button

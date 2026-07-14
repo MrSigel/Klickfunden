@@ -18,7 +18,7 @@ export function Footer() {
               Reputation, Sichtbarkeit &amp; Wachstum für lokale Betriebe — messbar statt Bauchgefühl.
             </p>
             <a
-              href={whatsappLink("Hallo Klickfunden, ich habe eine Frage.")}
+              href={whatsappLink()}
               target="_blank"
               rel="noopener noreferrer"
               className="group mt-6 inline-flex items-center gap-3 rounded-2xl border border-line bg-surface/70 py-2.5 pl-2.5 pr-5 transition-colors hover:border-signal/50"

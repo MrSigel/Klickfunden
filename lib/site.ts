@@ -13,6 +13,8 @@ export const site = {
   // Funnel — everything points to WhatsApp. No free offers.
   whatsappNumber: "4915563535989",
   whatsappHref: "https://wa.me/4915563535989",
+  whatsappDefaultMessage:
+    "Hallo Enrico, ich würde mich gern mit dir austauschen bezüglich eines passenden Pakets. Bitte melde dich bei mir zurück, damit wir einen passenden Termin ausmachen können.",
 
   // Phone kept for the legally required Impressum contact only.
   phoneDisplay: "0155 63535989",
@@ -46,9 +48,13 @@ export const site = {
 
 export type Site = typeof site;
 
-/** Build a WhatsApp deep link with a pre-filled message. */
+/**
+ * Build a WhatsApp deep link with a pre-filled message.
+ * Falls back to the default message so the chat is never opened blank.
+ */
 export function whatsappLink(message?: string): string {
-  return message
-    ? `${site.whatsappHref}?text=${encodeURIComponent(message)}`
+  const text = message ?? site.whatsappDefaultMessage;
+  return text
+    ? `${site.whatsappHref}?text=${encodeURIComponent(text)}`
     : site.whatsappHref;
 }

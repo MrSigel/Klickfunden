@@ -56,7 +56,7 @@ export function LandingPageView({ page }: { page: LandingPage }) {
             {page.lead}
           </p>
           <div className="mt-9 flex flex-wrap gap-[14px]">
-            <WhatsAppCta label="Per WhatsApp schreiben" message={`Hallo Klickfunden, ich interessiere mich für ${page.name}.`} />
+            <WhatsAppCta label="Per WhatsApp schreiben" message={`Hallo Enrico, ich interessiere mich für ${page.name}.`} />
             <Link href="/preise" className="btn btn-ghost">
               Pakete &amp; Preise
             </Link>
@@ -164,7 +164,7 @@ export function LandingPageView({ page }: { page: LandingPage }) {
             Eine kurze Nachricht genügt. Wir schätzen dein Potenzial ein und sagen dir klar, was sich lohnt.
           </p>
           <div className="mt-8 flex justify-center">
-            <WhatsAppCta label="Per WhatsApp schreiben" message={`Hallo Klickfunden, ich interessiere mich für ${page.name}.`} />
+            <WhatsAppCta label="Per WhatsApp schreiben" message={`Hallo Enrico, ich interessiere mich für ${page.name}.`} />
           </div>
         </div>
       </section>

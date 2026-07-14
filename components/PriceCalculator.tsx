@@ -35,7 +35,7 @@ export function PriceCalculator() {
   const message = useMemo(() => {
     const names = calc.chosen.map((m) => m.name).join(", ") || "—";
     const lines = [
-      "Hallo Klickfunden, ich habe den Preisrechner genutzt.",
+      "Hallo Enrico, ich habe den Preisrechner genutzt.",
       `Ausgewählt: ${names}`,
       `Standorte: ${locations}`,
       calc.anyAd ? `Werbebudget: ${fmtEur(adBudget)}/Monat` : null,

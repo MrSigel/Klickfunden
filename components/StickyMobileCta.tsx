@@ -6,7 +6,7 @@ export function StickyMobileCta() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-[90] border-t border-line bg-ink/85 px-4 py-3 backdrop-blur-xl md:hidden">
       <a
-        href={whatsappLink("Hallo Klickfunden, ich habe eine Frage.")}
+        href={whatsappLink()}
         target="_blank"
         rel="noopener noreferrer"
         className="btn btn-primary w-full"

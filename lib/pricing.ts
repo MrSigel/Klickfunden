@@ -33,7 +33,7 @@ export const PACKAGES: Package[] = [
       "Local SEO für deine Region",
       "Monatliches Reporting",
     ],
-    ctaMessage: "Hallo Klickfunden, ich interessiere mich für das Paket „Start“.",
+    ctaMessage: "Hallo Enrico, ich interessiere mich für das Paket „Start“.",
   },
   {
     id: "wachstum",
@@ -48,7 +48,7 @@ export const PACKAGES: Package[] = [
       "1 Ads-Kanal (Google, Meta oder TikTok)",
       "Conversion-Tracking & Reporting",
     ],
-    ctaMessage: "Hallo Klickfunden, ich interessiere mich für das Paket „Wachstum“.",
+    ctaMessage: "Hallo Enrico, ich interessiere mich für das Paket „Wachstum“.",
   },
   {
     id: "dominanz",
@@ -62,7 +62,7 @@ export const PACKAGES: Package[] = [
       "Multi-Channel-Ads (Google + Meta + TikTok)",
       "Priorisierte Betreuung & Strategie",
     ],
-    ctaMessage: "Hallo Klickfunden, ich interessiere mich für das Paket „Dominanz“.",
+    ctaMessage: "Hallo Enrico, ich interessiere mich für das Paket „Dominanz“.",
   },
 ];
 

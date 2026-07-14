@@ -48,7 +48,7 @@ export function Nav() {
         </nav>
 
         <a
-          href={whatsappLink("Hallo Klickfunden, ich habe eine Frage.")}
+          href={whatsappLink()}
           target="_blank"
           rel="noopener noreferrer"
           className="btn btn-primary hidden !h-11 !px-[18px] md:inline-flex"
@@ -84,7 +84,7 @@ export function Nav() {
             </Link>
           ))}
           <a
-            href={whatsappLink("Hallo Klickfunden, ich habe eine Frage.")}
+            href={whatsappLink()}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}

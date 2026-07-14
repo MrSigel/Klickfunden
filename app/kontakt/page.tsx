@@ -38,7 +38,7 @@ export default function KontaktPage() {
               sich zuerst lohnt — ohne Umwege.
             </p>
             <div className="mt-9 flex flex-wrap gap-[14px]">
-              <WhatsAppCta label="Per WhatsApp schreiben" message="Hallo Klickfunden, ich interessiere mich für eine Zusammenarbeit." />
+              <WhatsAppCta label="Per WhatsApp schreiben" />
               <a href={`mailto:${site.email}`} className="btn btn-ghost">
                 E-Mail schreiben
               </a>
@@ -51,7 +51,7 @@ export default function KontaktPage() {
                 Direkt schreiben
               </p>
               <a
-                href={whatsappLink("Hallo Klickfunden, ich interessiere mich für eine Zusammenarbeit.")}
+                href={whatsappLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 block font-display text-[clamp(26px,3.6vw,36px)] font-semibold tracking-[-0.008em] text-signal"
