@@ -1,90 +1,73 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
-import ConsentAnalytics from "@/components/ConsentAnalytics";
-import CookieBanner from "@/components/CookieBanner";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import { Providers } from "@/components/Providers";
+import { JsonLd } from "@/components/JsonLd";
+import { SiteChrome } from "@/components/SiteChrome";
+import { organizationLd, websiteLd } from "@/lib/jsonld";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
   variable: "--font-jakarta",
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.klickfunden.de"),
-  applicationName: "Klickfunden.de",
-  title: "Klickfunden – SEO, GEO, AEO & Ads für digitale Sichtbarkeit",
+  metadataBase: new URL("https://klickfunden.de"),
+  title: {
+    default: "Marketingagentur für Reputation, SEO & Wachstum | Klickfunden",
+    template: "%s",
+  },
   description:
-    "Klickfunden unterstützt Unternehmen mit SEO, GEO, AEO, Google Ads, Meta Ads, YouTube Ads, Local SEO und Conversion-Optimierung.",
-  manifest: "/site.webmanifest",
+    "Klickfunden ist deine Marketingagentur für Reputationsmanagement, SEO, GEO/AEO und Performance-Ads. Wir machen lokale Betriebe sichtbar, vertrauenswürdig und wachstumsstark — messbar in 90 Tagen.",
   keywords: [
+    "Marketingagentur",
+    "Online Marketing Agentur",
     "SEO Agentur",
-    "GEO Generative Engine Optimization",
-    "AEO Answer Engine Optimization",
+    "Reputationsmanagement",
+    "Google Bewertungen verbessern",
+    "GEO AEO Optimierung",
     "Google Ads Agentur",
-    "Meta Ads",
-    "YouTube Ads Betreuung",
-    "Local SEO",
-    "Conversion-Optimierung",
-    "Klickfunden.de",
+    "Social Media Marketing",
+    "Marketingagentur Castrop-Rauxel",
+    "Marketingagentur NRW",
   ],
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Klickfunden – SEO, GEO, AEO & Ads Agentur",
+    title: "Klickfunden — Reputation, Sichtbarkeit & Wachstum",
     description:
-      "SEO, GEO, AEO und Ads aus einer Hand. Wir machen dein Business überall dort sichtbar, wo deine Kund:innen heute suchen.",
-    siteName: "Klickfunden.de",
+      "Aus schwachen Bewertungen, unsichtbaren Rankings und verpufften Budgets machen wir ein Markenbild, das verkauft — messbar in 90 Tagen.",
     locale: "de_DE",
     type: "website",
-    url: "https://www.klickfunden.de",
-  },
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
-    ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
-  },
-  appleWebApp: {
-    title: "Klickfunden.de",
-    capable: true,
-    statusBarStyle: "default",
+    siteName: "Klickfunden",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Klickfunden – Agentur für digitale Sichtbarkeit",
+    title: "Klickfunden — Reputation, Sichtbarkeit & Wachstum",
     description:
-      "SEO, GEO, AEO, Ads, Local SEO und Conversion-Optimierung für Unternehmen.",
+      "Reputation, Sichtbarkeit & Wachstum für lokale Betriebe. SEO, GEO, AEO, CRO und Performance-Ads.",
   },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#003333",
-  colorScheme: "light",
+  themeColor: "#05080a",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="de" className={`${inter.variable} ${jakarta.variable}`}>
-      <body className="font-body antialiased">
-        {children}
-        <ConsentAnalytics />
-        <CookieBanner />
+    <html lang="de" className={jakarta.variable}>
+      <body>
+        <JsonLd data={[organizationLd(), websiteLd()]} />
+        <Providers>
+          <SiteChrome>{children}</SiteChrome>
+        </Providers>
       </body>
     </html>
   );

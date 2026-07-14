@@ -1,51 +1,32 @@
-import "server-only";
+import { createServerClient } from "@supabase/ssr";
+import { cookies } from "next/headers";
 
-import { createClient, SupabaseClient } from "@supabase/supabase-js";
-import type { Database } from "@/lib/supabase/types";
+export const supabaseConfigured =
+  !!process.env.NEXT_PUBLIC_SUPABASE_URL &&
+  !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-type SupabaseDatabaseClient = SupabaseClient<Database>;
+/** Server-side Supabase client bound to the request cookies (for auth). */
+export async function createClient() {
+  const cookieStore = await cookies();
 
-let adminClient: SupabaseDatabaseClient | null = null;
-let anonClient: SupabaseDatabaseClient | null = null;
-
-function requireEnv(name: string) {
-  const value = process.env[name];
-  if (!value) {
-    throw new Error(`Supabase-Konfiguration fehlt: ${name}`);
-  }
-  return value;
-}
-
-export function getSupabaseAdmin() {
-  if (!adminClient) {
-    adminClient = createClient<Database>(
-      requireEnv("NEXT_PUBLIC_SUPABASE_URL"),
-      requireEnv("SUPABASE_SERVICE_ROLE_KEY"),
-      {
-        auth: {
-          autoRefreshToken: false,
-          persistSession: false,
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll();
+        },
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options)
+            );
+          } catch {
+            // called from a Server Component — safe to ignore, middleware refreshes.
+          }
         },
       },
-    );
-  }
-
-  return adminClient;
-}
-
-export function getSupabaseAnon() {
-  if (!anonClient) {
-    anonClient = createClient<Database>(
-      requireEnv("NEXT_PUBLIC_SUPABASE_URL"),
-      requireEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY"),
-      {
-        auth: {
-          autoRefreshToken: false,
-          persistSession: false,
-        },
-      },
-    );
-  }
-
-  return anonClient;
+    }
+  );
 }

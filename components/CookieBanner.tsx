@@ -1,128 +1,57 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { usePathname } from "next/navigation";
+import Link from "next/link";
 
-type ConsentChoice = "accepted" | "essential";
+const KEY = "kf_cookie_consent";
 
-const consentStorageKey = "klickfunden_cookie_consent";
-
-function emitConsent(choice: ConsentChoice) {
-  window.dispatchEvent(
-    new CustomEvent("klickfunden-consent-change", {
-      detail: {
-        analytics: choice === "accepted",
-        choice,
-      },
-    }),
-  );
-}
-
-export default function CookieBanner() {
-  const pathname = usePathname();
-  const [ready, setReady] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const isSibylle = pathname.startsWith("/sibylle");
-  const legalBasePath = isSibylle ? "/sibylle" : "";
-  const siteName = isSibylle ? "Sibylle Bergold" : "Klickfunden";
+export function CookieBanner() {
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const stored = window.localStorage.getItem(consentStorageKey);
-    setVisible(stored !== "accepted" && stored !== "essential");
-    setReady(true);
-
-    const openSettings = () => setVisible(true);
-    window.addEventListener("klickfunden-open-cookie-settings", openSettings);
-    return () =>
-      window.removeEventListener(
-        "klickfunden-open-cookie-settings",
-        openSettings,
-      );
+    try {
+      if (!localStorage.getItem(KEY)) setShow(true);
+    } catch {
+      /* storage blocked — show anyway */
+      setShow(true);
+    }
   }, []);
 
-  const saveChoice = (choice: ConsentChoice) => {
-    window.localStorage.setItem(consentStorageKey, choice);
-    emitConsent(choice);
-    setVisible(false);
+  const decide = (value: "all" | "essential") => {
+    try {
+      localStorage.setItem(KEY, value);
+    } catch {}
+    // Let the analytics gate react immediately, no reload needed.
+    window.dispatchEvent(new Event("kf-consent-change"));
+    setShow(false);
   };
 
-  if (!ready) {
-    return null;
-  }
+  if (!show) return null;
 
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          initial={{ y: 32, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 32, opacity: 0 }}
-          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-x-0 bottom-0 z-[80] border-t border-white/10 bg-ink-900/95 px-5 py-5 shadow-card backdrop-blur-xl"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="cookie-banner-title"
-        >
-          <div className="mx-auto grid w-full max-w-7xl gap-5 lg:grid-cols-[1fr_auto] lg:items-center">
-            <div>
-              <p
-                id="cookie-banner-title"
-                className="font-display text-base font-semibold text-white"
-              >
-                Datenschutz-Einstellungen
-              </p>
-              <p className="mt-2 max-w-4xl text-sm leading-relaxed text-mist-100/80">
-                {siteName} verwendet technisch notwendige Speicherzugriffe, damit
-                diese Auswahl gespeichert bleibt. Vercel Web Analytics wird
-                nur nach deiner Zustimmung genutzt und arbeitet
-                datenschutzfreundlich ohne dauerhaft gesetzte
-                Drittanbieter-Cookies. Details findest du in der{" "}
-                <a
-                  href={`${legalBasePath}/datenschutz`}
-                  className="font-semibold text-marsgreen hover:underline"
-                >
-                  Datenschutzerklärung
-                </a>
-                {isSibylle && <>
-                  , in den{" "}
-                  <a
-                    href="/sibylle/cookies"
-                    className="font-semibold text-marsgreen hover:underline"
-                  >
-                    Cookie-Informationen
-                  </a>
-                </>}{" "}
-                und im{" "}
-                <a
-                  href={`${legalBasePath}/impressum`}
-                  className="font-semibold text-marsgreen hover:underline"
-                >
-                  Impressum
-                </a>
-                .
-              </p>
-            </div>
-
-            <div className="grid gap-3 sm:grid-cols-2 lg:min-w-[420px]">
-              <button
-                type="button"
-                onClick={() => saveChoice("essential")}
-                className="inline-flex h-12 items-center justify-center rounded-full border border-marsgreen/70 bg-ink-800 px-5 text-sm font-semibold text-marsgreen transition-colors hover:bg-marsgreen/10"
-              >
-                Nur essenzielle
-              </button>
-              <button
-                type="button"
-                onClick={() => saveChoice("accepted")}
-                className="inline-flex h-12 items-center justify-center rounded-full border border-marsgreen bg-marsgreen px-5 text-sm font-semibold text-ink-900 transition-colors hover:bg-marsgreen-400"
-              >
-                Alle akzeptieren
-              </button>
-            </div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div
+      role="dialog"
+      aria-label="Cookie-Einstellungen"
+      className="fixed inset-x-4 bottom-[88px] z-[120] mx-auto max-w-[440px] rounded-2xl border border-line bg-ink/95 p-5 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.9)] backdrop-blur-xl md:inset-x-auto md:bottom-6 md:left-6"
+    >
+      <p className="font-display text-[15px] font-semibold text-paper">Cookies & Datenschutz</p>
+      <p className="mt-2 text-[13.5px] leading-relaxed text-fog">
+        Wir verwenden technisch notwendige Cookies und — nur mit deiner Zustimmung —
+        eine datenschutzfreundliche Reichweitenmessung (Vercel&nbsp;Analytics). Details in
+        der{" "}
+        <Link href="/datenschutz" className="text-signal hover:underline">
+          Datenschutzerklärung
+        </Link>
+        .
+      </p>
+      <div className="mt-4 flex gap-2.5">
+        <button onClick={() => decide("all")} className="btn btn-primary !h-11 flex-1">
+          Alle akzeptieren
+        </button>
+        <button onClick={() => decide("essential")} className="btn btn-ghost !h-11 flex-1">
+          Nur notwendige
+        </button>
+      </div>
+    </div>
   );
 }

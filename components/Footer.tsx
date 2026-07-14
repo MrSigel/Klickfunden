@@ -1,122 +1,89 @@
-import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
-import CookieSettingsButton from "@/components/CookieSettingsButton";
+import Link from "next/link";
+import { Logo } from "./Logo";
+import { site, whatsappLink } from "@/lib/site";
+import { SERVICES, INDUSTRIES, pathFor } from "@/lib/pages";
+import { WhatsAppIcon } from "./icons";
 
-const footerColumns = [
-  {
-    title: "Leistungen",
-    links: [
-      { label: "SEO", href: "/services/seo" },
-      { label: "GEO", href: "/services/geo" },
-      { label: "AEO", href: "/services/aeo" },
-      { label: "Google Ads", href: "/services/google-ads" },
-      { label: "Meta Ads", href: "/services/meta-ads" },
-      { label: "YouTube Ads", href: "/services/youtube-ads" },
-      { label: "Local SEO", href: "/services/local-seo" },
-      { label: "Technical SEO", href: "/services/technical-seo" },
-      { label: "Content SEO", href: "/services/content-seo" },
-      {
-        label: "Conversion Optimierung",
-        href: "/services/conversion-optimierung",
-      },
-    ],
-  },
-  {
-    title: "Branchen",
-    links: [
-      { label: "Handwerker", href: "/industries/handwerker" },
-      { label: "Dienstleister", href: "/industries/dienstleister" },
-      { label: "Pflege & Pflegedienste", href: "/industries/pflege" },
-      { label: "Ärzte & Praxen", href: "/industries/aerzte" },
-      { label: "Anwälte & Kanzleien", href: "/industries/anwaelte" },
-      { label: "Immobilien", href: "/industries/immobilien" },
-      { label: "Steuerberater", href: "/industries/steuerberater" },
-      { label: "E-Commerce", href: "/industries/ecommerce" },
-      { label: "B2B", href: "/industries/b2b" },
-      { label: "Gastronomie", href: "/industries/gastronomie" },
-    ],
-  },
-  {
-    title: "Agentur",
-    links: [
-      { label: "Über uns", href: "/ueber-uns" },
-      { label: "FAQ", href: "/faq" },
-      { label: "Angebot anfordern", href: "/#angebot" },
-      { label: "Standort Castrop-Rauxel", href: "/standort/castrop-rauxel" },
-      { label: "Partnerprogramm", href: "/partner" },
-      { label: "Partner Login", href: "/partner/login" },
-      { label: "Kostenlose Erstprüfung", href: "/kostenlose-erstpruefung" },
-    ],
-  },
-  {
-    title: "Rechtliches",
-    links: [
-      { label: "Impressum", href: "/impressum" },
-      { label: "Datenschutz", href: "/datenschutz" },
-      { label: "Partnerbedingungen", href: "/partnerbedingungen" },
-    ],
-  },
-];
+const topServices = SERVICES.slice(0, 6);
+const topIndustries = INDUSTRIES.slice(0, 6);
 
-export default function Footer() {
+export function Footer() {
   return (
-    <footer className="relative border-t border-white/10 bg-ink-900">
-      <div className="container-page py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_2fr]">
+    <footer className="mt-[clamp(40px,6vw,90px)] rounded-t-[clamp(32px,5vw,64px)] border-t border-line bg-surface/40">
+      <div className="mx-auto max-w-[var(--maxw)] px-[var(--gutter)] py-[clamp(48px,6vw,80px)]">
+        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <a
-              href="/"
-              className="inline-flex items-center"
-              aria-label="Klickfunden Startseite"
-            >
-              <Image
-                src="/brand/klickfunden/logo-footer.png"
-                alt="Klickfunden Logo"
-                width={501}
-                height={116}
-                className="h-10 w-auto max-w-[210px] sm:h-11 sm:max-w-[240px]"
-              />
-            </a>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-mist-100/75 [text-wrap:pretty]">
-              Digital-Marketing-Agentur für SEO, GEO, AEO und Performance Ads. Wir machen dein Business nicht nur in klassischen Suchmaschinen sichtbar, sondern platzieren dich genau dort, wo deine Kund:innen heute und morgen nach Antworten suchen – von Google bis zur KI-Suche. Smart, messbar und ergebnisorientiert.
+            <Logo />
+            <p className="mt-5 max-w-[30ch] text-[15px] text-fog">
+              Reputation, Sichtbarkeit &amp; Wachstum für lokale Betriebe — messbar statt Bauchgefühl.
             </p>
-
+            <a
+              href={whatsappLink("Hallo Klickfunden, ich habe eine Frage.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-6 inline-flex items-center gap-3 rounded-2xl border border-line bg-surface/70 py-2.5 pl-2.5 pr-5 transition-colors hover:border-signal/50"
+            >
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#25D366] text-white">
+                <WhatsAppIcon size={22} />
+              </span>
+              <span className="leading-tight">
+                <span className="block text-[12.5px] text-fog">Schreib uns direkt</span>
+                <span className="block font-semibold text-paper">WhatsApp öffnen</span>
+              </span>
+            </a>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 xl:grid-cols-4">
-            {footerColumns.map((col) => (
-              <div key={col.title}>
-                <h4 className="font-display text-sm font-semibold text-white">
-                  {col.title}
-                </h4>
-                <ul className="mt-4 space-y-3">
-                  {col.links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-sm text-mist-100/75 transition-colors hover:text-marsgreen"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+          <FooterCol title="Leistungen" links={topServices.map((s) => ({ href: pathFor(s), label: s.name }))} more={{ href: "/leistungen", label: "Alle Leistungen" }} />
+          <FooterCol title="Branchen" links={topIndustries.map((s) => ({ href: pathFor(s), label: s.name }))} more={{ href: "/branchen", label: "Alle Branchen" }} />
+          <FooterCol
+            title="Unternehmen"
+            links={[
+              { href: "/preise", label: "Pakete & Preise" },
+              { href: "/ueber-uns", label: "Über uns" },
+              { href: "/kontakt", label: "Kontakt" },
+              { href: "/impressum", label: "Impressum" },
+              { href: "/datenschutz", label: "Datenschutz" },
+            ]}
+          />
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-7 text-xs text-mist-100/75 sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {new Date().getFullYear()} Klickfunden. Betreiber: Klickhafen.
-            Alle Rechte vorbehalten.
-          </p>
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            <CookieSettingsButton />
-            <p>GESUCHT. GEFUNDEN. GEBUCHT.</p>
-          </div>
+        <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-8 font-mono text-xs text-fog-dim">
+          <span>© 2026 {site.brand} · {site.legalName}</span>
+          <span>{site.address.city}, {site.address.countryName}</span>
         </div>
       </div>
     </footer>
+  );
+}
+
+function FooterCol({
+  title,
+  links,
+  more,
+}: {
+  title: string;
+  links: { href: string; label: string }[];
+  more?: { href: string; label: string };
+}) {
+  return (
+    <div>
+      <h3 className="mb-4 font-mono text-[11px]  tracking-[0.02em] text-fog-dim">{title}</h3>
+      <ul className="grid gap-2.5">
+        {links.map((l) => (
+          <li key={l.href}>
+            <Link href={l.href} className="text-[14px] text-fog transition-colors hover:text-signal">
+              {l.label}
+            </Link>
+          </li>
+        ))}
+        {more && (
+          <li>
+            <Link href={more.href} className="text-[14px] text-paper transition-colors hover:text-signal">
+              {more.label} →
+            </Link>
+          </li>
+        )}
+      </ul>
+    </div>
   );
 }

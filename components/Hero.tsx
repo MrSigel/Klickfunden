@@ -1,200 +1,120 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Link2, Search, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { SignatureRating } from "./SignatureRating";
+import { WhatsAppCta } from "./WhatsAppCta";
 
-type Tab = "web" | "ki";
+const ease = [0.22, 1, 0.36, 1] as const;
 
-const webResults = [
-  {
-    domain: "klickfunden.de",
-    title: "Klickfunden.de – Sichtbarkeit & Performance Ads",
-    snippet: "SEO, GEO, AEO und Ads aus einer Hand.",
-    highlight: true,
-  },
-  {
-    domain: "Branchenverzeichnis",
-    title: "Agenturen für digitale Sichtbarkeit",
-    snippet: "Eine allgemeine Übersicht verschiedener Anbieter.",
-    highlight: false,
-  },
-  {
-    domain: "Fachbeitrag",
-    title: "SEO, GEO und AEO im Vergleich",
-    snippet: "Grundlagen zur klassischen Suche und zu KI-Antwortsystemen.",
-    highlight: false,
-  },
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.08 } },
+};
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.75, ease } },
+};
+
+const TRUST = [
+  { big: "5,0★", small: "Google-Bewertung" },
+  { big: "140+", small: "Betriebe betreut" },
+  { big: "Ø +1,6★", small: "in 90 Tagen" },
+  { big: "3,4×", small: "mehr Anfragen" },
 ];
 
-const DEMO_HEIGHT = "h-[252px]";
-
-function SearchDemo() {
-  const [tab, setTab] = useState<Tab>("web");
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setTab((t) => (t === "web" ? "ki" : "web"));
-    }, 4200);
-    return () => clearInterval(id);
-  }, []);
-
+export function Hero() {
   return (
-    <div className="mx-auto w-full max-w-md overflow-hidden rounded-3xl border border-white/10 bg-ink-800 shadow-card">
-      <div className="flex items-center gap-2 border-b border-white/10 bg-ink-900/60 px-4 py-3">
-        <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-        <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-        <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-        <span className="ml-3 truncate text-xs text-mist-100/75">
-          {"suche · „seo geo aeo agentur“"}
-        </span>
+    <section
+      id="top"
+      className="relative overflow-hidden pb-[clamp(48px,7vw,90px)] pt-[clamp(120px,15vw,170px)]"
+    >
+      {/* layered background */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-1/2 top-[-10%] h-[70vw] w-[70vw] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(77,240,138,0.14),transparent_70%)]" />
+        <div className="absolute bottom-[-20%] right-[-10%] h-[50vw] w-[50vw] rounded-full bg-[radial-gradient(closest-side,rgba(77,240,138,0.08),transparent_70%)]" />
+        <div className="absolute inset-0 opacity-[0.5] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_0%,#000,transparent_75%)] bg-[radial-gradient(circle,rgba(230,255,240,0.05)_1px,transparent_1px)] bg-[length:24px_24px]" />
       </div>
 
-      <div className="flex items-center gap-3 border-b border-white/10 px-5 py-4">
-        <Search className="h-4 w-4 flex-shrink-0 text-mist-100/75" />
-        <span className="truncate text-sm text-mist-100/80">seo geo aeo agentur</span>
-      </div>
-
-      <div className="flex gap-1 border-b border-white/10 px-5 pt-3">
-        {(
-          [
-            { id: "web" as Tab, label: "Google-Ergebnisse" },
-            { id: "ki" as Tab, label: "KI-Antwort" },
-          ]
-        ).map((t) => (
-          <button
-            key={t.id}
-            type="button"
-            onClick={() => setTab(t.id)}
-            className="relative px-3 py-2 text-xs font-semibold transition-colors"
-          >
-            <span className={tab === t.id ? "text-white" : "text-mist-100/75 hover:text-mist-100/80"}>
-              {t.label}
-            </span>
-            {tab === t.id && (
-              <motion.span
-                layoutId="hero-search-tab-indicator"
-                className="absolute inset-x-3 -bottom-px h-px bg-marsgreen"
-                transition={{ duration: 0.25, ease: "easeOut" }}
-              />
-            )}
-          </button>
-        ))}
-      </div>
-
-      <div className={`relative ${DEMO_HEIGHT} overflow-hidden`}>
-        <AnimatePresence mode="wait">
-          {tab === "web" ? (
+      <div className="mx-auto max-w-[var(--maxw)] px-[var(--gutter)]">
+        <div className="grid items-center gap-[clamp(36px,5vw,72px)] lg:grid-cols-[1.1fr_0.9fr]">
+          {/* Left */}
+          <motion.div variants={container} initial="hidden" animate="show">
             <motion.div
-              key="web"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="absolute inset-0 flex flex-col gap-2.5 overflow-y-auto px-5 py-4 pr-3 [scrollbar-color:rgba(153,204,51,0.65)_rgba(255,255,255,0.08)] [scrollbar-width:thin]"
+              variants={item}
+              className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-line bg-surface/60 py-2 pl-3 pr-4 text-[13px] text-fog backdrop-blur"
             >
-              {webResults.map((r) => (
-                <div
-                  key={r.domain}
-                  className={`rounded-xl border px-4 py-2.5 ${
-                    r.highlight ? "border-marsgreen/40 bg-marsgreen/10" : "border-white/5 bg-white/[0.02]"
-                  }`}
-                >
-                  <p className="text-[11px] text-mist-100/75">{r.domain}</p>
-                  <p className={`mt-0.5 text-sm font-semibold ${r.highlight ? "text-marsgreen-300" : "text-mist-100/85"}`}>
-                    {r.title}
-                  </p>
-                  <p className="mt-1 text-xs leading-relaxed text-mist-100/75">{r.snippet}</p>
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-signal opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-signal" />
+              </span>
+              Marketingagentur · Antwort meist in unter 2&nbsp;Stunden
+            </motion.div>
+
+            <motion.h1
+              variants={item}
+              className="font-display text-[clamp(40px,6.6vw,82px)] font-light leading-[1.02] tracking-[-0.01em]"
+            >
+              Dein Ruf entscheidet,
+              <br />
+              <span className="font-medium text-signal">bevor du verkaufst.</span>
+            </motion.h1>
+
+            <motion.p
+              variants={item}
+              className="mt-6 max-w-[34em] text-[clamp(16px,1.6vw,19px)] leading-relaxed text-fog"
+            >
+              Klickfunden verwandelt schwache Bewertungen, unsichtbare Rankings und
+              verpuffte Werbebudgets in ein Markenbild, das verkauft — mit
+              Reputationsmanagement, SEO, GEO&nbsp;/&nbsp;AEO und Performance-Ads.
+            </motion.p>
+
+            <motion.div variants={item} className="mt-8 flex flex-wrap gap-[14px]">
+              <WhatsAppCta label="Per WhatsApp schreiben" />
+              <Link href="/preise" className="btn btn-ghost">
+                Pakete &amp; Preise ansehen
+              </Link>
+            </motion.div>
+
+            {/* trust bar */}
+            <motion.div
+              variants={item}
+              className="mt-10 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-line pt-7 sm:grid-cols-4"
+            >
+              {TRUST.map((t) => (
+                <div key={t.small}>
+                  <div className="font-display text-[22px] font-semibold leading-none tracking-[-0.01em] text-paper">
+                    {t.big}
+                  </div>
+                  <div className="mt-1.5 text-[12.5px] text-fog">{t.small}</div>
                 </div>
               ))}
             </motion.div>
-          ) : (
-            <motion.div
-              key="ki"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="absolute inset-0 flex flex-col justify-center gap-3 px-5 py-5"
-            >
-              <div className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/[0.02] px-4 py-4">
-                <span className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-marsgreen/15 text-marsgreen">
-                  <Sparkles className="h-3.5 w-3.5" />
-                </span>
-                <p className="text-sm leading-relaxed text-mist-100/80">
-                  <span className="font-semibold text-white">Klickfunden</span> ist eine Digital-Marketing-Agentur für SEO, GEO, AEO, Google Ads, Meta Ads, YouTube Ads, Local SEO und Conversion-Optimierung.
-                </p>
+          </motion.div>
+
+          {/* Right — rating card + floating chips */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease, delay: 0.35 }}
+            className="relative mx-auto w-full max-w-[460px]"
+          >
+            <SignatureRating />
+
+            <div className="pointer-events-none absolute -left-4 top-8 hidden rotate-[-4deg] rounded-2xl border border-line bg-surface/90 px-4 py-3 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] backdrop-blur lg:block">
+              <div className="font-display text-[20px] font-semibold text-signal">−38&nbsp;%</div>
+              <div className="text-[12px] text-fog">Cost-per-Lead</div>
+            </div>
+
+            <div className="pointer-events-none absolute -right-3 bottom-10 hidden rotate-[3deg] rounded-2xl border border-line bg-surface/90 px-4 py-3 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] backdrop-blur lg:block">
+              <div className="flex items-center gap-2">
+                <span className="text-signal">★</span>
+                <span className="font-display text-[20px] font-semibold text-paper">+280</span>
               </div>
-              <div className="flex items-center gap-2 rounded-full border border-marsgreen/30 bg-marsgreen/10 px-3 py-1.5 text-[11px] font-medium text-marsgreen-300">
-                <Link2 className="h-3 w-3" />
-                Quelle: klickfunden.de
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </div>
-  );
-}
-
-export default function Hero() {
-  return (
-    <section id="top" className="relative overflow-hidden bg-ink pt-32 pb-20 sm:pt-40 sm:pb-28">
-      <div className="container-page relative grid items-center gap-16 lg:grid-cols-[1.1fr_0.9fr]">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-marsgreen-300">
-            <span className="h-px w-8 bg-marsgreen" />
-            SEO · GEO · AEO · Ads
-          </p>
-
-          <h1 className="mt-6 text-balance font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Digitale Sichtbarkeit bei Google und in der <span className="text-marsgreen">KI-Suche.</span>
-          </h1>
-
-          <p className="mt-6 max-w-xl text-balance text-lg leading-relaxed text-mist-100/80">
-            Klickfunden verbindet Suchmaschinenoptimierung, GEO, AEO und
-            Performance Ads, damit Unternehmen besser gefunden werden und mehr
-            qualifizierte Anfragen erhalten.
-          </p>
-
-          <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <motion.a
-              href="#angebot"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              className="btn-primary px-7 py-4 text-base"
-            >
-              Individuelles Angebot anfordern
-              <ArrowRight className="h-4 w-4" />
-            </motion.a>
-            <a href="#leistungen" className="btn-secondary px-7 py-4 text-base">
-              Leistungen entdecken
-            </a>
-          </div>
-
-          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-mist-100/75">
-            <span>Keine versteckten Preise</span>
-            <span className="h-1 w-1 rounded-full bg-white/30" />
-            <span>Kostenloses Erstgespräch</span>
-            <span className="h-1 w-1 rounded-full bg-white/30" />
-            <span>Aus Castrop-Rauxel · deutschlandweit digital</span>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <SearchDemo />
-          <p className="mt-4 text-balance text-center text-xs text-mist-100/75">
-            Beispielhafte Darstellung, wie sich Sichtbarkeit von der klassischen Suche zur KI-Antwort verändert.
-          </p>
-        </motion.div>
+              <div className="text-[12px] text-fog">neue Bewertungen</div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

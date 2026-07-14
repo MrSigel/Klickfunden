@@ -1,87 +1,62 @@
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import ServicesGrid from "@/components/ServicesGrid";
-import References from "@/components/References";
-import AboutFounder from "@/components/AboutFounder";
-import FAQ from "@/components/FAQ";
-import LeadForm from "@/components/LeadForm";
-import Footer from "@/components/Footer";
-import AgencyOverview from "@/components/AgencyOverview";
-import SeoResources from "@/components/SeoResources";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Klickfunden – SEO, GEO, AEO & Ads Agentur für digitale Sichtbarkeit",
-  description:
-    "Klickfunden unterstützt Unternehmen mit SEO, GEO, AEO, Google Ads, Meta Ads, YouTube Ads, Local SEO und Conversion-Optimierung.",
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: "Klickfunden – Agentur für SEO, GEO, AEO & Ads",
-    description:
-      "Digitale Sichtbarkeit bei Google und in KI-Suchen sowie Kampagnen für qualifizierte Anfragen.",
-    url: "https://www.klickfunden.de",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Klickfunden – SEO, GEO, AEO & Ads Agentur",
-    description:
-      "Digitale Sichtbarkeit, Auffindbarkeit und Conversion-Optimierung für Unternehmen.",
-  },
-};
-
-const homeSchema = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": ["Organization", "LocalBusiness"],
-      "@id": "https://www.klickfunden.de/#organization",
-      name: "Klickfunden",
-      url: "https://www.klickfunden.de",
-      email: "kontakt@klickfunden.de",
-      telephone: "+49 155 63535989",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Gerther Straße 76",
-        postalCode: "44577",
-        addressLocality: "Castrop-Rauxel",
-        addressRegion: "Nordrhein-Westfalen",
-        addressCountry: "DE",
-      },
-      areaServed: "Deutschland",
-      knowsAbout: [
-        "SEO", "GEO", "AEO", "Google Ads", "Meta Ads", "YouTube Ads",
-        "Local SEO", "Technical SEO", "Content SEO", "Conversion-Optimierung",
-      ],
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.klickfunden.de/#website",
-      url: "https://www.klickfunden.de",
-      name: "Klickfunden",
-      inLanguage: "de-DE",
-      publisher: { "@id": "https://www.klickfunden.de/#organization" },
-    },
-  ],
-};
+import Link from "next/link";
+import { Hero } from "@/components/Hero";
+import { Partners } from "@/components/Partners";
+import { Metrics } from "@/components/Metrics";
+import { Process } from "@/components/Process";
+import { Services } from "@/components/Services";
+import { Testimonials } from "@/components/Testimonials";
+import { Mission } from "@/components/Mission";
+import { Faq } from "@/components/Faq";
+import { Cta } from "@/components/Cta";
+import { Reveal } from "@/components/Reveal";
+import { PageGrid } from "@/components/PageGrid";
+import { JsonLd } from "@/components/JsonLd";
+import { SERVICES, INDUSTRIES } from "@/lib/pages";
+import { faqLd } from "@/lib/jsonld";
+import { HOME_FAQ } from "@/lib/homeFaq";
 
 export default function Home() {
   return (
-    <main className="relative">
-      <Header />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSchema) }}
-      />
+    <>
+      <JsonLd data={faqLd(HOME_FAQ)} />
       <Hero />
-      <AgencyOverview />
-      <ServicesGrid />
-      <SeoResources />
-      <References />
-      <AboutFounder />
-      <FAQ />
-      <LeadForm />
-      <Footer />
-    </main>
+      <Partners />
+      <Metrics />
+      <Process />
+      <Services />
+
+      {/* All service pages — internal linking + keyword coverage */}
+      <section id="leistungen" className="mx-auto max-w-[var(--maxw)] px-[var(--gutter)] py-[clamp(70px,10vw,130px)]">
+        <Reveal className="mb-[clamp(40px,5vw,72px)] flex flex-wrap items-end justify-between gap-6">
+          <div className="max-w-[620px]">
+            <p className="eyebrow mb-5">Leistungen im Detail</p>
+            <h2 className="section-title">Wähle deinen Hebel.</h2>
+          </div>
+          <Link href="/leistungen" className="btn btn-ghost">
+            Alle Leistungen
+          </Link>
+        </Reveal>
+        <PageGrid pages={SERVICES} />
+      </section>
+
+      {/* Industry pages */}
+      <section id="branchen" className="mx-auto max-w-[var(--maxw)] px-[var(--gutter)] pb-[clamp(70px,10vw,130px)]">
+        <Reveal className="mb-[clamp(40px,5vw,72px)] flex flex-wrap items-end justify-between gap-6">
+          <div className="max-w-[620px]">
+            <p className="eyebrow mb-5">Für deine Branche</p>
+            <h2 className="section-title">Marketing, das deine Branche versteht.</h2>
+          </div>
+          <Link href="/branchen" className="btn btn-ghost">
+            Alle Branchen
+          </Link>
+        </Reveal>
+        <PageGrid pages={INDUSTRIES} />
+      </section>
+
+      <Testimonials />
+      <Mission />
+      <Faq />
+      <Cta />
+    </>
   );
 }

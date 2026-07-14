@@ -1,168 +1,98 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { site } from "@/lib/site";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Impressum | Klickhafen",
-  description:
-    "Impressum von Klickhafen für Klickfunden.de mit Anbieterkennzeichnung, Kontaktangaben, Umsatzsteuer-Identifikationsnummer und Angaben zur Streitbeilegung.",
-  alternates: {
-    canonical: "/impressum",
-  },
+  title: "Impressum | Klickfunden",
+  description: "Impressum und Anbieterkennzeichnung von Klickfunden.",
+  alternates: { canonical: "/impressum" },
+  robots: { index: false, follow: true },
 };
-
-const Section = ({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) => (
-  <section className="rounded-3xl border border-white/10 bg-ink-800/60 p-6 shadow-card">
-    <h2 className="font-display text-2xl font-semibold text-white">{title}</h2>
-    <div className="mt-4 space-y-3 text-sm leading-relaxed text-mist-100/75">
-      {children}
-    </div>
-  </section>
-);
 
 export default function ImpressumPage() {
   return (
-    <>
-      <Header />
-      <main className="bg-ink pt-32">
-        <section className="container-page py-20 sm:py-24">
-          <div className="max-w-4xl">
-            <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-marsgreen-300">
-              <span className="h-px w-8 bg-marsgreen" />
-              Rechtliches
-            </p>
-            <h1 className="mt-6 text-balance font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Impressum
-            </h1>
-            <p className="mt-5 text-lg leading-relaxed text-mist-100/75">
-              Anbieterkennzeichnung nach § 5 Digitale-Dienste-Gesetz
-              (DDG, vormals § 5 TMG) und Informationen nach § 18
-              Medienstaatsvertrag (MStV).
-            </p>
-          </div>
+    <section className="mx-auto max-w-[820px] px-[var(--gutter)] pb-[clamp(70px,10vw,120px)] pt-[clamp(120px,15vw,180px)]">
+      <Breadcrumbs items={[{ name: "Start", href: "/" }, { name: "Impressum", href: "/impressum" }]} />
+      <h1 className="mb-8 font-display text-[clamp(32px,5vw,56px)] font-medium tracking-[-0.01em]">
+        Impressum
+      </h1>
 
-          <div className="mt-12 grid gap-6">
-            <Section title="Angaben zum Diensteanbieter">
-              <p>
-                <strong className="text-white">Enrico Gross</strong>
-                <br />
-                handelnd unter Klickhafen
-                <br />
-                Gerther Straße 76
-                <br />
-                44577 Castrop-Rauxel
-                <br />
-                Deutschland
-              </p>
-              <p>Klickfunden.de ist das Website- und Produktangebot von Klickhafen.</p>
-            </Section>
+      <div className="legal">
+        <h2>Angaben gemäß § 5 DDG</h2>
+        <p>
+          {site.legalName}
+          <br />
+          handelnd unter {site.tradingAs}
+          <br />
+          {site.address.street}
+          <br />
+          {site.address.postalCode} {site.address.city}
+          <br />
+          {site.address.countryName}
+        </p>
 
-            <Section title="Kontakt">
-              <p>
-                Telefon:{" "}
-                <a
-                  className="text-marsgreen hover:underline"
-                  href="tel:+4915563535989"
-                >
-                  +49 155 63535989
-                </a>
-                <br />
-                E-Mail:{" "}
-                <a
-                  className="text-marsgreen hover:underline"
-                  href="mailto:kontakt@klickfunden.de"
-                >
-                  kontakt@klickfunden.de
-                </a>
-              </p>
-            </Section>
+        <h2>Kontakt</h2>
+        <p>
+          Telefon: <a href={site.phoneTel}>{site.phoneIntl}</a>
+          <br />
+          E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a>
+        </p>
 
-            <Section title="Umsatzsteuer">
-              <p>
-                Umsatzsteuer-Identifikationsnummer gemäß § 27a
-                Umsatzsteuergesetz:
-                <br />
-                <strong className="text-white">DE278597389</strong>
-              </p>
-            </Section>
+        <h2>Kleinunternehmerregelung</h2>
+        <p>
+          Gemäß § 19 UStG wird keine Umsatzsteuer berechnet und dementsprechend
+          keine Umsatzsteuer-Identifikationsnummer ausgewiesen.
+        </p>
 
-            <Section title="Verantwortlich für den Inhalt">
-              <p>
-                Verantwortlich für journalistisch-redaktionelle Inhalte nach
-                § 18 Abs. 2 MStV:
-                <br />
-                Klickhafen, Inhaber: Enrico Gross, Gerther Straße 76, 44577
-                Castrop-Rauxel, Deutschland.
-              </p>
-            </Section>
+        <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+        <p>
+          {site.legalName}, Anschrift wie oben.
+        </p>
 
-            <Section title="EU-Streitbeilegung und Verbraucherstreitbeilegung">
-              <p>
-                Die Europäische Kommission hat die Plattform zur
-                Online-Streitbeilegung (OS-Plattform) zum 20. Juli 2025
-                eingestellt. Ein Link auf eine aktive OS-Plattform wird daher
-                nicht mehr bereitgestellt.
-              </p>
-              <p>
-                Wir sind weder verpflichtet noch bereit, an
-                Streitbeilegungsverfahren vor einer
-                Verbraucherschlichtungsstelle teilzunehmen.
-              </p>
-            </Section>
+        <h2>Haftung für Inhalte</h2>
+        <p>
+          Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf
+          diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis
+          10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte
+          oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu
+          forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+        </p>
+        <p>
+          Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen
+          nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche
+          Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten
+          Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen
+          werden wir diese Inhalte umgehend entfernen.
+        </p>
 
-            <Section title="Haftung für Inhalte">
-              <p>
-                Als Diensteanbieter sind wir für eigene Inhalte auf diesen
-                Seiten nach den allgemeinen Gesetzen verantwortlich. Eine
-                Verpflichtung zur Überwachung übermittelter oder gespeicherter
-                fremder Informationen besteht jedoch nur nach Maßgabe der
-                gesetzlichen Vorschriften. Verpflichtungen zur Entfernung oder
-                Sperrung der Nutzung von Informationen nach den allgemeinen
-                Gesetzen bleiben unberührt.
-              </p>
-            </Section>
+        <h2>Haftung für Links</h2>
+        <p>
+          Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte
+          wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch
+          keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der
+          jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten
+          Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße
+          überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht
+          erkennbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links
+          umgehend entfernen.
+        </p>
 
-            <Section title="Haftung für Links">
-              <p>
-                Diese Website kann Links zu externen Websites Dritter
-                enthalten, auf deren Inhalte wir keinen Einfluss haben. Für
-                diese fremden Inhalte übernehmen wir keine Gewähr. Für die
-                Inhalte verlinkter Seiten ist stets der jeweilige Anbieter
-                oder Betreiber der Seiten verantwortlich. Rechtswidrige Inhalte
-                waren zum Zeitpunkt der Verlinkung nicht erkennbar. Bei
-                Bekanntwerden entsprechender Rechtsverletzungen entfernen wir
-                derartige Links umgehend.
-              </p>
-            </Section>
+        <h2>Urheberrecht</h2>
+        <p>
+          Die durch die Seitenbetreiber erstellten Inhalte, Texte, Bilder, Grafiken und
+          sonstigen Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die
+          Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb
+          der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen
+          Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten,
+          nicht kommerziellen Gebrauch gestattet. Fotos: {site.legalName}, alle Rechte vorbehalten.
+        </p>
 
-            <Section title="Urheberrecht">
-              <p>
-                Die auf dieser Website erstellten Inhalte, Texte, Bilder,
-                Grafiken und sonstigen Werke unterliegen dem deutschen
-                Urheberrecht. Jede Verwertung außerhalb der Grenzen des
-                Urheberrechts bedarf der vorherigen schriftlichen Zustimmung
-                des jeweiligen Rechteinhabers. Downloads und Kopien dieser
-                Seite sind nur für den privaten, nicht kommerziellen Gebrauch
-                gestattet, soweit keine abweichende Lizenz angegeben ist.
-              </p>
-            </Section>
-
-            <Section title="Bildnachweise">
-              <p>
-                Bildnachweise: Eigene Aufnahmen / Urheber: Enrico Gross. Alle
-                Rechte vorbehalten.
-              </p>
-            </Section>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </>
+        <h2>Verbraucherstreitbeilegung</h2>
+        <p>
+          Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+          Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+      </div>
+    </section>
   );
 }

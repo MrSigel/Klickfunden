@@ -1,73 +1,63 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { faqItems } from "@/lib/data";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Reveal } from "./Reveal";
+import { HOME_FAQ } from "@/lib/homeFaq";
 
-function FaqSchema() {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqItems.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: { "@type": "Answer", text: item.answer },
-    })),
-  };
+export function Faq() {
+  const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
-}
+    <section
+      id="faq"
+      className="mx-auto max-w-[var(--maxw)] px-[var(--gutter)] py-[clamp(70px,12vw,150px)]"
+    >
+      <Reveal className="mb-[clamp(40px,6vw,72px)] max-w-[720px]">
+        <p className="eyebrow mb-5">Klar gefragt, klar geantwortet</p>
+        <h2 className="section-title">Häufige Fragen.</h2>
+      </Reveal>
 
-export default function FAQ() {
-  return (
-    <section id="faq" className="relative bg-ink-800 py-24 sm:py-32">
-      <FaqSchema />
-      <div className="container-page">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-2xl text-center"
-        >
-          <span className="eyebrow">Häufige Fragen</span>
-          <h2 className="section-label mt-5 text-balance">
-            SEO, GEO, AEO und Ads kurz beantwortet
-          </h2>
-          <p className="mt-5 text-balance text-lg leading-relaxed text-mist-100/75">
-            Klare Antworten für Menschen, Suchmaschinen und KI-Antwortsysteme.
-          </p>
-        </motion.div>
+      <div className="border-t border-line">
+        {HOME_FAQ.map((item, i) => {
+          const isOpen = open === i;
+          return (
+            <div key={i} className="border-b border-line">
+              <button
+                onClick={() => setOpen(isOpen ? null : i)}
+                aria-expanded={isOpen}
+                className={`flex w-full items-center justify-between gap-6 py-[26px] text-left font-display text-[clamp(17px,2.1vw,24px)] font-medium tracking-[-0.005em] transition-colors ${
+                  isOpen ? "text-signal" : "hover:text-signal"
+                }`}
+              >
+                <span>{item.q}</span>
+                <span
+                  aria-hidden
+                  className={`relative h-4 w-4 shrink-0 transition-transform duration-300 ${
+                    isOpen ? "rotate-45" : ""
+                  }`}
+                >
+                  <span className={`absolute left-0 top-1/2 h-0.5 w-4 -translate-y-1/2 ${isOpen ? "bg-signal" : "bg-fog"}`} />
+                  <span className={`absolute left-1/2 top-0 h-4 w-0.5 -translate-x-1/2 ${isOpen ? "bg-signal" : "bg-fog"}`} />
+                </span>
+              </button>
 
-        <div className="mx-auto mt-12 max-w-3xl space-y-4">
-          {faqItems.map((item, index) => (
-            <motion.details
-              key={item.question}
-              open={index === 0}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.45, delay: index * 0.04 }}
-              className="group overflow-hidden rounded-2xl border border-white/10 bg-ink-700/50"
-            >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left">
-                <span className="text-balance font-display text-base font-semibold text-white sm:text-lg">
-                  {item.question}
-                </span>
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-marsgreen/15 text-xl text-marsgreen transition-transform group-open:rotate-45">
-                  +
-                </span>
-              </summary>
-              <p className="px-6 pb-6 text-sm leading-relaxed text-mist-100/75 [text-wrap:pretty] sm:text-base">
-                {item.answer}
-              </p>
-            </motion.details>
-          ))}
-        </div>
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <p className="max-w-[68ch] pb-[26px] text-fog">{item.a}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
